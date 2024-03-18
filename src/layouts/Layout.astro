@@ -11,49 +11,51 @@ export interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
 const resolvedImageWithDomain = new URL(
-  "/opengraph.jpg",
+  "/logo.svg",
   Astro.site
 ).toString();
 
 const { title } = Astro.props;
 
 const makeTitle = title
-  ? title + " | " + "Astroship"
-  : "Astroship - Starter Template for Astro with Tailwind CSS";
+  ? title + " | " + "Dualistic"
+  : "Dualistic";
+
+const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba(233,190,255,0.8) 100%, rgba(246,232,255,1) 100%, rgba(225,189,255,1) 100%);"
+
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style={style}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo_no_dual.png" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- <link rel="preload" as="image" href={src} alt="Hero" /> -->
     <SEO
       title={makeTitle}
-      description="Astroship is a starter website template for Astro built with TailwindCSS."
+      description="Dualistic is a startup to ease Digital Twin development"
       canonical={canonicalURL}
       twitter={{
-        creator: "@surjithctly",
-        site: "@web3templates",
+        creator: "@dualistic_twin",
+        site: "",
         card: "summary_large_image",
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Astroship - Starter Template for Astro`,
+          title: `Dualistic`,
           image: resolvedImageWithDomain,
         },
         image: {
-          alt: "Astroship Homepage Screenshot",
+          alt: "Dualistic Homepage Screenshot",
         },
       }}
     />
   </head>
-  <body>
+  <body >
     <Navbar />
     <slot />
     <Footer />
