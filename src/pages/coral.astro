@@ -1,0 +1,41 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+import Sectionhead from "@components/sectionhead.astro";
+import PricingCard from "@components/pricing.astro";
+
+const cards = [
+  {
+    name: "Personal",
+    price: "Custom",
+    popular: false,
+    features: [
+      "3D visualization",
+      "AR/VR",
+      "Virtual assets",
+      "Seamless integration",
+      "Custom editor features",
+      "Support 24/7",
+    ],
+    button: {
+      text: "Coming soon",
+      link: "#",
+    },
+  },
+];
+---
+
+<Layout title="Pricing">
+  <Container>
+    <Sectionhead>
+      <Fragment slot="title">Coral</Fragment>
+      <Fragment slot="desc">
+        Digital Twin platform.
+      </Fragment>
+    </Sectionhead>
+
+    <div class="grid sm:grid-cols-1 gap-10 mx-auto  mt-12">
+      {cards.map((item) => <PricingCard plan={item} />)}
+    </div>
+  </Container>
+</Layout>
