@@ -2,6 +2,7 @@
 draft: false
 name: "Luca Heltai"
 title: "Scientific advisor & Co-Founder"
+social: "https://www.linkedin.com/in/heltai/"
 avatar: {
     src: "/team_gallery/luca.jpeg",
     alt: "luca heltai"
