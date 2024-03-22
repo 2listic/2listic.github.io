@@ -6,7 +6,7 @@ image: {
     src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
     alt: "digital twin"
 }
-publishDate: "2024-03-18 23:39"
+publishDate: "2024-02-1 23:39"
 category: "Foundation"
 author: "Dualistic"
 tags: [ai, iot, ar, vr]
