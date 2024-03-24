@@ -31,6 +31,8 @@ Let's explore some of the key applications where digital twins are making a sign
 4. Operational Recalibration:
    Leveraging insights gleaned from digital twins, organizations can optimize the operations of their systems, fine-tuning processes for maximum efficiency and performance.
 
+![digital twin](/blog_gallery/phy_dt.png)
+
 ## The future of the Digital Twin
 Behind the seamless functionality of digital twins lie a set of enabling technologies that drive their development and deployment:
 
@@ -40,6 +42,8 @@ Behind the seamless functionality of digital twins lie a set of enabling technol
 - Cloud Computing: Providing scalable and cost-effective infrastructure for hosting and analyzing vast amounts of data.
 - High-Performance Computing: Accelerating complex simulations and computations required for real-time insights.
 - Extended Reality (XR)/Augmented Reality (AR)/Virtual Reality (VR): Enhancing the visualization and interaction capabilities of digital twins, facilitating immersive experiences for users.
+
+![predictive maintenance](/blog_gallery/pred.png)
 
 ## Conclusions
 In conclusion, the widespread adoption of digital twins signifies a paradigm shift in how industries approach problem-solving and optimization. By embracing this innovative technology and leveraging its capabilities, organizations can unlock new levels of efficiency, reliability, and agility in an increasingly digital world. As we continue to push the boundaries of innovation, digital twins will undoubtedly remain at the forefront, driving transformative change across diverse sectors.
