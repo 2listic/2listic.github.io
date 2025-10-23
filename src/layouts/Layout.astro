@@ -3,6 +3,7 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
+import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -32,6 +33,7 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo_no_dual.png" />
     <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
 
     <SEO
       title={makeTitle}
@@ -60,6 +62,10 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
     <slot />
     <Footer />
     <style is:global>
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {
