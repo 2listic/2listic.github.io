@@ -1,16 +1,15 @@
 ---
-import Contactform from "@components/contactform.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
-import Layout from "@layouts/Layout.astro";
+import Contactform from "@components/contactform.astro";
 import { Icon } from "astro-icon";
 ---
 
-<Layout title="Contact">
+<section id="contact" class="scroll-mt-20 mt-24">
   <Container>
     <Sectionhead>
       <Fragment slot="title">Contact</Fragment>
-      <Fragment slot="desc">We are a here to help.</Fragment>
+      <Fragment slot="desc">We are here to help.</Fragment>
     </Sectionhead>
 
     <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-16">
@@ -23,16 +22,15 @@ import { Icon } from "astro-icon";
         <div class="mt-5">
           <div class="flex items-center mt-2 space-x-2 text-gray-600">
             <Icon class="text-gray-400 w-4 h-4" name="uil:map-marker" />
-            <span> via Crispi 56, 34126 Trieste (Italy)  </span>
-          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
-            <Icon class="text-gray-400 w-4 h-4" name="uil:envelope" /><a
-              href="mailto:info@dualistic.it"
-              >info@dualistic.it</a
-            >
-          </div><div class="flex items-center mt-2 space-x-2 text-gray-600">
-            <Icon class="text-gray-400 w-4 h-4" name="uil:phone" /><a
-              href="tel:+39 040 9719258 ">+39 040 9719258 </a
-            >
+            <span> via Crispi 56, 34126 Trieste (Italy) </span>
+          </div>
+          <div class="flex items-center mt-2 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:envelope" />
+            <a href="mailto:info@dualistic.it">info@dualistic.it</a>
+          </div>
+          <div class="flex items-center mt-2 space-x-2 text-gray-600">
+            <Icon class="text-gray-400 w-4 h-4" name="uil:phone" />
+            <a href="tel:+39 040 9719258">+39 040 9719258</a>
           </div>
         </div>
       </div>
@@ -41,4 +39,4 @@ import { Icon } from "astro-icon";
       </div>
     </div>
   </Container>
-</Layout>
+</section>

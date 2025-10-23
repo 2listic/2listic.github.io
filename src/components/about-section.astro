@@ -1,9 +1,8 @@
 ---
-import { getCollection } from "astro:content";
-import { Picture } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
 import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
+import { getCollection } from "astro:content";
+import { Picture } from "astro:assets";
 
 // Filter team entries with 'draft: false' & date before current date
 const publishedTeamMembers = await getCollection("team", ({ data }) => {
@@ -11,7 +10,7 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
 });
 ---
 
-<Layout title="About">
+<section id="about" class="scroll-mt-20 mt-24">
   <Container>
     <Sectionhead>
       <Fragment slot="title">About</Fragment>
@@ -24,7 +23,7 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
       </h2>
       <p class="text-lg leading-relaxed text-slate-500">
         We are the perfect blend between industrial and accademical backgrounds,
-         bringing different personalities, experiences and skills to
+        bringing different personalities, experiences and skills to
         the job. This is what makes our team so special.
       </p>
     </div>
@@ -54,4 +53,4 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
       }
     </div>
   </Container>
-</Layout>
+</section>
