@@ -1,29 +1,30 @@
 ---
-import AboutSection from "@components/about-section.astro";
-import ContactSection from "@components/contact-section.astro";
+import AboutSection from "@components/aboutSection.astro";
+import ContactSection from "@components/contactSection.astro";
 import Container from "@components/container.astro";
-import CoralSection from "@components/coral-section.astro";
+import CoralSection from "@components/coralSection.astro";
 import Hero from "@components/hero.astro";
+import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="" enableScrollSnap={true}>
   <Container>
-     <div class="snap-section">
-      <Hero />
-    </div>
+     <SnappingElement>
+       <Hero />
+     </SnappingElement>
 
-    <div class="snap-section">
+    <SnappingElement>
       <CoralSection />
-    </div>
+    </SnappingElement>
 
-    <div class="snap-section">
+    <SnappingElement>
       <AboutSection />
-    </div>
+    </SnappingElement>
 
-    <div class="snap-section">
+    <SnappingElement>
       <ContactSection />
-    </div>
+    </SnappingElement>
   </Container>
 
 </Layout>

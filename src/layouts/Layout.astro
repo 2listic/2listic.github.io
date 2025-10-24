@@ -28,7 +28,12 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
 ---
 
 <!DOCTYPE html>
-<html lang="en" style={style} class:list={[enableScrollSnap && "scroll-snap-enabled"]}>
+  <!-- Add scroll smooth always, snapping on prop condition -->
+  <html 
+    lang="en"
+    style={style}
+    class:list={["scroll-smooth", enableScrollSnap && "snap-y snap-mandatory"]}
+  >
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -63,24 +68,6 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
     <slot />
     <Footer />
     <style is:global>
-      /* Smooth scrolling */
-      html {
-        scroll-behavior: smooth;
-      }
-      /* Scroll snap for index page */
-      html.scroll-snap-enabled {
-        scroll-snap-type: y mandatory;
-      }
-
-      html.scroll-snap-enabled .snap-section {
-        scroll-snap-align: start;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        /* justify-content: center; */
-        /* align-items: center; */
-        padding-bottom: 15vh;
-      }
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
       img {

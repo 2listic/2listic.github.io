@@ -1,0 +1,7 @@
+---
+const { class: className } = Astro.props;
+---
+
+<div class:list={["snap-start min-h-screen flex flex-col pb-[15vh]", className]}>
+  <slot />
+</div>
