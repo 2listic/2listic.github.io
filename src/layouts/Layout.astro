@@ -7,6 +7,7 @@ import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title: string;
+  enableScrollSnap?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
@@ -16,7 +17,7 @@ const resolvedImageWithDomain = new URL(
   Astro.site
 ).toString();
 
-const { title } = Astro.props;
+const { title, enableScrollSnap = false } = Astro.props;
 
 const makeTitle = title
   ? title + " | " + "Dualistic"
@@ -27,13 +28,13 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
 ---
 
 <!DOCTYPE html>
-<html lang="en" style={style}>
+<html lang="en" style={style} class:list={[enableScrollSnap && "scroll-snap-enabled"]}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo_no_dual.png" />
     <meta name="generator" content={Astro.generator} />
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
 
     <SEO
       title={makeTitle}
@@ -65,6 +66,20 @@ const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba
       /* Smooth scrolling */
       html {
         scroll-behavior: smooth;
+      }
+      /* Scroll snap for index page */
+      html.scroll-snap-enabled {
+        scroll-snap-type: y mandatory;
+      }
+
+      html.scroll-snap-enabled .snap-section {
+        scroll-snap-align: start;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        /* justify-content: center; */
+        /* align-items: center; */
+        padding-bottom: 15vh;
       }
       /* Improve Page speed */
       /* https://css-tricks.com/almanac/properties/c/content-visibility/ */

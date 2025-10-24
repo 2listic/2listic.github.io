@@ -1,66 +1,63 @@
 ---
-import Container from "@components/container.astro";
 import Sectionhead from "@components/sectionhead.astro";
 ---
 
-<section id="coral" class="scroll-mt-20">
-  <Container>
-    <Sectionhead>
-      <Fragment slot="title">Coral</Fragment>
-      <Fragment slot="desc">
-        Digital Twin Platform Redefined.
-      </Fragment>
-    </Sectionhead>
+<section id="coral" class="scroll-mt-20 mt-20">
+  <Sectionhead>
+    <Fragment slot="title">Coral</Fragment>
+    <Fragment slot="desc">
+      Digital Twin Platform Redefined.
+    </Fragment>
+  </Sectionhead>
 
-    <div class="mx-auto mt-12 max-w-4xl">
-      <p class="text-xl text-gray-800 mb-8 leading-relaxed font-light tracking-wide">
-        Coral reimagines the Digital Twin experience with a sleek, no-code approach. Craft stunning virtual replicas of your physical world effortlessly—whether it's assets, systems, or entire environments—using an intuitive platform that puts power in your hands, no coding required.
+  <div class="mx-auto mt-12 max-w-4xl">
+    <p class="text-xl text-gray-800 mb-8 leading-relaxed font-light tracking-wide">
+      Coral reimagines the Digital Twin experience with a sleek, no-code approach. Craft stunning virtual replicas of your physical world effortlessly—whether it's assets, systems, or entire environments—using an intuitive platform that puts power in your hands, no coding required.
+    </p>
+
+    <h2 class="text-3xl font-bold mt-12 mb-6 tracking-tight">
+      DCIMate
+    </h2>
+    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+      Meet DCIMate, the heartbeat of Coral's data center innovation. This powerhouse component transforms how data centers operate by delivering precise digital twins, real-time insights, and game-changing energy optimization. Designed for efficiency and sustainability, DCIMate empowers operators to slash costs, boost performance, and lead the charge toward a greener future.
+    </p>
+
+    <ul class="grid sm:grid-cols-2 gap-4 text-gray-800 text-lg list-disc pl-6">
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Real-time data center monitoring
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Accurate digital twin modeling
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Advanced energy consumption analytics
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Predictive maintenance insights
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Seamless integration with existing systems
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Customizable dashboards & reports
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Automated energy-saving recommendations
+      </li>
+      <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
+        Scalable for small to enterprise-grade data centers
+      </li>
+    </ul>
+
+    <div class="mt-12 text-center">
+      <img 
+        src="/cfd_data.jpeg" 
+        alt="CFD simulation of airflow and temperature in a data center" 
+        class="w-full max-w-3xl mx-auto rounded-lg shadow-lg border border-gray-200"
+      />
+      <p class="text-sm text-gray-600 mt-4 italic">
+        Airflow and thermal dynamics in a CFD simulation.
       </p>
-
-      <h2 class="text-3xl font-bold mt-12 mb-6 tracking-tight">
-        DCIMate
-      </h2>
-      <p class="text-lg text-gray-700 mb-8 leading-relaxed">
-        Meet DCIMate, the heartbeat of Coral's data center innovation. This powerhouse component transforms how data centers operate by delivering precise digital twins, real-time insights, and game-changing energy optimization. Designed for efficiency and sustainability, DCIMate empowers operators to slash costs, boost performance, and lead the charge toward a greener future.
-      </p>
-
-      <ul class="grid sm:grid-cols-2 gap-4 text-gray-800 text-lg list-disc pl-6">
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Real-time data center monitoring
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Accurate digital twin modeling
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Advanced energy consumption analytics
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Predictive maintenance insights
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Seamless integration with existing systems
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Customizable dashboards & reports
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Automated energy-saving recommendations
-        </li>
-        <li class="relative before:content-['•'] before:absolute before:-left-4 before:text-indigo-500">
-          Scalable for small to enterprise-grade data centers
-        </li>
-      </ul>
-
-      <div class="mt-12 text-center">
-        <img 
-          src="/cfd_data.jpeg" 
-          alt="CFD simulation of airflow and temperature in a data center" 
-          class="w-full max-w-3xl mx-auto rounded-lg shadow-lg border border-gray-200"
-        />
-        <p class="text-sm text-gray-600 mt-4 italic">
-          Airflow and thermal dynamics in a CFD simulation.
-        </p>
-      </div>
     </div>
-  </Container>
+  </div>
 </section>

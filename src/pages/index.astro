@@ -7,12 +7,23 @@ import Hero from "@components/hero.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="">
+<Layout title="" enableScrollSnap={true}>
   <Container>
-    <Hero />
-    <CoralSection />
-    <AboutSection />
-    <ContactSection />
+     <div class="snap-section">
+      <Hero />
+    </div>
+
+    <div class="snap-section">
+      <CoralSection />
+    </div>
+
+    <div class="snap-section">
+      <AboutSection />
+    </div>
+
+    <div class="snap-section">
+      <ContactSection />
+    </div>
   </Container>
 
 </Layout>
