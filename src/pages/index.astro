@@ -10,19 +10,19 @@ import Layout from "@layouts/Layout.astro";
 
 <Layout title="" enableScrollSnap={true}>
   <Container>
-     <SnappingElement>
+     <SnappingElement id="hero">
        <Hero />
      </SnappingElement>
 
-    <SnappingElement>
+    <SnappingElement id="coral">
       <CoralSection />
     </SnappingElement>
 
-    <SnappingElement>
+    <SnappingElement id="about">
       <AboutSection />
     </SnappingElement>
 
-    <SnappingElement>
+    <SnappingElement id="contact" isLast={true}>
       <ContactSection />
     </SnappingElement>
   </Container>
