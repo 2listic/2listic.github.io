@@ -23,16 +23,17 @@ const makeTitle = title
   ? title + " | " + "Dualistic"
   : "Dualistic";
 
-const style="background: linear-gradient(135deg, rgba(251,245,252,0.8) 35%, rgba(233,190,255,0.8) 100%, rgba(246,232,255,1) 100%, rgba(225,189,255,1) 100%);"
-
 ---
 
 <!DOCTYPE html>
   <!-- Add scroll smooth always, snapping on prop condition -->
   <html 
     lang="en"
-    style={style}
-    class:list={["scroll-smooth", enableScrollSnap && "md:snap-y md:snap-mandatory"]}
+    class:list={[
+        "bg-gradient-to-br from-purple-50/95 to-purple-200/95",
+        "scroll-smooth",
+        enableScrollSnap && "md:snap-y md:snap-mandatory"
+      ]}
   >
   <head>
     <meta charset="UTF-8" />

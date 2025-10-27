@@ -11,27 +11,35 @@ import Layout from "@layouts/Layout.astro";
 ---
 
 <Layout title="" enableScrollSnap={true}>
-  <Container>
+  <!-- <Container> -->
      <SnappingElement id="hero">
-       <Hero />
+      <Container>
+        <Hero />
+      </Container>
      </SnappingElement>
 
-    <SnappingElement id="features">
-      <Features />
-      <Cta />
+    <SnappingElement id="features" class="bg-gradient-to-br from-purple-100/95 to-purple-200/95">
+      <Container>
+        <Features />
+        <Cta />
+      </Container>
     </SnappingElement>
 
     <!-- <SnappingElement id="coral">
       <CoralSection />
     </SnappingElement> -->
 
-    <SnappingElement id="team">
-      <AboutSection />
+    <SnappingElement id="team" class="bg-gradient-to-br from-purple-50/95 to-purple-100/95">
+      <Container>
+        <AboutSection />
+      </Container>
     </SnappingElement>
 
     <SnappingElement id="contact" isLast={true}>
-      <ContactSection />
+      <Container>
+        <ContactSection />
+      </Container>
     </SnappingElement>
-  </Container>
+  <!-- </Container> -->
 
 </Layout>
