@@ -1,6 +1,7 @@
 ---
 // @ts-ignore
 import { Icon } from "astro-icon";
+import Sectionhead from "./sectionhead.astro";
 
 const features = [
   {
@@ -44,16 +45,23 @@ const features = [
 ];
 ---
 
-<div class="mt-8 md:mt-0">
-  <h2 class="text-3xl lg:text-4xl font-bold lg:tracking-tight">
+<Sectionhead>
+  <Fragment slot="title">Coral Digital Twin platform</Fragment>
+  <Fragment slot="desc">Coral is our digital twin creation and management platform. 
+  Its holistic design encompasses and connects all the enabling technologies, 
+  from IoT, to simulations, from AI, to data management, from HPC, to visualization.</Fragment>
+</Sectionhead>
+
+<!-- <div class="mt-8 md:mt-0">
+  <h2 class="text-center text-3xl lg:text-4xl font-bold lg:tracking-tight">
     Coral Digital Twin platform
   </h2>
-  <p class="text-lg mt-4 text-slate-600">
+  <p class="text-justify text-lg mt-4 text-slate-600">
     Coral is our digital twin creation and management platform. 
     Its holistic design encompasses and connects all the enabling technologies, 
     from IoT, to simulations, from AI, to data management, from HPC, to visualization.  
   </p>
-</div>
+</div> -->
 
 <div class="grid sm:grid-cols-2 md:grid-cols-3 mt-8 gap-12">
   {
