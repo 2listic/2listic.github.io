@@ -3,6 +3,8 @@ import AboutSection from "@components/aboutSection.astro";
 import ContactSection from "@components/contactSection.astro";
 import Container from "@components/container.astro";
 import CoralSection from "@components/coralSection.astro";
+import Cta from "@components/cta.astro";
+import Features from "@components/features.astro";
 import Hero from "@components/hero.astro";
 import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
@@ -14,11 +16,16 @@ import Layout from "@layouts/Layout.astro";
        <Hero />
      </SnappingElement>
 
-    <SnappingElement id="coral">
-      <CoralSection />
+    <SnappingElement>
+      <Features />
+      <Cta />
     </SnappingElement>
 
-    <SnappingElement id="about">
+    <!-- <SnappingElement id="coral">
+      <CoralSection />
+    </SnappingElement> -->
+
+    <SnappingElement id="team">
       <AboutSection />
     </SnappingElement>
 

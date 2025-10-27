@@ -1,0 +1,76 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon";
+
+const features = [
+  {
+    title: "Simplicity and Wellbeing-Centric Approach",
+    description:
+      "Coral aims to revolutionize Digital Twin creation and management, ensuring that users can use the platform effortlessly.",
+    icon: "bx:bxs-face", 
+  },
+  {
+    title: "Next-Generation Platform",
+    description:
+      "Coral's design revolves around concepts such as ease-of-use and modularity to empower industrial organizations \
+       to tackle future challenges effectively",
+    icon: "bx:bxs-window-alt",
+  },
+  {
+    title: "Integration of Technologies",
+    description:
+      "Coral integrates IoT, simulations, AI, data management, HPC, and visualization to provide a digital replica \
+      for effective decision-making and management. ",
+    icon: "bx:bxs-data",
+  },
+  {
+    title: "Orchestrated by CoralCore",
+    description:
+      "CoralCore orchestrator ensures to operate efficiently and deliver an user experience based on block-based and no-code principles",
+    icon: "bx:bxs-bot",
+  },
+  {
+    title: "Modularity and Extensibility",
+    description:
+      "Modularity allows flexibility in customization and adaptation to specific organizational needs",
+    icon: "bx:bxs-file-find",
+  },
+  {
+    title: "Widely Adopted Standards",
+    description:
+      "compatibility and interoperability facilitates smooth integration with existing software environments.",
+    icon: "bx:bx-check", 
+  },
+];
+---
+
+<div class="mt-8 md:mt-0">
+  <h2 class="text-3xl lg:text-4xl font-bold lg:tracking-tight">
+    Coral Digital Twin platform
+  </h2>
+  <p class="text-lg mt-4 text-slate-600">
+    Coral is our digital twin creation and management platform. 
+    Its holistic design encompasses and connects all the enabling technologies, 
+    from IoT, to simulations, from AI, to data management, from HPC, to visualization.  
+  </p>
+</div>
+
+<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-8 gap-12">
+  {
+    features.map((item) => (
+      <div class="flex gap-4 items-start">
+        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
+          <Icon class="text-white" name={item.icon} />
+        </div>
+        <div>
+          <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
+          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>
+<!-- <div class="p-8" style="display: flex; justify-content: center;">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Yxipeo_vLys?si=HIo6YgjkgKtdVdD-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div> -->
+
