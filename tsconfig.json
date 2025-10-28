@@ -1,8 +1,11 @@
 {
   "extends": "astro/tsconfigs/base",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "baseUrl": "src",
-    "strictNullChecks": true,
+    "strictNullChecks": true, // add if using `base` template
+    "allowJs": true, // required, and included with all Astro templates
     "types": ["astro/client"],
     "paths": {
       "@lib/*": ["lib/*"],

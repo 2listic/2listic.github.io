@@ -3,7 +3,6 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
-import { ViewTransitions } from 'astro:transitions';
 
 export interface Props {
   title: string;
@@ -40,7 +39,6 @@ const makeTitle = title
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/logo_no_dual.png" />
     <meta name="generator" content={Astro.generator} />
-    <!-- <ViewTransitions /> -->
 
     <SEO
       title={makeTitle}
