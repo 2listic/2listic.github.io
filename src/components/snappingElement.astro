@@ -1,0 +1,20 @@
+---
+export interface Props {
+  id?: string,
+  class?: string;
+  isLast?: boolean;
+}
+
+const { id: id, class: className, isLast = false } = Astro.props;
+---
+
+<div 
+  id={id}
+  class:list={[
+    "flex flex-col",
+    "snap-start scroll-pt-10 md:scroll-pt-20 pt-10 md:pt-20 pb-16 md:pb-32",
+    isLast ? "min-h-fit" : "min-h-0",
+    className
+  ]}>
+  <slot />
+</div>

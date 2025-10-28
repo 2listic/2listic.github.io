@@ -1,5 +1,7 @@
 ---
 import Button from "./ui/button.astro";
+
+const web3formPublicKey = import.meta.env.PUBLIC_WEB3FORM_KEY;
 ---
 
 <!-- To make this contact form work, create your free access key from https://web3forms.com/
@@ -10,7 +12,7 @@ import Button from "./ui/button.astro";
   id="form"
   class="needs-validation"
   novalidate>
-  <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+  <input type="hidden" name="access_key" value={web3formPublicKey} /> 
   <!-- Create your free access key from https://web3forms.com/ -->
   <input type="checkbox" class="hidden" style="display:none" name="botcheck" />
   <div class="mb-5">

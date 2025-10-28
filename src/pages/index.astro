@@ -1,17 +1,45 @@
 ---
+import TeamSection from "@components/teamSection.astro";
+import ContactSection from "@components/contactSection.astro";
 import Container from "@components/container.astro";
+import CoralSection from "@components/coralSection.astro";
 import Cta from "@components/cta.astro";
 import Features from "@components/features.astro";
 import Hero from "@components/hero.astro";
-import Logos from "@components/logos.astro";
+import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
 ---
 
-<Layout title="">
-  <Container>
-    <Hero />
-    <Features />
-    <Logos />
-    <Cta />
-  </Container>
+<Layout title="" enableScrollSnap={true}>
+  <!-- <Container> -->
+     <SnappingElement id="hero">
+      <Container>
+        <Hero />
+      </Container>
+     </SnappingElement>
+
+    <SnappingElement id="features" class="bg-gradient-to-br from-purple-100/95 to-purple-200/95">
+      <Container>
+        <Features />
+        <Cta />
+      </Container>
+    </SnappingElement>
+
+    <!-- <SnappingElement id="coral">
+      <CoralSection />
+    </SnappingElement> -->
+
+    <SnappingElement id="team" class="bg-gradient-to-br from-purple-50/95 to-purple-100/95">
+      <Container>
+        <TeamSection />
+      </Container>
+    </SnappingElement>
+
+    <SnappingElement id="contact" isLast={true}>
+      <Container>
+        <ContactSection />
+      </Container>
+    </SnappingElement>
+  <!-- </Container> -->
+
 </Layout>
