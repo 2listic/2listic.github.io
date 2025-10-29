@@ -10,4 +10,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  devToolbar: {
+    enabled: true // false to disable Astro dev toolbar
+  }
 });

@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 name: "Marco Franzon"
 title: "CTO & Co-Founder"
 social: "https://www.linkedin.com/in/marco-franzon/"

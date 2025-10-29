@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 name: "Francesco De Giorgi"
 title: "COO"
 social: "https://www.linkedin.com/in/deggio/"

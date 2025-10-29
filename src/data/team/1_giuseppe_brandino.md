@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 name: "Giuseppe Piero Brandino"
 title: "CEO & Co-Founder"
 social: "https://www.linkedin.com/in/giuseppe-piero-brandino-8285068a/"
