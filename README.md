@@ -15,7 +15,7 @@ All the code is inside `src` folder:
 
 ### Relevant files
 
-To add new blog articles, just add a new `.md` in the [blog](./src/content/blog/) folder following using the same header you can find in the first article.
+To add new blog articles, just add a new `.md` in the [blog](./src/data/blog/) folder following using the same header you can find in the first article.
 
 
 
