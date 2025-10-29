@@ -2,7 +2,7 @@
 
 ## Project description
 
-This website is based on the Astro template [web3Templates](https://web3templates.com/templates/astroship-starter-website-template-for-astro).
+This website is build with Astro, Tailwind and is based on the Astro template [web3Templates](https://web3templates.com/templates/astroship-starter-website-template-for-astro).
 
 All the code is inside `src` folder:
 
