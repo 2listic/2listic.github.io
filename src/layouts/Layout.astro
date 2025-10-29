@@ -3,6 +3,7 @@ import { SEO } from "astro-seo";
 import Footer from "@components/footer.astro";
 import Navbar from "@components/navbar/navbar.astro";
 import "@fontsource-variable/inter/index.css";
+import "../styles/global.css";
 
 export interface Props {
   title: string;
@@ -29,7 +30,7 @@ const makeTitle = title
   <html 
     lang="en"
     class:list={[
-        "bg-gradient-to-br from-purple-50/95 to-purple-200/95",
+        "bg-linear-to-br from-purple-50/95 to-purple-200/95",
         "scroll-smooth",
         enableScrollSnap && "snap-y snap-proximity"
       ]}
