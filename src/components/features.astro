@@ -43,6 +43,38 @@ const features = [
     icon: "uil:check", 
   },
 ];
+const coralComponents = [
+  {
+    type: "Design",
+    title: "Coral Build",
+    description: "No-code building and admin. GUI",
+    icon: "uil:pen",
+  },
+  {
+    type: "Ingest",
+    title: "Coral IoT",
+    description: "Sensor data gateway",
+    icon: "uil:plane-arrival",
+  },
+  {
+    type: "Simulate",
+    title: "Coral Sim/AI",
+    description: "Simulation and AI engine",
+    icon: "uil:heartbeat",
+  },
+  {
+    type: "Orchestrate",
+    title: "Coral Core",
+    description: "Orchestrator and data manager",
+    icon: "uil:constructor"
+  },
+  {
+    type: "Visualize",
+    title: "Coral Visualizer",
+    description: "3D visualization with XR/VR",
+    icon: "uil:cube"
+  }
+]
 ---
 
 <Sectionhead>
@@ -61,7 +93,7 @@ const features = [
   </p>
 </div> -->
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-8 md:mt-12 gap-12">
+<div class="grid grid-cols-1 sm:grid-cols-3 mt-8 md:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
       <div class="flex gap-4 items-start">
@@ -70,8 +102,22 @@ const features = [
         </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          <p class="text-slate-600 mt-2 leading-relaxed">{item.description}</p>
         </div>
+      </div>
+    ))
+  }
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-5 mt-8 md:mt-12 gap-8 md:gap-12">
+  {
+    coralComponents.map((component) => (
+      <div class="flex flex-col gap-1 md:gap-2 justify-content-start justify-items-center items-center">
+        <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
+          <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
+        </div>
+        <div class="text-center mt-1">{component.title}</div>
+        <div class="font-semibold text-lg">{component.type}</div>
+        <div class="text-center text-slate-600 leading-relaxed max-w-[75%]">{component.description}</div>
       </div>
     ))
   }

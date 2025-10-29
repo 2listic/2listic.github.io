@@ -1,45 +1,40 @@
 ---
-import TeamSection from "@components/teamSection.astro";
 import ContactSection from "@components/contactSection.astro";
 import Container from "@components/container.astro";
-import CoralSection from "@components/coralSection.astro";
-import Cta from "@components/cta.astro";
 import Features from "@components/features.astro";
 import Hero from "@components/hero.astro";
 import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
+import ExperienceSection from "@components/experienceSection.astro";
 ---
 
 <Layout title="" enableScrollSnap={true}>
-  <!-- <Container> -->
-     <SnappingElement id="hero">
-      <Container>
-        <Hero />
-      </Container>
-     </SnappingElement>
-
-    <SnappingElement id="features" class="bg-linear-to-br from-purple-100 to-purple-300">
-      <Container>
-        <Features />
-        <Cta />
-      </Container>
+    <SnappingElement id="hero">
+    <Container>
+      <Hero />
+    </Container>
     </SnappingElement>
 
-    <!-- <SnappingElement id="coral">
-      <CoralSection />
-    </SnappingElement> -->
+  <SnappingElement id="features" class="bg-linear-to-br from-purple-100 to-purple-300">
+    <Container>
+      <Features />
+      <!-- <Cta /> -->
+    </Container>
+  </SnappingElement>
 
-    <SnappingElement id="team" class="bg-linear-to-br from-purple-50 to-purple-50">
-      <Container>
-        <TeamSection />
-      </Container>
-    </SnappingElement>
+  <!-- <SnappingElement id="coral">
+    <CoralSection />
+  </SnappingElement> -->
 
-    <SnappingElement id="contact" isLast={true}>
-      <Container>
-        <ContactSection />
-      </Container>
-    </SnappingElement>
-  <!-- </Container> -->
+  <SnappingElement id="team" class="bg-linear-to-br from-purple-50 to-purple-50">
+    <Container>
+      <ExperienceSection />
+    </Container>
+  </SnappingElement>
 
+  <SnappingElement id="contact" isLast={true}>
+    <Container>
+      <ContactSection />
+    </Container>
+  </SnappingElement>
 </Layout>

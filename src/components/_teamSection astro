@@ -7,10 +7,6 @@ import { Picture } from "astro:assets";
 const publishedTeamMembers = await getCollection("team", ({ data }) => {
   return !data.draft && data.publishDate < new Date();
 });
-const publishedExperiences = await getCollection("experience", ({ data }) => {
-  return !data.draft;
-});
-const sortedExperiences = publishedExperiences.sort((a, b) => a.data.order - b.data.order)
 ---
 
 <section>
@@ -52,25 +48,4 @@ const sortedExperiences = publishedExperiences.sort((a, b) => a.data.order - b.d
       ))
     }
   </div>
-  <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 mt-8 md:mt-12 gap-12">
-    {
-      sortedExperiences.map((experience) => {
-        const rowClasses = experience.data.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
-                          experience.data.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
-                          experience.data.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
-        
-        return (
-          <div class={`flex flex-col rounded-2xl p-8 ring-1 ring-gray-200/50 shadow-lg ${rowClasses}`}>
-            <h3 class="font-semibold text-lg pb-1">
-              {experience.data.area}
-            </h3>
-            <ul class="list-disc list-inside mt-2 space-y-2">
-              {experience.data.topics.map((topic) => {
-                return <li class="text-slate-500 leading-relaxed">{topic}</li>
-              })}
-            </ul>
-          </div>
-        )
-      })
-    }
 </section>
