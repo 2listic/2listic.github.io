@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "The No-code/Low-code approach"
-snippet: "In today's rapidly evolving technological landscape, the concept of a digital twin has emerged as a game-changer across various industries. A digital twin represents a virtual replica of a physical entity, whether it's a machine, a process, or even a living organism."
+snippet: "How no-code and low-code programming unleash intuitive interactions with complex simulation and data management workflow, while retaining an high, expert-level of customizability."
 image: {
     src: "/blog_gallery/lowcode.png",
     alt: "no-code/low-code"

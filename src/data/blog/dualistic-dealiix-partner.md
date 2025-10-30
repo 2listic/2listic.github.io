@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "Dualistic is partner in the EU-funded dealii-X project"
-snippet: "The dealii-X CoE aims to elevate existing pre-exascale applications of digital twins for the brain, heart, lungs, liver, and mechanobiology to exascale readiness, providing an ideal computational platform for the integration of the developed software."
+snippet: "An Exascale Framework for Digital Twins of the Human Body with 16 Europen partners and 3,9 million budget."
 image: {
     src: "/blog_gallery/logo_dualistic_dealiix.svg",
     alt: "deali-X and Dualistic logos"

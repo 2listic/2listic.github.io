@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "What is Digital twin?"
-snippet: "In today's rapidly evolving technological landscape, the concept of a digital twin has emerged as a game-changer across various industries. A digital twin represents a virtual replica of a physical entity, whether it's a machine, a process, or even a living organism."
+snippet: "A digital twin represents a virtual replica of a physical entity, whether it's a machine, a process, or even a living organism."
 image: {
     src: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?&fit=crop&w=430&h=240",
     alt: "digital twin"

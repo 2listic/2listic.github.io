@@ -1,7 +1,7 @@
 ---
 draft: false
 title: "Digital Train Transformation - SMACT @ Cortina"
-snippet: ""
+snippet: "How predictive maintenance and virtual prototyping are two revolutionizing components in the industrial landscape."
 image: {
     src: "/blog_gallery/dual_cortina.jpg",
     alt: "digital twin"
