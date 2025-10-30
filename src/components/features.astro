@@ -107,7 +107,7 @@ const coralComponents = [
         </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-600 mt-2 leading-relaxed">{item.description}</p>
+          <p class="mt-2 text-slate-600 leading-relaxed">{item.description}</p>
         </div>
       </div>
     ))
@@ -120,7 +120,7 @@ const coralComponents = [
                       component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
                       component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
       return (
-        <div class={`${rowStart} w-full bg-white p-4 md:p-8 rounded-xl shadow flex flex-col gap-1 md:gap-2 justify-content-start justify-items-center items-center`}>
+        <div class={`${rowStart} w-full bg-white max-w-[75vw] p-4 md:p-8 rounded-xl shadow flex flex-col md:gap-2 justify-content-start justify-items-center items-center`}>
           <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
             <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
           </div>
