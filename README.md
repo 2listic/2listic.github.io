@@ -33,6 +33,10 @@ Create an `.env` file in the root folder and the variable:
 PUBLIC_WEB3FORM_KEY="your-web3form-key-to-test-the-contact-form"
 ```
 
+### Astro Icon
+
+The project uses Astro Icon. Follow the [instructions](https://www.astroicon.dev/guides/customization/) and use your own svg or the icons from [Iconify - Unicons](https://icon-sets.iconify.design/uil/). You can also easly install new icon sets.
+
 ## Deployment
 
 Deployment is handled by GitHub Actions through [.github/workflows/deploy.yaml](.github/workflows/deploy.yaml).
