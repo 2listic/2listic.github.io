@@ -26,13 +26,13 @@ const makeTitle = title
 ---
 
 <!DOCTYPE html>
-  <!-- Add scroll smooth always, snapping on prop condition -->
+  <!-- Add scroll smooth always, snapping on prop condition and only for larger screens -->
   <html 
     lang="en"
     class:list={[
         "bg-linear-to-br from-white to-purple-200",
         "scroll-smooth",
-        enableScrollSnap && "snap-y snap-proximity"
+        enableScrollSnap && "lg:snap-y lg:snap-proximity"
       ]}
   >
   <head>
