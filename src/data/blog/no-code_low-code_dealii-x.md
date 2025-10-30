@@ -51,4 +51,4 @@ The approach that Dualistic is pursuing for dealii-X should sport **both strateg
 
 
 ## Conclusions
-In conclusion, the combination of no-code and low-code is a fundamental tools to unleash intuitive interactions with complex simulation and data management workflow, while retaining an high, expert-level of customizability. This will pave the way to streamlined tools for a more effective and quantitative personalized medicine. 
+In conclusion, the combination of no-code and low-code are a fundamental tools to unleash intuitive interactions with complex simulation and data management workflow, while retaining an high, expert-level of customizability. This will pave the way to streamlined tools for a more effective and quantitative personalized medicine. 
