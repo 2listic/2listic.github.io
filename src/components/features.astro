@@ -1,6 +1,6 @@
 ---
 // @ts-ignore
-import { Icon } from "astro-icon";
+import { Icon } from "astro-icon/components";
 import Sectionhead from "./sectionhead.astro";
 
 const features = [
@@ -8,46 +8,83 @@ const features = [
     title: "Simplicity and Wellbeing-Centric Approach",
     description:
       "Coral aims to revolutionize Digital Twin creation and management, ensuring that users can use the platform effortlessly.",
-    icon: "bx:bxs-face", 
+    icon: "uil:smile", 
   },
   {
     title: "Next-Generation Platform",
     description:
       "Coral's design revolves around concepts such as ease-of-use and modularity to empower industrial organizations \
        to tackle future challenges effectively",
-    icon: "bx:bxs-window-alt",
+    icon: "uil:window",
   },
   {
     title: "Integration of Technologies",
     description:
       "Coral integrates IoT, simulations, AI, data management, HPC, and visualization to provide a digital replica \
       for effective decision-making and management. ",
-    icon: "bx:bxs-data",
+    icon: "uil:database",
   },
-  {
-    title: "Orchestrated by CoralCore",
-    description:
-      "CoralCore orchestrator ensures to operate efficiently and deliver an user experience based on block-based and no-code principles",
-    icon: "bx:bxs-bot",
-  },
-  {
-    title: "Modularity and Extensibility",
-    description:
-      "Modularity allows flexibility in customization and adaptation to specific organizational needs",
-    icon: "bx:bxs-file-find",
-  },
-  {
-    title: "Widely Adopted Standards",
-    description:
-      "compatibility and interoperability facilitates smooth integration with existing software environments.",
-    icon: "bx:bx-check", 
-  },
+  // {
+  //   title: "Orchestrated by CoralCore",
+  //   description:
+  //     "CoralCore orchestrator ensures to operate efficiently and deliver an user experience based on block-based and no-code principles",
+  //   icon: "uil:robot",
+  // },
+  // {
+  //   title: "Modularity and Extensibility",
+  //   description:
+  //     "Modularity allows flexibility in customization and adaptation to specific organizational needs",
+  //   icon: "uil:search",
+  // },
+  // {
+  //   title: "Widely Adopted Standards",
+  //   description:
+  //     "compatibility and interoperability facilitates smooth integration with existing software environments.",
+  //   icon: "uil:check", 
+  // },
 ];
+const coralComponents = [
+  {
+    type: "Design",
+    title: "Coral Build",
+    description: "No-code building and admin. GUI",
+    icon: "uil:pen",
+    rowStart: 1,
+  },
+  {
+    type: "Ingest",
+    title: "Coral IoT",
+    description: "Sensor data gateway",
+    icon: "uil:plane-arrival",
+    rowStart: 2,
+  },
+  {
+    type: "Orchestrate",
+    title: "Coral Core",
+    description: "Orchestrator and data manager",
+    icon: "uil:constructor",
+    rowStart: 1,
+  },
+  {
+    type: "Simulate",
+    title: "Coral Sim/AI",
+    description: "Simulation and AI engine",
+    icon: "uil:heartbeat",
+    rowStart: 2
+  },
+  {
+    type: "Visualize",
+    title: "Coral Visualizer",
+    description: "3D visualization with XR/VR",
+    icon: "uil:cube",
+    rowStart: 1
+  }
+]
 ---
 
 <Sectionhead>
-  <Fragment slot="title">Coral Digital Twin platform</Fragment>
-  <Fragment slot="desc"></Fragment>
+  <Fragment slot="title">Coral</Fragment>
+  <Fragment slot="desc">The next-generation Digital Twin platform</Fragment>
 </Sectionhead>
 
 <!-- <div class="mt-8 md:mt-0">
@@ -61,7 +98,7 @@ const features = [
   </p>
 </div> -->
 
-<div class="grid sm:grid-cols-2 md:grid-cols-3 mt-8 md:mt-12 gap-12">
+<div class="grid grid-cols-1 sm:grid-cols-3 mt-8 md:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
       <div class="flex gap-4 items-start">
@@ -70,10 +107,29 @@ const features = [
         </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="text-slate-500 mt-2 leading-relaxed">{item.description}</p>
+          <p class="mt-2 text-slate-600 leading-relaxed">{item.description}</p>
         </div>
       </div>
     ))
+  }
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-5 sm-grid-rows-5 mt-8 md:mt-12 gap-8 md:gap-12 justify-items-center">
+  {
+    coralComponents.map((component) => {
+      const rowStart = component.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
+                      component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
+                      component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
+      return (
+        <div class={`${rowStart} w-full bg-white max-w-[75vw] p-4 md:p-8 rounded-xl shadow flex flex-col md:gap-2 justify-content-start justify-items-center items-center`}>
+          <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
+            <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
+          </div>
+          <div class="text-center mt-1">{component.title}</div>
+          <div class="font-semibold text-lg">{component.type}</div>
+          <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
+        </div>
+      )
+    })
   }
 </div>
 <!-- <div class="p-8" style="display: flex; justify-content: center;">

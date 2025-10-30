@@ -2,7 +2,7 @@
 
 ## Project description
 
-This website is based on the Astro template [web3Templates](https://web3templates.com/templates/astroship-starter-website-template-for-astro).
+This website is build with Astro, Tailwind and is based on the Astro template [web3Templates](https://web3templates.com/templates/astroship-starter-website-template-for-astro).
 
 All the code is inside `src` folder:
 
@@ -32,6 +32,10 @@ Create an `.env` file in the root folder and the variable:
 ```
 PUBLIC_WEB3FORM_KEY="your-web3form-key-to-test-the-contact-form"
 ```
+
+### Astro Icon
+
+The project uses Astro Icon. Follow the [instructions](https://www.astroicon.dev/guides/customization/) and use your own svg or the icons from [Iconify - Unicons](https://icon-sets.iconify.design/uil/). You can also easly install new icon sets.
 
 ## Deployment
 

@@ -35,9 +35,22 @@ const teamCollection = defineCollection({
   }),
 });
 
+const experienceCollection = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: "./src/data/experience" }),
+  schema: z.object({
+    draft: z.boolean(),
+    area: z.string(),
+    topics: z.array(z.string()),
+    rowStart: z.number().optional(),
+    rowEnd: z.number().optional(),
+    order: z.number(),
+  })
+})
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/data"
 export const collections = {
   'blog': blogCollection,
   'team': teamCollection,
+  'experience': experienceCollection,
 };

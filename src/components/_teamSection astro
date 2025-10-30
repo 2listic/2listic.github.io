@@ -11,7 +11,7 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
 
 <section>
   <Sectionhead>
-    <Fragment slot="title">Team</Fragment>
+    <Fragment slot="title">Team Experience</Fragment>
     <Fragment slot="desc"></Fragment>
   </Sectionhead>
 
@@ -21,8 +21,7 @@ const publishedTeamMembers = await getCollection("team", ({ data }) => {
     </h2> -->
     <p class="text-justify text-lg leading-relaxed text-slate-500">
       We are the perfect blend between industrial and accademical backgrounds, bringing different personalities, experiences and skills to
-      the job. This is what makes our team so special.
-    </p>
+      the job. This is what makes our team so special.</p>
   </div>
   <div class="grid grid-cols-1 gap-5 mx-auto max-w-3xl mt-8">
     {

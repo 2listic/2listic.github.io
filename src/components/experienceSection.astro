@@ -1,0 +1,47 @@
+---
+import Sectionhead from "@components/sectionhead.astro";
+import { getCollection } from "astro:content";
+
+// Filter team entries with 'draft: false' & date before current date
+const publishedExperiences = await getCollection("experience", ({ data }) => {
+  return !data.draft;
+});
+const sortedExperiences = publishedExperiences.sort((a, b) => a.data.order - b.data.order)
+---
+
+<section>
+  <Sectionhead>
+    <Fragment slot="title">Team Experience</Fragment>
+    <Fragment slot="desc"></Fragment>
+  </Sectionhead>
+
+  <div class="flex flex-col gap-3 mx-auto max-w-4xl mt-8">
+    <!-- <h2 class="text-center font-bold text-3xl text-gray-800">
+      Empowering the world with Dualistic.
+    </h2> -->
+    <p class="text-justify text-lg leading-relaxed text-slate-700">
+      We are the perfect blend between industrial and accademical backgrounds, bringing different personalities, experiences and skills to
+      the job. This is what makes our team so special</p>
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:grid-rows-4 mt-8 md:mt-12 gap-6 md:gap-12">
+    {
+      sortedExperiences.map((experience) => {
+        const rowClasses = experience.data.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
+                          experience.data.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
+                          experience.data.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
+        
+        return (
+          <div class={`flex flex-col rounded-2xl p-4 md:p-8 ring-1 ring-gray-200/50 shadow md:shadow-lg ${rowClasses}`}>
+            <h3 class="font-semibold text-lg pb-1">
+              {experience.data.area}
+            </h3>
+            <ul class="list-disc list-inside mt-2 space-y-2">
+              {experience.data.topics.map((topic) => {
+                return <li class="text-slate-600 leading-relaxed">{topic}</li>
+              })}
+            </ul>
+          </div>
+        )
+      })
+    }
+</section>

@@ -1,5 +1,5 @@
 ---
-draft: false
+draft: true
 name: "Fast Computing"
 title: "Scientific Advisor & Co-Founder"
 social: "https://www.fastcomputing.net/"
