@@ -1,7 +1,7 @@
 ---
-draft: true
+draft: false
 title: "Design, simulate and visualize with Coral platform"
-snippet: "How our user-friendly interface together with a scheduler and a visualizer uses a FEM library to easily create complex digital replicas."
+snippet: "Discover how our user-friendly interface, combined with intelligent scheduling and powerful visualization, leverages FEM libraries to create complex digital replicas with ease."
 image: {
     src: "/blog_gallery/screen_frontend.png",
     alt: "no-code/low-code"
@@ -12,7 +12,7 @@ author: "Dualistic"
 tags: [no-code, low-code, dealii-x, use cases, requirements]
 ---
 
-Today we are going to demonstrate how easy it can be to design, simulate and visualize results using **Coral**, our digital twin platform.
+In this post, we'll demonstrate how **Coral**, our digital twin platform, simplifies the entire workflow of designing, simulating, and visualizing complex engineering analyses.
 
 <iframe 
     width="100%" 
@@ -25,13 +25,12 @@ Today we are going to demonstrate how easy it can be to design, simulate and vis
     allowfullscreen>
 </iframe>
 
+Leveraging a [No-code/Low-code approach](/blog/no-code_low-code_dealii-x), Coral enables you to construct computational graphs that structure your digital replica through an intuitive **visual interface**. Simply drag and drop nodes, connect them to define relationships, and adjust parameters to customize your simulation. These graphs can be saved, loaded, and shared seamlessly with team members, fostering true collaborative engineering.
 
-Using the [No-code/Low-code approach](/blog/no-code_low-code_dealii-x), a computational graph structuring our digital replica is easily created. Nodes can be dropped, connected and tweaked to customize the simulation or create new graphs, which can then be saved, loaded and shared among users collaborating on the same project.
+Once your computational graph is ready, Coral gives you the flexibility to choose **where your simulation runs**. Since computational requirements can scale dramatically—particularly for complex finite element analyses—you're not limited to your local machine. For instance, in the [dealii-X project](/blog/dualistic-dealiix-partner/), we leverage High Performance Computing (HPC) clusters for large-scale simulations, though local workstations and cloud instances are equally supported.
 
-When the graph is ready, the user can choose the location where the simulation will actually run. This is because the resources needed can rapidly become very large: in the case of the [dealii-X project](/blog/dualistic-dealiix-partner/), High Performance Computing (HPC) clusters are used, but nothing prevents using a local machine or a cloud instance.
+This is where **Coral Orchestrate** takes action. Acting as an intelligent job scheduler, it manages computational resources by efficiently queueing simulations and storing results in designated locations. Throughout the process, it provides real-time status updates to the user interface, keeping you informed about your simulation's progress.
 
-Now is when Coral Orchestrate takes action, managing the available resources by queueing the different calculations and saving the results in the appropriate location. It also returns to the graphical interface the status of the computation, providing useful information to the user. 
+Behind the intuitive interface, **Coral Simulate** performs the heavy lifting. It translates your visual computational graph into optimized code that compiles and executes using parallel computing paradigms. In this specific case it integrates with the [deal.II](https://dealii.org) finite element library, in order to provide high-fidelity results that meet demanding engineering standards.
 
-Under the hood, Coral Simulate translates the graph into a set of classes, methods and functions to be compiled and executed using parallel computing. In this case, the FEM dealii library is used to provide results with high fidelity. 
-
-Finally, Coral Visualize provides a powerful way to visualize the results.
+Finally, **Coral Visualize** transforms raw simulation data into actionable insights through powerful visualization capabilities, allowing you to explore and understand your results comprehensively.
