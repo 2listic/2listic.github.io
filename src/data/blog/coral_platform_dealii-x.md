@@ -9,7 +9,7 @@ image: {
 publishDate: "2025-10-30 11:00"
 category: "Projects"
 author: "Dualistic"
-tags: [no-code, low-code, dealii-x, use cases, requirements]
+tags: [Coral, Coral Build, Coral Viz, Coral Core, Coral Sim, dealii-x]
 ---
 
 In this post, we'll demonstrate how **Coral**, our digital twin platform, simplifies the entire workflow of designing, simulating, and visualizing complex engineering analyses.
