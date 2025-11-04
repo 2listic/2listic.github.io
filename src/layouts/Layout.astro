@@ -50,7 +50,8 @@ const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
         creator: "@dualistic_twin",
         site: "@dualistic_twin",
         card: "summary_large_image",
-        description: seoDescription
+        image: seoImage,
+        description: seoDescription,
       }}
       openGraph={{
         basic: {
