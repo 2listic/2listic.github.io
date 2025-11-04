@@ -17,7 +17,7 @@ In this post, we'll demonstrate how **Coral**, our digital twin platform, simpli
 <iframe 
     width="100%" 
     height="400" 
-    src="https://www.youtube.com/embed/dAVx0f7pP6U" 
+    src="https://www.youtube.com/embed/V44hH8C_D7E" 
     title="YouTube video player" 
     class="border-0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
