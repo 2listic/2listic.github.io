@@ -20,7 +20,7 @@ const { title, enableScrollSnap = false, description, image, author } = Astro.pr
 const makeTitle = title ? title + " | " + "Dualistic" : "Dualistic";
 const defaultDescription = "Digital Twins made simple. Create and manage digital twins, \
   using no-code interfaces and advanced visualization.";
-const defaultImage = new URL("/logo.svg", Astro.site).toString();
+const defaultImage = new URL("/logo.png", Astro.site).toString();
 const seoDescription = description || defaultDescription;
 const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
 
@@ -39,7 +39,7 @@ const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo_no_dual.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <SEO
