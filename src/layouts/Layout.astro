@@ -18,7 +18,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const { title, enableScrollSnap = false, description, image, author } = Astro.props;
 
 const makeTitle = title ? title + " | " + "Dualistic" : "Dualistic";
-const defaultDescription = "Dualistic is a startup to ease Digital Twin development";
+const defaultDescription = "Digital Twins made simple. Create and manage digital twins, \
+  using no-code interfaces and advanced visualization.";
 const defaultImage = new URL("/logo.svg", Astro.site).toString();
 const seoDescription = description || defaultDescription;
 const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
@@ -49,6 +50,7 @@ const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
         creator: "@dualistic_twin",
         site: "@dualistic_twin",
         card: "summary_large_image",
+        description: seoDescription
       }}
       openGraph={{
         basic: {
