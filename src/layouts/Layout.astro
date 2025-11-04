@@ -8,20 +8,21 @@ import "../styles/global.css";
 export interface Props {
   title: string;
   enableScrollSnap?: boolean;
+  description?: string;
+  image?: string;
+  author?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 
-const resolvedImageWithDomain = new URL(
-  "/logo.svg",
-  Astro.site
-).toString();
+const { title, enableScrollSnap = false, description, image, author } = Astro.props;
 
-const { title, enableScrollSnap = false } = Astro.props;
-
-const makeTitle = title
-  ? title + " | " + "Dualistic"
-  : "Dualistic";
+const makeTitle = title ? title + " | " + "Dualistic" : "Dualistic";
+const defaultDescription = "Dualistic is a startup to ease Digital Twin development";
+const defaultImage = new URL("/logo.svg", Astro.site).toString();
+const seoDescription = description || defaultDescription;
+const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
+const twitterCardType = image ? "summary_large_image" : "summary";
 
 ---
 
@@ -38,27 +39,27 @@ const makeTitle = title
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/logo_no_dual.png" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <SEO
       title={makeTitle}
-      description="Dualistic is a startup to ease Digital Twin development"
+      description={seoDescription}
       canonical={canonicalURL}
       twitter={{
         creator: "@dualistic_twin",
-        site: "",
-        card: "summary_large_image",
+        site: "@dualistic_twin",
+        card: twitterCardType,
       }}
       openGraph={{
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Dualistic`,
-          image: resolvedImageWithDomain,
+          title: makeTitle,
+          image: seoImage,
         },
         image: {
-          alt: "Dualistic Homepage Screenshot",
+          alt: title || "Dualistic",
         },
       }}
     />

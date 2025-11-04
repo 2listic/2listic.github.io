@@ -3,13 +3,13 @@ draft: false
 title: "Design, simulate and visualize with Coral platform"
 snippet: "Discover how our user-friendly interface, combined with a scheduler and a visualizator, leverages FEM libraries to create digital replicas with ease."
 image: {
-    src: "/blog_gallery/screen_frontend.png",
-    alt: "no-code/low-code"
+    src: "/blog_gallery/graphical_interface_coral_build.png",
+    alt: "Coral build graphical interface screenshot"
 }
 publishDate: "2025-10-30 11:00"
 category: "Projects"
 author: "Dualistic"
-tags: [no-code, low-code, dealii-x, use cases, requirements]
+tags: [Coral, Coral Build, Coral Viz, Coral Core, Coral Sim, dealii-x]
 ---
 
 In this post, we'll demonstrate how **Coral**, our digital twin platform, simplifies the entire workflow of designing, simulating, and visualizing complex engineering analyses.
@@ -17,7 +17,7 @@ In this post, we'll demonstrate how **Coral**, our digital twin platform, simpli
 <iframe 
     width="100%" 
     height="400" 
-    src="https://www.youtube.com/embed/dAVx0f7pP6U" 
+    src="https://www.youtube.com/embed/V44hH8C_D7E" 
     title="YouTube video player" 
     class="border-0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
