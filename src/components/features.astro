@@ -74,7 +74,7 @@ const coralComponents = [
   },
   {
     type: "Visualize",
-    title: "Coral Visualizer",
+    title: "Coral Viz",
     description: "3D visualization with XR/VR",
     icon: "uil:cube",
     rowStart: 1
@@ -101,7 +101,7 @@ const coralComponents = [
 <div class="grid grid-cols-1 sm:grid-cols-3 mt-8 md:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
-      <div class="flex gap-4 items-start">
+      <div class="hidden sm:flex gap-4 items-start">
         <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
           <Icon class="text-white" name={item.icon} />
         </div>
