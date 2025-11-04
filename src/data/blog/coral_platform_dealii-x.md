@@ -3,8 +3,8 @@ draft: false
 title: "Design, simulate and visualize with Coral platform"
 snippet: "Discover how our user-friendly interface, combined with a scheduler and a visualizator, leverages FEM libraries to create digital replicas with ease."
 image: {
-    src: "/blog_gallery/screen_frontend.png",
-    alt: "no-code/low-code"
+    src: "/blog_gallery/graphical_interface_coral_build.png",
+    alt: "Coral build graphical interface screenshot"
 }
 publishDate: "2025-10-30 11:00"
 category: "Projects"

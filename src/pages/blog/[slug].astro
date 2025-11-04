@@ -15,9 +15,28 @@ export async function getStaticPaths() {
 // Get the entry directly from the prop on render
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const { title, snippet, image, author } = entry.data;
+
+// Check if image has external URL othewise add site base URL 
+const resolveImageUrl = (imageSrc: string): string => {
+  if (imageSrc.startsWith('http://') || imageSrc.startsWith('https://')) {
+    return imageSrc;
+  }
+  
+  const cleanPath = imageSrc.startsWith('/') ? imageSrc.slice(1) : imageSrc;
+  return new URL(cleanPath, Astro.site).toString();
+};
+
+const resolvedImageUrl = resolveImageUrl(image.src);
 ---
 
-<Layout title={entry.data.title}>
+<Layout 
+  title={title}
+  description={snippet}
+  image={resolvedImageUrl}
+  author={author}
+>
   <Container>
     <div class="mx-auto max-w-3xl mt-14">
       <span class="text-blue-400 uppercase tracking-wider text-sm font-medium">
