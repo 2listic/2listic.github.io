@@ -22,7 +22,6 @@ const defaultDescription = "Dualistic is a startup to ease Digital Twin developm
 const defaultImage = new URL("/logo.svg", Astro.site).toString();
 const seoDescription = description || defaultDescription;
 const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
-const twitterCardType = image ? "summary_large_image" : "summary";
 
 ---
 
@@ -49,7 +48,7 @@ const twitterCardType = image ? "summary_large_image" : "summary";
       twitter={{
         creator: "@dualistic_twin",
         site: "@dualistic_twin",
-        card: twitterCardType,
+        card: "summary_large_image",
       }}
       openGraph={{
         basic: {
