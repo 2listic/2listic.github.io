@@ -1,6 +1,8 @@
 ---
 import { Picture } from "astro:assets";
 import heroImage from "/public/logo.svg";
+import CubeAlpha from "/public/cubeAlpha2.svg";
+import CubeBeta from "/public/cubeBeta2.svg";
 // import Link from "@components/ui/link.astro";
 //import { Icon } from "astro-icon/components";
 
@@ -25,8 +27,8 @@ import heroImage from "/public/logo.svg";
 //   { src: '/cubeD.svg', alt: 'Cube 4', delay: 4, direction: 'bottom' },
 // ];
 const cubes = [
-  { src: '/cubeAlpha2.svg', alt: 'Cube 1', delay: 0, direction: 'bottom'},
-  { src: '/cubeBeta2.svg', alt: 'Cube 2', delay: 0, direction: 'right'},
+  { Component: CubeAlpha, alt: 'Cube 1', delay: 0, direction: 'bottom'},
+  { Component: CubeBeta, alt: 'Cube 2', delay: 0, direction: 'right'},
   // { src: '/cubeTeta2.svg', alt: 'Cube 3', delay: 3}
 ];
 
@@ -38,14 +40,14 @@ const cubes = [
           // }
 ---
 
-<main class="pb-4 pt-4 md:pt-12 md:pb-12">
-  <div class="flex flex-col gap-1 items-center justify-center">
-    <a href="/#features" class="relative w-[300px] h-[300px]">
-      {cubes.map(({ src, alt, delay, direction }, index) => (
-        <img
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          src={src}
-          alt={alt}
+<main class="max-w-full pb-4 pt-4 md:pt-12 md:pb-12">
+  <div class="max-w-full flex flex-col gap-1 items-center justify-center">
+    <a href="/#features" class="relative w-[200px] h-[200px] md:w-[300px] md:h-[300px]">
+      {cubes.map(({ Component, alt, delay, direction }, index) => (
+        <Component
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
+          width="100%"
+          height="100%"
           style={
             index === cubes.length - 1
               // ? `opacity: 0; animation: fade-in 1s ${delay}s, pulse 5s ${delay}s infinite alternate;`
