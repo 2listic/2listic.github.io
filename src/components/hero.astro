@@ -3,19 +3,45 @@ import { Picture } from "astro:assets";
 import heroImage from "/public/logo.svg";
 // import Link from "@components/ui/link.astro";
 //import { Icon } from "astro-icon/components";
+
+// const cubes = [
+//   { src: '/cube1.svg', alt: 'Cube 1', delay: 0 },
+//   { src: '/cube2.svg', alt: 'Cube 2', delay: 0.5 },
+//   { src: '/cube3.svg', alt: 'Cube 3', delay: 1 },
+//   { src: '/cube4.svg', alt: 'Cube 4', delay: 1.5 },
+//   { src: '/cube5.svg', alt: 'Cube 5', delay: 2 },
+//   { src: '/cube6.svg', alt: 'Cube 6', delay: 2.5 },
+//   { src: '/cube7.svg', alt: 'Cube 7', delay: 3 },
+//   { src: '/cube8.svg', alt: 'Cube 8', delay: 3.5 },
+//   { src: '/cube9.svg', alt: 'Cube 9', delay: 4 },
+//   { src: '/cube10.svg', alt: 'Cube 10', delay: 4.5 },
+//   { src: '/cube11.svg', alt: 'Cube 11', delay: 5 },
+// ];
+
+const cubes = [
+  { src: '/cubeA.svg', alt: 'Cube 1', delay: 1 },
+  { src: '/cubeB.svg', alt: 'Cube 2', delay: 2 },
+  { src: '/cubeC.svg', alt: 'Cube 3', delay: 3 },
+  { src: '/cubeD.svg', alt: 'Cube 4', delay: 4 },
+];
 ---
 
-<main class="pb-8 pt-8 md:pt-24 md:pb-24">
-  <div class="flex flex-col gap-1 md:gap-3 items-center ">
-    <a href="/#features" class="animate-pulse [animation-duration:5s] opacity-5">
-      <Picture
-        src={heroImage}
-        alt="Digital concepts"
-        widths={[800, 800, 800]}
-        sizes="(max-width: 800px) 100vw, 620px"
-        loading="eager"
-        format="avif"
-      />
+<main class="pb-4 pt-4 md:pt-12 md:pb-12">
+  <div class="flex flex-col gap-1 items-center justify-center">
+    <a href="/#features" class="relative w-[250px] h-[250px]">
+      {cubes.map(({ src, alt, delay }, index) => (
+        <img
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          src={src}
+          alt={alt}
+          style={
+            index === cubes.length - 1 
+              // ? `opacity: 0; animation: fade-in 1s ${delay}s, pulse 5s ${delay}s infinite alternate;`
+              ? `opacity: 0; animation: fade-in 1s ${delay}s forwards`
+              : `opacity: 0; animation: fade-in 1s ${delay}s forwards, fade-out 1s ${delay+1}s forwards;`
+          }
+        />
+      ))}
     </a>
     <div >
       <!-- <h1
@@ -43,3 +69,18 @@ import heroImage from "/public/logo.svg";
     </div>
   </div>
 </main>
+
+<style>
+  @keyframes fade-in {
+    to { opacity: 0.5; }
+  }
+  
+  @keyframes fade-out {
+    to { opacity: 0; }
+  }
+  
+  @keyframes pulse {
+    from { opacity: 0.5; }
+    to { opacity: 0.3; }
+  }
+</style>
