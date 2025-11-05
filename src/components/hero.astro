@@ -18,27 +18,39 @@ import heroImage from "/public/logo.svg";
 //   { src: '/cube11.svg', alt: 'Cube 11', delay: 5 },
 // ];
 
+// const cubes = [
+//   { src: '/cubeA.svg', alt: 'Cube 1', delay: 1, direction: 'left' },
+//   { src: '/cubeB.svg', alt: 'Cube 2', delay: 2, direction: 'top' },
+//   { src: '/cubeC.svg', alt: 'Cube 3', delay: 3, direction: 'right' },
+//   { src: '/cubeD.svg', alt: 'Cube 4', delay: 4, direction: 'bottom' },
+// ];
 const cubes = [
-  { src: '/cubeA.svg', alt: 'Cube 1', delay: 1 },
-  { src: '/cubeB.svg', alt: 'Cube 2', delay: 2 },
-  { src: '/cubeC.svg', alt: 'Cube 3', delay: 3 },
-  { src: '/cubeD.svg', alt: 'Cube 4', delay: 4 },
+  { src: '/cubeAlpha2.svg', alt: 'Cube 1', delay: 0, direction: 'bottom'},
+  { src: '/cubeBeta2.svg', alt: 'Cube 2', delay: 0, direction: 'right'},
+  // { src: '/cubeTeta2.svg', alt: 'Cube 3', delay: 3}
 ];
+
+// style={
+          //   index === cubes.length - 1 
+          //     // ? `opacity: 0; animation: fade-in 1s ${delay}s, pulse 5s ${delay}s infinite alternate;`
+          //     ? `opacity: 0; animation: slide-from-${direction} 1s ${delay}s forwards`
+          //     : `opacity: 0; animation: fade-in 1s ${delay}s forwards`
+          // }
 ---
 
 <main class="pb-4 pt-4 md:pt-12 md:pb-12">
   <div class="flex flex-col gap-1 items-center justify-center">
-    <a href="/#features" class="relative w-[250px] h-[250px]">
-      {cubes.map(({ src, alt, delay }, index) => (
+    <a href="/#features" class="relative w-[300px] h-[300px]">
+      {cubes.map(({ src, alt, delay, direction }, index) => (
         <img
           class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           src={src}
           alt={alt}
           style={
-            index === cubes.length - 1 
+            index === cubes.length - 1
               // ? `opacity: 0; animation: fade-in 1s ${delay}s, pulse 5s ${delay}s infinite alternate;`
-              ? `opacity: 0; animation: fade-in 1s ${delay}s forwards`
-              : `opacity: 0; animation: fade-in 1s ${delay}s forwards, fade-out 1s ${delay+1}s forwards;`
+              ? `opacity: 0; animation: slide-from-${direction} 1.5s ${delay}s forwards`
+              : `opacity: 0; animation: fade-in 1s ${delay}s forwards`
           }
         />
       ))}
@@ -82,5 +94,49 @@ const cubes = [
   @keyframes pulse {
     from { opacity: 0.5; }
     to { opacity: 0.3; }
+  }
+
+  @keyframes slide-from-left {
+    from { 
+      opacity: 0;
+      transform: translate(-50%, 0%);
+    }
+    to { 
+      opacity: 0.5;
+      transform: translate(0%, 0%);
+    }
+  }
+
+  @keyframes slide-from-top {
+    from { 
+      opacity: 0;
+      transform: translate(0%, -50%);
+    }
+    to { 
+      opacity: 0.5;
+      transform: translate(0%, 0%);
+    }
+  }
+
+  @keyframes slide-from-right {
+    from { 
+      opacity: 0;
+      transform: translate(50%, 0%);
+    }
+    to { 
+      opacity: 0.5;
+      transform: translate(0%, 0%);
+    }
+  }
+
+  @keyframes slide-from-bottom {
+    from { 
+      opacity: 0;
+      transform: translate(0%, 50%);
+    }
+    to { 
+      opacity: 0.5;
+      transform: translate(0%, 0%);
+    }
   }
 </style>
