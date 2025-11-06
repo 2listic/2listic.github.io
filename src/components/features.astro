@@ -109,7 +109,7 @@ const coralComponents = [
                       component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
                       component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
       return (
-        <div class={`${rowStart} w-full bg-white max-w-[75vw] p-4 md:p-8 rounded-xl shadow flex flex-col md:gap-2 justify-content-start justify-items-center items-center`}>
+        <div class={`${rowStart} w-full max-w-56 min-h-56 p-4 md:p-8 rounded-xl bg-white shadow flex flex-col md:gap-2 justify-center justify-items-center items-center`}>
           <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
             <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
           </div>
