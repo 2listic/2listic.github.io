@@ -90,7 +90,7 @@ const coralComponents = [
 <div class="grid grid-cols-1 sm:grid-cols-3 mt-0 md:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
-      <div class="hidden sm:flex gap-4 items-start">
+      <div class="hidden md:flex gap-4 items-start">
         <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
           <Icon class="text-white" name={item.icon} />
         </div>
@@ -102,7 +102,7 @@ const coralComponents = [
     ))
   }
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-5 sm-grid-rows-5 mt-8 md:mt-12 gap-8 md:gap-12 justify-items-center">
+<div class="grid grid-cols-1 sm:grid-cols-5 sm-grid-rows-5 mt-8 md:mt-12 mx-10 sm:mx-4 gap-8 sm:gap-4 md:gap-12 justify-items-center">
   {
     coralComponents.map((component) => {
       const rowStart = component.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
