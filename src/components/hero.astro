@@ -1,27 +1,26 @@
 ---
-import { Picture } from "astro:assets";
-import heroImage from "/public/logo.svg";
-// import Link from "@components/ui/link.astro";
-//import { Icon } from "astro-icon/components";
+import LogoPart1 from "/public/logo_part1.svg";
+import LogoPart2 from "/public/logo_part2.svg";
+
+const cubes = [
+  { Component: LogoPart1, name: "fade-in", time: 1, delay: 0 },
+  { Component: LogoPart2, name: "slide-from-right", time: 1.5, delay: 0},
+];
 ---
 
-<main class="pb-8 pt-8 md:pt-24 md:pb-24">
-  <div class="flex flex-col gap-1 md:gap-3 items-center ">
-    <a href="/#features" class="animate-pulse [animation-duration:5s] opacity-5">
-      <Picture
-        src={heroImage}
-        alt="Digital concepts"
-        widths={[800, 800, 800]}
-        sizes="(max-width: 800px) 100vw, 620px"
-        loading="eager"
-        format="avif"
-      />
+<main class="pb-12 pt-12">
+  <div class="flex flex-col gap-1 items-center justify-center">
+    <a href="/#features" class="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px]">
+      {cubes.map(({ Component, name, time, delay }, index) => (
+        <Component
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
+          width="100%"
+          height="100%"
+          style={`opacity: 0; animation: ${name} ${time}s ${delay}s forwards`}
+        />
+      ))}
     </a>
-    <div >
-      <!-- <h1
-        class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight xl:tracking-tighter">
-        No more accrocchi!
-      </h1> -->
+    <div class="pt-12">
       <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-center text-slate-600 max-w-4xl">
         Digital Twins,<br/> made simple 
       </h1>
@@ -29,17 +28,34 @@ import heroImage from "/public/logo.svg";
         Create and manage digital twins,<br/> using no-code interfaces and advanced visualization
       </p>
     </div>
-    <div class="mt-6 flex flex-col sm:flex-row gap-3">
-      <!-- <Link
+    <!-- <div class="mt-6 flex flex-col sm:flex-row gap-3">
+      <Link
         size="lg"
         style="outline"
         rel="noopener"
-        href="https://github.com/surjithctly/astroship"
+        href="https://github.com/2listic/"
         class="flex gap-1 items-center justify-center"
         target="_blank">
         <Icon class="text-black w-4 h-4" name="uil:github" />
          GitHub Repo
-      </Link> -->
-    </div>
+      </Link>
+    </div> -->
   </div>
 </main>
+
+<style>
+  @keyframes fade-in {
+    to { opacity: 0.5; }
+  }
+
+  @keyframes slide-from-right {
+    from { 
+      opacity: 0;
+      transform: translate(50%, 0%);
+    }
+    to { 
+      opacity: 0.5;
+      transform: translate(0%, 0%);
+    }
+  }
+</style>
