@@ -8,7 +8,7 @@ const cubes = [
 ];
 ---
 
-<main class="pb-12 pt-12">
+<main class="pb-16 pt-16">
   <div class="flex flex-col gap-1 items-center justify-center">
     <a href="/#features" class="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px]">
       {cubes.map(({ Component, name, time, delay }, index) => (
@@ -45,7 +45,7 @@ const cubes = [
 
 <style>
   @keyframes fade-in {
-    to { opacity: 0.5; }
+    to { opacity: 0.8; }
   }
 
   @keyframes slide-from-right {
@@ -54,7 +54,7 @@ const cubes = [
       transform: translate(50%, 0%);
     }
     to { 
-      opacity: 0.5;
+      opacity: 0.8;
       transform: translate(0%, 0%);
     }
   }
