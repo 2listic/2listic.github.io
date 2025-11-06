@@ -2,6 +2,7 @@
 // @ts-ignore
 import { Icon } from "astro-icon/components";
 import Sectionhead from "./sectionhead.astro";
+import Link from "./ui/link.astro";
 
 const features = [
   {
@@ -27,7 +28,7 @@ const features = [
   // {
   //   title: "Orchestrated by CoralCore",
   //   description:
-  //     "CoralCore orchestrator ensures to operate efficiently and deliver an user experience based on block-based and no-code principles",
+  //     "CoralCore orchestrator ensures efficient operation and delivers a user experience based on block-based and no-code principles",
   //   icon: "uil:robot",
   // },
   // {
@@ -39,7 +40,7 @@ const features = [
   // {
   //   title: "Widely Adopted Standards",
   //   description:
-  //     "compatibility and interoperability facilitates smooth integration with existing software environments.",
+  //     "Compatibility and interoperability facilitate smooth integration with existing software environments.",
   //   icon: "uil:check", 
   // },
 ];
@@ -48,41 +49,51 @@ const coralComponents = [
     type: "Design",
     title: "Coral Build",
     description: "No-code building and admin. GUI",
-    backDescription: "backDescription",
     icon: "uil:pen",
     rowStart: 1,
+    backDescription: "Design and manage your digital replica easily with our no-code graphical interface",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Ingest",
     title: "Coral IoT",
     description: "Sensor data gateway",
-    backDescription: "backDescription",
     icon: "uil:plane-arrival",
     rowStart: 2,
+    backDescription: "Feed your digital twin with real-time data using our powerful gateway",
+    buttonCssClass: "hidden",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Orchestrate",
     title: "Coral Core",
     description: "Orchestrator and data manager",
-    backDescription: "backDescription",
     icon: "uil:constructor",
     rowStart: 1,
+    backDescription: "Efficiently provide resources for heavy computations and conveniently manage data",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Simulate",
     title: "Coral Sim/AI",
     description: "Simulation and AI engine",
-    backDescription: "backDescription",
     icon: "uil:heartbeat",
-    rowStart: 2
+    rowStart: 2,
+    backDescription: "Generate trustworthy results using state-of-the-art AI and simulation techniques",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Visualize",
     title: "Coral Viz",
     description: "3D visualization with XR/VR",
-    backDescription: "backDescription",
     icon: "uil:cube",
-    rowStart: 1
+    rowStart: 1,
+    backDescription: "Leverage the power of 3D visualization to explore your digital replica",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   }
 ]
 ---
@@ -115,10 +126,11 @@ const coralComponents = [
                       component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
                       component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
       return (
-        <div class={`${rowStart} w-40 lg:w-52 h-60 flip-card`}>
+        <div class={`${rowStart} w-40 lg:w-52 h-72 flip-card`}>
           <div class="flip-card-inner">
+
             <!--front -->
-            <div class="flip-card-front p-4 md:p-8 rounded-xl bg-white shadow flex flex-col md:gap-2 justify-center items-center">
+            <div class="flip-card-front p-4 md:p-8 rounded-xl bg-white shadow flex flex-col md:gap-2 justify-between items-center">
               <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
                 <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
               </div>
@@ -126,9 +138,20 @@ const coralComponents = [
               <div class="font-semibold text-lg">{component.type}</div>
               <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
             </div>
+
             <!-- back -->
-            <div class="flip-card-back p-4 md:p-8 rounded-xl bg-slate-800 text-white shadow flex flex-col md:gap-2 justify-center items-center">
-              <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.backDescription}</div>
+            <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow flex flex-col md:gap-2 justify-center items-center">
+              <div class="text-center text-lg text-slate-200 leading-relaxed max-w-[50vw]">{component.backDescription}</div>
+              <Link
+                size="lg"
+                style="outline"
+                rel="noopener"
+                href={component.buttonLink}
+                class={`${component.buttonCssClass} gap-1 items-center justify-center`}
+                target="_blank">
+                <Icon class="text-black w-6 h-6" name="uil:arrow-circle-right" />
+                  More
+              </Link>
             </div>
           </div>
         </div>
