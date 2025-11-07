@@ -127,18 +127,18 @@ const coralComponents = [
   }
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-5 md:grid-rows-5 mt-8 md:mt-12 mx-4 gap-8 sm:gap-4 md:gap-12 justify-items-center">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:grid-rows-5 mt-8 lg:mt-12 mx-4 gap-8 lg:gap-12 justify-items-center">
   {
     coralComponents.map((component) => {
-      const rowStart = component.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
-                      component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
-                      component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
+      const rowStart = component.rowStart === 1 ? 'lg:row-start-1 lg:row-span-3' :
+                      component.rowStart === 2 ? 'lg:row-start-2 lg:row-span-3' :
+                      component.rowStart === 3 ? 'lg:row-start-3 lg:row-span-3' : '';
       return (
         <div class={`${rowStart} w-52 h-72 flip-card cursor-pointer`}>
           <div class="flip-card-inner">
 
             <!--front -->
-            <div class="flip-card-front p-4 md:p-8 rounded-xl bg-white shadow hover:border
+            <div class="flip-card-front p-4 lg:p-8 rounded-xl bg-white shadow hover:border
              flex flex-col gap-2 justify-center items-center">
               <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
                 <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
@@ -150,7 +150,7 @@ const coralComponents = [
 
             <!-- back -->
             <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow 
-              flex flex-col md:gap-2 justify-between items-center">
+              flex flex-col lg:gap-2 justify-between items-center">
               <div class="text-center text-lg text-slate-200 leading-relaxed">{component.backDescription}</div>
               <Link
                 size="lg"
