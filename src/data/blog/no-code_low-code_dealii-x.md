@@ -14,7 +14,7 @@ tags: [no-code, low-code, dealii-x, use cases, requirements]
 
 ## A modern platform for human organ digital twin creation 
 
-One of the long-term goals of the [dealii-X](https://www.dealii-x.eu/) project in which [Dualistic is a partner](http://localhost:4321/blog/dualistic-dealiix-partner) is to develop a modern **digital twin platform**, that will significantly enhance the creation of digital twins and the scheduling of related computational tasks.  
+One of the long-term goals of the [dealii-X](https://www.dealii-x.eu/) project in which [Dualistic is a partner](/blog/dualistic-dealiix-partner) is to develop a modern **digital twin platform**, that will significantly enhance the creation of digital twins and the scheduling of related computational tasks.  
 
 The platform will provide key components for diagnostic and training tools in the fields of personalized medicine. Some **use cases** could be a biomedical engineer willing to access the mechanical properties of the organs or tissues or a surgeon interested in intuitive ways to drag an MRI scan and have an interactive simulation without having to deal with all the technical details that are normally needed.
 
