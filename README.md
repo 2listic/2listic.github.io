@@ -32,12 +32,14 @@ Create an `.env` file in the root folder and the variable:
 PUBLIC_WEB3FORM_KEY="your-web3form-key-to-test-the-contact-form"
 ```
 
-### Spell check
-To automatically spellcheck all the `.md` (i.e. all the blog files) files run:  
+### Automatic spell check on commit
+Automatic spellcheck on all the `.md` files (i.e. all the blog posts) is done via [Husky](https://typicode.github.io/husky/how-to.html) and [Cspell](https://cspell.org/docs/getting-started#1-create-a-configuration-file).  
+
+To manually spellcheck run the same script used by Husky:  
 ```
   npm run spellcheck
 ```  
-If you have a false positive, the word may not be known by the spellchecker. Add the word to the [project-words.txt](./project-words.txt) file to make the spellchecker ignore it.  
+If you have a false positive, the word may not be known by Cspell. Add the word to the [project-words.txt](./project-words.txt) file to make the spellchecker ignore it.  
 
 To check also `.astro` files, update the script in the [package.json](./package.json) with `cspell \"**/*.{md,astro}\"`.
 
