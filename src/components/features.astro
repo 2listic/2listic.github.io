@@ -143,9 +143,12 @@ const coralComponents = [
               <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
                 <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
               </div>
-              <div class="text-center mt-1">{component.title}</div>
+              <div class="text-center text-lg mt-1">{component.title}</div>
               <div class="font-semibold text-lg">{component.type}</div>
               <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
+              <div class="lg:hidden mt-4 text-xs text-slate-600 animate-pulse">
+                Tap to flip →
+              </div>
             </div>
 
             <!-- back -->
