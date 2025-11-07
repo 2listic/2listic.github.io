@@ -2,6 +2,7 @@
 // @ts-ignore
 import { Icon } from "astro-icon/components";
 import Sectionhead from "./sectionhead.astro";
+import Link from "./ui/link.astro";
 
 const features = [
   {
@@ -27,7 +28,7 @@ const features = [
   // {
   //   title: "Orchestrated by CoralCore",
   //   description:
-  //     "CoralCore orchestrator ensures to operate efficiently and deliver an user experience based on block-based and no-code principles",
+  //     "CoralCore orchestrator ensures efficient operation and delivers a user experience based on block-based and no-code principles",
   //   icon: "uil:robot",
   // },
   // {
@@ -39,7 +40,7 @@ const features = [
   // {
   //   title: "Widely Adopted Standards",
   //   description:
-  //     "compatibility and interoperability facilitates smooth integration with existing software environments.",
+  //     "Compatibility and interoperability facilitate smooth integration with existing software environments.",
   //   icon: "uil:check", 
   // },
 ];
@@ -50,6 +51,9 @@ const coralComponents = [
     description: "No-code building and admin. GUI",
     icon: "uil:pen",
     rowStart: 1,
+    backDescription: "Design and manage your digital replica easily with our no-code graphical interface",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Ingest",
@@ -57,6 +61,9 @@ const coralComponents = [
     description: "Sensor data gateway",
     icon: "uil:plane-arrival",
     rowStart: 2,
+    backDescription: "Feed your digital twin with real-time data using our powerful gateway",
+    buttonCssClass: "hidden",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Orchestrate",
@@ -64,58 +71,99 @@ const coralComponents = [
     description: "Orchestrator and data manager",
     icon: "uil:constructor",
     rowStart: 1,
+    backDescription: "Efficiently provide resources for heavy computations and conveniently manage data",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Simulate",
     title: "Coral Sim/AI",
     description: "Simulation and AI engine",
     icon: "uil:heartbeat",
-    rowStart: 2
+    rowStart: 2,
+    backDescription: "Generate trustworthy results using state-of-the-art AI and simulation techniques",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   },
   {
     type: "Visualize",
     title: "Coral Viz",
     description: "3D visualization with XR/VR",
     icon: "uil:cube",
-    rowStart: 1
+    rowStart: 1,
+    backDescription: "Leverage the power of 3D visualization to explore your digital replica",
+    buttonCssClass: "flex",
+    buttonLink: "/blog/coral_platform_dealii-x",
   }
 ]
 ---
+
+<script>
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', () => {
+      card.classList.toggle('flipped');
+    });
+  });
+</script>
 
 <Sectionhead>
   <Fragment slot="title">Coral</Fragment>
   <Fragment slot="desc">The next-generation Digital Twin platform</Fragment>
 </Sectionhead>
 
-<div class="grid grid-cols-1 sm:grid-cols-3 mt-0 md:mt-12 gap-8 md:gap-12">
+<div class="hidden md:grid grid-cols-3 mt-0 md:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
-      <div class="hidden md:flex gap-4 items-start">
+      <div class="flex gap-4 items-start">
         <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
           <Icon class="text-white" name={item.icon} />
         </div>
         <div>
           <h3 class="font-semibold text-lg">{item.title}</h3>{" "}
-          <p class="mt-2 text-slate-600 leading-relaxed">{item.description}</p>
+          <p class="hidden lg:block mt-2 text-slate-600 leading-relaxed">{item.description}</p>
         </div>
       </div>
     ))
   }
 </div>
-<div class="grid grid-cols-1 sm:grid-cols-5 sm-grid-rows-5 mt-8 md:mt-12 mx-10 sm:mx-4 gap-8 sm:gap-4 md:gap-12 justify-items-center">
+
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:grid-rows-5 mt-8 lg:mt-12 mx-4 gap-8 lg:gap-12 justify-items-center">
   {
     coralComponents.map((component) => {
-      const rowStart = component.rowStart === 1 ? 'md:row-start-1 md:row-span-3' :
-                      component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
-                      component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
+      const rowStart = component.rowStart === 1 ? 'lg:row-start-1 lg:row-span-3' :
+                      component.rowStart === 2 ? 'lg:row-start-2 lg:row-span-3' :
+                      component.rowStart === 3 ? 'lg:row-start-3 lg:row-span-3' : '';
       return (
-        <div class={`${rowStart} w-full bg-white max-w-[75vw] p-4 md:p-8 rounded-xl shadow flex flex-col md:gap-2 justify-content-start justify-items-center items-center`}>
-          <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
-            <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
+        <div class={`${rowStart} w-52 h-72 flip-card cursor-pointer`}>
+          <div class="flip-card-inner">
+
+            <!--front -->
+            <div class="flip-card-front p-4 lg:p-8 rounded-xl bg-white shadow hover:border
+             flex flex-col gap-2 justify-center items-center">
+              <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
+                <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
+              </div>
+              <div class="text-center mt-1">{component.title}</div>
+              <div class="font-semibold text-lg">{component.type}</div>
+              <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
+            </div>
+
+            <!-- back -->
+            <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow 
+              flex flex-col lg:gap-2 justify-between items-center">
+              <div class="text-center text-lg text-slate-200 leading-relaxed">{component.backDescription}</div>
+              <Link
+                size="lg"
+                style="outline"
+                rel="noopener"
+                href={component.buttonLink}
+                class={`${component.buttonCssClass} gap-1 items-center justify-center`}
+                target="_blank">
+                <Icon class="text-black w-6 h-6" name="uil:arrow-circle-right" />
+                  More
+              </Link>
+            </div>
           </div>
-          <div class="text-center mt-1">{component.title}</div>
-          <div class="font-semibold text-lg">{component.type}</div>
-          <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
         </div>
       )
     })
@@ -125,3 +173,33 @@ const coralComponents = [
   <iframe width="560" height="315" src="https://www.youtube.com/embed/Yxipeo_vLys?si=HIo6YgjkgKtdVdD-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div> -->
 
+<style>
+  .flip-card {
+    perspective: 1000px;
+  }
+  
+  .flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+  }
+
+  .flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  .flip-card-back {
+    transform: rotateY(180deg);
+  }
+</style>
