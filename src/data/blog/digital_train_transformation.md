@@ -29,7 +29,7 @@ Our intervention aimed to focus on how predictive maintenance and virtual protot
 
 Predictive maintenance utilizes data analytics and machine learning algorithms to forecast equipment failures, enabling proactive maintenance to prevent costly downtimes. This approach not only minimizes operational disruptions but also optimizes asset performance and extends their lifespan. 
 
-![virtual prototiping](/blog_gallery/virtual_pro.jpg)
+![virtual prototyping](/blog_gallery/virtual_pro.jpg)
 
 Virtual prototyping focus on creatings digital replicas of products or systems, allowing for thorough testing and refinement in a virtual environment before physical production.This significantly reduces time-to-market, lowers development costs, and facilitates innovation by enabling rapid iteration and experimentation. 
 

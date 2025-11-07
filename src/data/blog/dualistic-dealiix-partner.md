@@ -1,10 +1,10 @@
 ---
 draft: false
 title: "Dualistic is partner in the EU-funded dealii-X project"
-snippet: "An Exascale Framework for Digital Twins of the Human Body with 16 Europen partners and 3,9 million budget."
+snippet: "An Exascale Framework for Digital Twins of the Human Body with 16 European partners and 3,9 million budget."
 image: {
     src: "/blog_gallery/logo_dualistic_dealiix.svg",
-    alt: "deali-X and Dualistic logos"
+    alt: "dealii-X and Dualistic logos"
 }
 publishDate: "2024-12-02 11:00"
 category: "News"
