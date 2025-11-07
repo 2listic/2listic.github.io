@@ -134,7 +134,7 @@ const coralComponents = [
                       component.rowStart === 2 ? 'md:row-start-2 md:row-span-3' :
                       component.rowStart === 3 ? 'md:row-start-3 md:row-span-3' : '';
       return (
-        <div class={`${rowStart} w-52 h-72 flip-card`}>
+        <div class={`${rowStart} w-52 h-72 flip-card cursor-pointer`}>
           <div class="flip-card-inner">
 
             <!--front -->
@@ -185,15 +185,7 @@ const coralComponents = [
     transition: transform 0.7s;
     transform-style: preserve-3d;
   }
-  
-  /* Hover styles for hover-capable devices */
-  @media (hover: hover) {
-    .flip-card:hover {
-      cursor: pointer;
-    }
-  }
 
-  /* Only flip on click, not hover */
   .flip-card.flipped .flip-card-inner {
     transform: rotateY(180deg);
   }
