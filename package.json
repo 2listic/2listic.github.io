@@ -8,7 +8,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "spellcheck": "cspell \"**/*.md\" --show-suggestions"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.8",
@@ -23,5 +24,8 @@
     "astro-seo": "^0.8.0",
     "sharp": "^0.33.0",
     "tailwindcss": "^4.1.16"
+  },
+  "devDependencies": {
+    "cspell": "^9.3.0"
   }
 }
