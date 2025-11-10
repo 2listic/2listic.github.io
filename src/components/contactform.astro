@@ -68,7 +68,7 @@ const web3formPublicKey = import.meta.env.PUBLIC_WEB3FORM_KEY;
         I consent to the processing of my personal data per GDPR in order to respond to this inquiry. *
       </div>
     </label>
-    <div class="checkbox-feedback text-red-400 text-sm mt-1" style="display: none;">
+    <div class="checkbox-feedback text-red-400 text-sm mt-1">
       You must consent to data processing to proceed.
     </div>
   </div>
@@ -87,6 +87,14 @@ const web3formPublicKey = import.meta.env.PUBLIC_WEB3FORM_KEY;
   }
 
   .was-validated :not(:placeholder-shown):invalid ~ .invalid-feedback {
+    display: block;
+  }
+
+  .checkbox-feedback {
+    display: none;
+  }
+
+  .was-validated label:has(input[type="checkbox"]:invalid) ~ .checkbox-feedback {
     display: block;
   }
 
@@ -119,17 +127,6 @@ const web3formPublicKey = import.meta.env.PUBLIC_WEB3FORM_KEY;
   form.addEventListener("submit", function (e) {
     e.preventDefault();
     form.classList.add("was-validated");
-
-    // Check privacy consent checkbox
-    const privacyConsent = document.getElementById("privacy_consent");
-    const checkboxFeedback = document.querySelector(".checkbox-feedback");    
-    if (!privacyConsent.checked) {
-      checkboxFeedback.style.display = "block";
-      privacyConsent.focus();
-      return;
-    } else {
-      checkboxFeedback.style.display = "none";
-    }
 
     if (!form.checkValidity()) {
       form.querySelectorAll(":invalid")[0].focus();
