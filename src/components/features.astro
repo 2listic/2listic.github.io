@@ -98,9 +98,13 @@ const coralComponents = [
 ---
 
 <script>
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('flipped');
+  // When Astro View Transitions is enabled, the astro:page-load event listener has to be used 
+  // to execute code that would otherwise normally execute on DOMContentLoaded event.
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('.flip-card').forEach(card => {
+      card.addEventListener('click', () => {
+        card.classList.toggle('flipped');
+      });
     });
   });
 </script>
