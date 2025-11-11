@@ -1,11 +1,15 @@
 ---
 export interface Props {
-  id?: string,
+  id?: string;
   class?: string;
   isLast?: boolean;
 }
 
-const { id: id, class: className, isLast = false } = Astro.props;
+const { 
+  id, 
+  class: className, 
+  isLast = false,
+} = Astro.props;
 ---
 
 <div 

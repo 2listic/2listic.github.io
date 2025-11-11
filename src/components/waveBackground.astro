@@ -1,0 +1,157 @@
+---
+export interface Props {
+  variant?: 'purple' | 'white' | 'green' | 'gray';
+  animate?: boolean;
+  size?: number;
+  className?: string;
+}
+
+const { 
+  variant = 'purple',
+  animate = true,
+  size = 1,
+  className = '' 
+} = Astro.props;
+
+const colorSchemes = {
+  purple: {
+    wave1: 'rgba(243, 232, 255, 1)', // purple-100
+    wave2: 'rgba(233, 213, 255, 1)', // purple-200
+    wave3: 'rgba(216, 180, 254, 1)', // purple-300
+  },
+  white: {
+    wave1: 'rgba(255, 255, 255, 1)',
+    wave2: 'rgba(255, 255, 255, 0.7)',
+    wave3: 'rgba(255, 255, 255, 0.4)',
+  },
+  green: {
+    wave1: 'rgba(220, 252, 231, 1)',  // green-100
+    wave2: 'rgba(187, 247, 208, 1)',  // green-200
+    wave3: 'rgba(134, 239, 172, 1)',  // green-300
+  },
+  gray: {
+    wave1: 'rgba(249, 250, 251, 1)',  // gray-50
+    wave2: 'rgba(243, 244, 246, 1)',  // gray-100
+    wave3: 'rgba(229, 231, 235, 1)',  // gray-200
+  }
+};
+
+const colors = colorSchemes[variant];
+---
+
+<div class="relative">
+
+  <div class:list={[
+    'absolute left-0 right-0 pointer-events-none z-0 overflow-hidden',
+    'bottom-0',
+    className
+  ]}
+      style={`height: 150px; --wave-size: ${size};`}
+    >
+    <!-- Wave Layer 1 (Front) -->
+    <svg
+      class:list={[
+        'absolute w-full z-10',
+        'top-4',
+        animate && 'animate-wave-fast'
+      ]}
+      style="height: 150px; min-height: 150px;"
+      viewBox="0 0 1440 150"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,75 C320,110 420,20 720,75 C1020,130 1120,40 1440,75 L1440,150 L0,150 Z"
+        fill={colors.wave1}
+      />
+    </svg>
+
+    <!-- Wave Layer 2 (Middle) -->
+    <svg
+      class:list={[
+        'absolute w-full z-9',
+        'top-2',
+        animate && 'animate-wave-medium'
+      ]}
+      style="height: 150px; min-height: 150px;"
+      viewBox="0 0 1440 150"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,75 C320,110 420,20 720,75 C1020,130 1120,40 1440,75 L1440,150 L0,150 Z"
+        fill={colors.wave2}
+      />
+    </svg>
+
+    <!-- Wave Layer 3 (Back) -->
+    <svg
+      class:list={[
+        'absolute w-full z-8',
+        'top-0',
+        animate && 'animate-wave-slow'
+      ]}
+      style="height: 150px; min-height: 150px;"
+      viewBox="0 0 1440 150"
+      preserveAspectRatio="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M0,75 C320,110 420,20 720,75 C1020,130 1120,40 1440,75 L1440,150 L0,150 Z"
+        fill={colors.wave3}
+      />
+    </svg>
+  </div>
+  
+</div>
+
+<style>
+  @keyframes wave-fast {
+    0%, 100% {
+      transform: translateX(0) scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: translateX(0) scaleX(3) scaleY(calc(3 * var(--wave-size)));
+    }
+  }
+
+  @keyframes wave-medium {
+    0%, 100% {
+      transform: translateX(0) scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: translateX(0) scaleX(2) scaleY(calc(2 * var(--wave-size)));
+    }
+  }
+
+  @keyframes wave-slow {
+    0%, 100% {
+      transform: translateX(0) scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: translateX(0) scaleX(1.2) scaleY(calc(1.2 * var(--wave-size)));
+    }
+  }
+
+  .animate-wave-fast {
+    animation: wave-fast 9s ease-in-out infinite;
+  }
+  
+  .animate-wave-medium {
+    animation: wave-medium 12s ease-in-out infinite reverse;
+  }
+
+  .animate-wave-slow {
+    animation: wave-slow 16s ease-in-out infinite;
+  }
+
+
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-wave-slow,
+    .animate-wave-medium,
+    .animate-wave-fast {
+      animation: none;
+    }
+  }
+</style>

@@ -6,33 +6,46 @@ import Hero from "@components/hero.astro";
 import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
 import ExperienceSection from "@components/experienceSection.astro";
+import WaveBackground from "@components/waveBackground.astro";
 ---
 
 <Layout title="" enableScrollSnap={true}>
-    <SnappingElement id="hero">
+  <SnappingElement 
+    id="hero"
+  >
     <Container>
       <Hero />
     </Container>
-    </SnappingElement>
+  </SnappingElement>
 
-  <SnappingElement id="features" class="bg-linear-to-br from-purple-100 to-purple-200">
+  <WaveBackground variant="purple" size={1}/>
+  <SnappingElement
+    id="features"
+    class="bg-purple-100"
+  >
     <Container>
       <Features />
       <!-- <Cta /> -->
     </Container>
   </SnappingElement>
 
+  <WaveBackground variant="white" size={1}/>
   <!-- <SnappingElement id="coral">
     <CoralSection />
   </SnappingElement> -->
 
-  <SnappingElement id="team" class="bg-linear-to-br from-white to-purple-100">
+  <SnappingElement id="team">
     <Container>
       <ExperienceSection />
     </Container>
   </SnappingElement>
 
-  <SnappingElement id="contact" isLast={true}>
+  <WaveBackground variant="purple" size={0.5}/>
+  <SnappingElement
+    id="contact"
+    isLast={true}
+    class="bg-purple-100"
+  >
     <Container>
       <ContactSection />
     </Container>
