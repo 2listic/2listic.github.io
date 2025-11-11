@@ -1,5 +1,5 @@
-<svg width="217" height="270" viewBox="0 0 217 270" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="30" height="30" transform="matrix(0.866025 -0.5 2.20305e-08 1 163 150.133)" fill="#F79AD3"/>
-<rect width="30" height="30" transform="matrix(0.866025 -0.5 0.866025 0.5 137 135.133)" fill="#FE1990"/>
-<rect width="30" height="30" transform="matrix(0.866025 0.5 -2.20305e-08 1 137 135.133)" fill="#AF125A"/>
+<svg width="309" height="251" viewBox="0 0 309 251" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M212 138L237.981 123V153L212 168V138Z" fill="#F79AD3"/>
+<path d="M186 123L211.981 108L237.962 123L211.981 138L186 123Z" fill="#FE1990"/>
+<path d="M186 123L211.981 138V168L186 153L186 123Z" fill="#AF125A"/>
 </svg>
