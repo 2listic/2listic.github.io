@@ -14,7 +14,7 @@ tags: [Coral, Coral Build, Coral Viz, Coral Core, Coral Sim, dealii-x]
 
 In this post, we'll demonstrate how **Coral**, our digital twin platform, simplifies the entire workflow of designing, simulating, and visualizing complex engineering analyses.
 
-<iframe 
+<!-- <iframe 
     width="100%" 
     height="400" 
     src="https://www.youtube.com/embed/V44hH8C_D7E" 
@@ -23,7 +23,20 @@ In this post, we'll demonstrate how **Coral**, our digital twin platform, simpli
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
     referrerpolicy="strict-origin-when-cross-origin" 
     allowfullscreen>
-</iframe>
+</iframe> -->
+<div class="relative w-full h-[400px]">
+    <div id="placeholder-coral-alpha"
+        class="absolute inset-0 z-0 bg-black animate-pulse">
+    </div>
+    <iframe 
+        title="Coral: alpha preview"
+        src="https://peertube.uno/videos/embed/jhVMj7CeWSPESxf9uhDY7J?muted=1&amp;title=0&amp;warningTitle=0&amp;peertubeLink=0"
+        allow="fullscreen"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+        class="absolute inset-0 z-10 w-full h-full border-0"
+        onload="document.getElementById('placeholder-coral-alpha').style.display='none'"
+    ></iframe>
+</div>
 
 Leveraging a [No-code/Low-code approach](/blog/no-code_low-code_dealii-x), Coral enables you to construct computational graphs that structure your digital replica through an intuitive **visual interface**. Simply drag and drop nodes, connect them to define relationships, and adjust parameters to customize your simulation. These graphs can be saved, loaded, and shared seamlessly with team members, fostering true collaborative engineering.
 
