@@ -36,25 +36,25 @@ const colors = colorSchemes[variant];
 const waves = [
   { 
     color: colors.wave1, 
-    zIndex: 10, 
-    topOffset: 4,
+    zIndex: 'z-10', 
+    topOffset: 't-4',
     animation: 'animate-wave-fast' 
   },
   { 
     color: colors.wave2, 
-    zIndex: 9, 
-    topOffset: 2,
+    zIndex: 'z-9', 
+    topOffset: 't-2',
     animation: 'animate-wave-medium' 
   },
   { 
     color: colors.wave3, 
-    zIndex: 8, 
-    topOffset: 0, 
+    zIndex: 'z-8', 
+    topOffset: 't-0', 
     animation: 'animate-wave-slow' 
   },
 ];
 
-// Calculate dimensions based on size prop
+// Calculate dimensions based on size prop and viewport
 const baseHeight = 150;
 const height = baseHeight * size;
 const mobileHeight = baseHeight * size * 0.7
@@ -73,9 +73,10 @@ const mobileHeight = baseHeight * size * 0.7
       <svg
         class:list={[
           'absolute w-full h-full',
-          animate && wave.animation
+          animate && wave.animation,
+          wave.topOffset,
+          wave.zIndex
         ]}
-        style={`top: ${wave.topOffset * size}px; z-index: ${wave.zIndex};`}
         viewBox="0 0 1440 150"
         preserveAspectRatio="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -92,28 +93,28 @@ const mobileHeight = baseHeight * size * 0.7
 <style>
   @keyframes wave-fast {
     0%, 100% {
-      transform: translateX(0) scaleX(1) scaleY(1);
+      transform: scaleX(1) scaleY(1);
     }
     50% {
-      transform: translateX(0) scaleX(3) scaleY(3);
+      transform: scaleX(3) scaleY(3);
     }
   }
 
   @keyframes wave-medium {
     0%, 100% {
-      transform: translateX(0) scaleX(1) scaleY(1);
+      transform: scaleX(1) scaleY(1);
     }
     50% {
-      transform: translateX(0) scaleX(2) scaleY(2);
+      transform: scaleX(2) scaleY(2);
     }
   }
 
   @keyframes wave-slow {
     0%, 100% {
-      transform: translateX(0) scaleX(1) scaleY(1);
+      transform: scaleX(1) scaleY(1);
     }
     50% {
-      transform: translateX(0) scaleX(1.5) scaleY(1.5);
+      transform: scaleX(1.5) scaleY(1.5);
     }
   }
 
