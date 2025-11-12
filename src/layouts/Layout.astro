@@ -20,7 +20,7 @@ const { title, enableScrollSnap = false, description, image, author } = Astro.pr
 const makeTitle = title ? title + " | " + "Dualistic" : "Dualistic";
 const defaultDescription = "Digital Twins made simple. Create and manage digital twins, \
   using no-code interfaces and advanced visualization.";
-const defaultImage = new URL("/logo.svg", Astro.site).toString();
+const defaultImage = new URL("/logo.png", Astro.site).toString();
 const seoDescription = description || defaultDescription;
 const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
 
