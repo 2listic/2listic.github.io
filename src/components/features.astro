@@ -6,22 +6,21 @@ import Link from "./ui/link.astro";
 
 const features = [
   {
-    title: "Well-being-Centric Approach",
+    title: "User-Centric Design",
     description:
-      "Coral aims to revolutionize Digital Twin creation and management, ensuring that users can work with the platform effortlessly.",
+      "Coral enables to create and manage Digital Twins effortlessly.",
     icon: "uil:smile", 
   },
   {
     title: "Next-Generation Platform",
     description:
-      "Coral's design revolves around principles like ease‑of‑use and modularity, empowering industrial organizations to tackle future challenges effectively.",
+      "Designed for ease of use, efficiency, integration and modularity.",
     icon: "uil:window",
   },
   {
     title: "Integration of Technologies",
     description:
-      "Coral integrates IoT, simulations, AI, data management, HPC, and visualization to provide a digital replica \
-      for effective decision-making.",
+      "Integrates IoT, simulations, AI, data management, HPC, and visualization.",
     icon: "uil:database",
   },
   // {
@@ -107,26 +106,26 @@ const coralComponents = [
 
 <Sectionhead>
   <Fragment slot="title">Coral</Fragment>
-  <Fragment slot="desc">The next-generation Digital Twin platform.</Fragment>
+  <Fragment slot="desc">Digital Twin platform.</Fragment>
 </Sectionhead>
 
-<div class="hidden md:grid grid-cols-3 mt-0 lg:mt-12 gap-8 md:gap-12">
+<div class="grid grid-col-1 md:grid-cols-3 justify-center mt-8 lg:mt-12 gap-8 md:gap-12">
   {
     features.map((item) => (
-      <div class="flex gap-4 items-start">
-        <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
-          <Icon class="text-white" name={item.icon} />
-        </div>
-        <div>
+      <div class="max-w-sm flex flex-col lg:gap-1 mx-2">
+        <div class="flex gap-4 items-end">
+          <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
+            <Icon class="text-white" name={item.icon} />
+          </div>
           <div class="font-semibold text-lg">{item.title}</div>{" "}
-          <div class="hidden lg:block mt-2 text-slate-600 leading-relaxed">{item.description}</div>
         </div>
+        <div class="mt-2 text-justify text-slate-600 leading-relaxed">{item.description}</div>
       </div>
     ))
   }
 </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:grid-rows-5 mt-8 lg:mt-12 mx-4 gap-8 lg:gap-12 justify-items-center">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:grid-rows-5 mt-12 mx-4 gap-8 lg:gap-12 justify-items-center">
   {
     coralComponents.map((component) => {
       const rowStart = component.rowStart === 1 ? 'lg:row-start-1 lg:row-span-3' :
