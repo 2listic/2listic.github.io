@@ -1,0 +1,151 @@
+---
+export interface Props {
+  variant?: 'purple' | 'white' | 'gray';
+  animate?: boolean;
+  size?: number;
+  className?: string;
+}
+
+const { 
+  variant = 'purple',
+  animate = true,
+  size = 1,
+  className = '' 
+} = Astro.props;
+
+const colorSchemes = {
+  purple: {
+    wave1: 'rgba(243, 232, 255, 1)', // purple-100
+    wave2: 'rgba(233, 213, 255, 1)', // purple-200
+    wave3: 'rgba(216, 180, 254, 1)', // purple-300
+  },
+  white: {
+    wave1: 'rgba(255, 255, 255, 1)',
+    wave2: 'rgba(255, 255, 255, 0.7)',
+    wave3: 'rgba(255, 255, 255, 0.4)',
+  },
+  gray: {
+    wave1: 'rgba(249, 250, 251, 1)',  // gray-50
+    wave2: 'rgba(243, 244, 246, 1)',  // gray-100
+    wave3: 'rgba(229, 231, 235, 1)',  // gray-200
+  }
+};
+
+const colors = colorSchemes[variant];
+
+const waves = [
+  { 
+    color: colors.wave1, 
+    zIndex: 'z-10', 
+    topOffset: 't-4',
+    animation: 'animate-wave-fast' 
+  },
+  { 
+    color: colors.wave2, 
+    zIndex: 'z-9', 
+    topOffset: 't-2',
+    animation: 'animate-wave-medium' 
+  },
+  { 
+    color: colors.wave3, 
+    zIndex: 'z-8', 
+    topOffset: 't-0', 
+    animation: 'animate-wave-slow' 
+  },
+];
+
+// Calculate dimensions based on size prop and viewport
+const baseHeight = 150;
+const height = baseHeight * size;
+const mobileHeight = baseHeight * size * 0.7
+---
+
+<div class="relative">
+  <div
+    class="wave-container"
+    class:list={[
+      'absolute left-0 right-0 pointer-events-none z-0 overflow-hidden bottom-0',
+      className
+    ]}
+    style={`--wave-height: ${height}px; --wave-mobile-height: ${mobileHeight}px;`}
+  >
+    {waves.map((wave) => (
+      <svg
+        class:list={[
+          'absolute w-full h-full',
+          animate && wave.animation,
+          wave.topOffset,
+          wave.zIndex
+        ]}
+        viewBox="0 0 1440 150"
+        preserveAspectRatio="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0,75 C320,110 420,20 720,75 C1020,130 1120,40 1440,75 L1440,150 L0,150 Z"
+          fill={wave.color}
+        />
+      </svg>
+    ))}
+  </div>
+</div>
+
+<style>
+  @keyframes wave-fast {
+    0%, 100% {
+      transform: scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: scaleX(3) scaleY(3);
+    }
+  }
+
+  @keyframes wave-medium {
+    0%, 100% {
+      transform: scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: scaleX(2) scaleY(2);
+    }
+  }
+
+  @keyframes wave-slow {
+    0%, 100% {
+      transform: scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: scaleX(1.5) scaleY(1.5);
+    }
+  }
+
+  .animate-wave-fast {
+    animation: wave-fast 9s ease-in-out infinite;
+  }
+  
+  .animate-wave-medium {
+    animation: wave-medium 12s ease-in-out infinite reverse;
+  }
+
+  .animate-wave-slow {
+    animation: wave-slow 16s ease-in-out infinite;
+  }
+
+  .wave-container {
+    height: var(--wave-height);
+  }
+
+  @media (max-width: 800px) {
+    .wave-container {
+      height: var(--wave-mobile-height);
+    }
+  }
+
+  /* Accessibility: Respect user's motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-wave-slow,
+    .animate-wave-medium,
+    .animate-wave-fast {
+      animation: none;
+    }
+  }
+</style>
