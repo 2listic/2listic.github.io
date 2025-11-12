@@ -34,24 +34,40 @@ const colorSchemes = {
 const colors = colorSchemes[variant];
 
 const waves = [
-  { color: colors.wave1, zIndex: 10, topOffset: 4, animation: 'animate-wave-fast' },
-  { color: colors.wave2, zIndex: 9, topOffset: 2, animation: 'animate-wave-medium' },
-  { color: colors.wave3, zIndex: 8, topOffset: 0, animation: 'animate-wave-slow' },
+  { 
+    color: colors.wave1, 
+    zIndex: 10, 
+    topOffset: 4,
+    animation: 'animate-wave-fast' 
+  },
+  { 
+    color: colors.wave2, 
+    zIndex: 9, 
+    topOffset: 2,
+    animation: 'animate-wave-medium' 
+  },
+  { 
+    color: colors.wave3, 
+    zIndex: 8, 
+    topOffset: 0, 
+    animation: 'animate-wave-slow' 
+  },
 ];
 
 // Calculate dimensions based on size prop
 const baseHeight = 150;
 const height = baseHeight * size;
+const mobileHeight = baseHeight * size * 0.7
 ---
 
 <div class="relative">
   <div
+    class="wave-container"
     class:list={[
-      'absolute left-0 right-0 pointer-events-none z-0 overflow-hidden',
-      'bottom-0',
+      'absolute left-0 right-0 pointer-events-none z-0 overflow-hidden bottom-0',
       className
     ]}
-    style={`height: ${height}px;`}
+    style={`--wave-height: ${height}px; --wave-mobile-height: ${mobileHeight}px;`}
   >
     {waves.map((wave) => (
       <svg
@@ -111,6 +127,16 @@ const height = baseHeight * size;
 
   .animate-wave-slow {
     animation: wave-slow 16s ease-in-out infinite;
+  }
+
+  .wave-container {
+    height: var(--wave-height);
+  }
+
+  @media (max-width: 800px) {
+    .wave-container {
+      height: var(--wave-mobile-height);
+    }
   }
 
   /* Accessibility: Respect user's motion preferences */
