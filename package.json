@@ -16,6 +16,7 @@
     "@astrojs/mdx": "^4.3.8",
     "@astrojs/sitemap": "^3.6.0",
     "@fontsource-variable/inter": "^5.0.15",
+    "@iconify-json/material-symbols-light": "^1.2.46",
     "@iconify-json/uil": "^1.2.3",
     "@tailwindcss/typography": "^0.5.10",
     "@tailwindcss/vite": "^4.1.16",
