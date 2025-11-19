@@ -9,7 +9,7 @@ const features = [
     title: "User-Centric Design",
     description:
       "Coral enables to create and manage Digital Twins effortlessly.",
-    icon: "uil:smile", 
+    icon: "material-symbols-light:face", 
   },
   {
     title: "Next-Generation Platform",
@@ -47,7 +47,7 @@ const coralComponents = [
     type: "Design",
     title: "Coral Build",
     description: "No-code building and admin GUI",
-    icon: "uil:pen",
+    icon: "material-symbols-light:graph-3",
     rowStart: 1,
     backDescription: "Design and manage your digital replica easily with our no-code graphical interface",
     buttonCssClass: "flex",
@@ -57,7 +57,7 @@ const coralComponents = [
     type: "Ingest",
     title: "Coral IoT",
     description: "Sensor data gateway",
-    icon: "uil:plane-arrival",
+    icon: "material-symbols-light:settings-input-component-outline-rounded",
     rowStart: 2,
     backDescription: "Feed your digital twin with real-time data using our powerful gateway",
     buttonCssClass: "hidden",
@@ -67,7 +67,7 @@ const coralComponents = [
     type: "Orchestrate",
     title: "Coral Core",
     description: "Orchestrator and data manager",
-    icon: "uil:constructor",
+    icon: "material-symbols-light:crossword-outline-rounded",
     rowStart: 1,
     backDescription: "Efficiently provide resources for heavy computations and conveniently manage data",
     buttonCssClass: "flex",
@@ -77,7 +77,7 @@ const coralComponents = [
     type: "Simulate",
     title: "Coral Sim/AI",
     description: "Simulation and AI engine",
-    icon: "uil:heartbeat",
+    icon: "material-symbols-light:ecg-heart-outline",
     rowStart: 2,
     backDescription: "Generate trustworthy results using state-of-the-art AI and simulation techniques",
     buttonCssClass: "flex",
@@ -87,7 +87,7 @@ const coralComponents = [
     type: "Visualize",
     title: "Coral Viz",
     description: "3D visualization with XR/VR",
-    icon: "uil:cube",
+    icon: "material-symbols-light:visibility-outline-rounded",
     rowStart: 1,
     backDescription: "Leverage the power of 3D visualization to explore your digital replica",
     buttonCssClass: "flex",
@@ -114,8 +114,8 @@ const coralComponents = [
     features.map((item) => (
       <div class="max-w-sm flex flex-col lg:gap-1 mx-2">
         <div class="flex gap-4 items-end">
-          <div class="mt-1 bg-black rounded-full  p-2 w-8 h-8 shrink-0">
-            <Icon class="text-white" name={item.icon} />
+          <div class="mt-1 bg-gray-800 rounded-full p-2 w-10 h-10 shrink-0">
+            <Icon class="text-center text-white w-6 h-6" name={item.icon} />
           </div>
           <div class="font-semibold text-lg">{item.title}</div>{" "}
         </div>
@@ -136,21 +136,24 @@ const coralComponents = [
           <div class="flip-card-inner">
 
             <!--front -->
-            <div class="flip-card-front p-4 lg:p-8 rounded-xl bg-white shadow hover:border border-gray-500
-             flex flex-col gap-2 justify-center items-center">
-              <div class="flex items-center justify-center shrink-0 border rounded-md w-16 h-16 ">
-                <Icon class="text-center text-black w-8 h-8" name={component.icon}/>
+            <div class="flip-card-front p-4 lg:p-8 rounded-xl bg-white shadow hover:shadow-2xl 
+              flex flex-col gap-5 justify-center items-center">
+              <div class="flex items-center justify-center shrink-0 border rounded-md w-20 h-20 ">
+                <Icon class="text-center text-black w-12 h-12" name={component.icon}/>
               </div>
               <div class="text-center text-lg mt-1">{component.title}</div>
-              <div class="font-semibold text-lg">{component.type}</div>
-              <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div>
+              <div class="font-bold text-lg">{component.type}</div>
+              {/* <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div> */}
               <div class="lg:hidden mt-4 text-xs text-slate-600 animate-pulse">
-                Tap to flip →
+                Tap for more →
+              </div>
+              <div class="hidden lg:block mt-4 text-xs text-slate-600 animate-pulse">
+                Click for more →
               </div>
             </div>
 
             <!-- back -->
-            <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow 
+            <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow hover:shadow-2xl
               flex flex-col lg:gap-2 justify-between items-center">
               <div class="text-center text-lg text-slate-200 leading-relaxed">{component.backDescription}</div>
               <Link
@@ -161,7 +164,7 @@ const coralComponents = [
                 class={`${component.buttonCssClass} gap-1 items-center justify-center`}
                 target="_blank">
                 <Icon class="text-black w-6 h-6" name="uil:arrow-circle-right" />
-                  More
+                  Video
               </Link>
             </div>
           </div>
@@ -185,6 +188,7 @@ const coralComponents = [
     height: 100%;
     transition: transform 0.7s;
     transform-style: preserve-3d;
+    will-change: transform;  /* browser expects changes */
   }
 
   .flip-card.flipped .flip-card-inner {
@@ -200,7 +204,10 @@ const coralComponents = [
     -webkit-backface-visibility: hidden;
   }
   
+  .flip-card-front {
+    transform: translateZ(0); /* force also this side active in GPU memory */
+  }
   .flip-card-back {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) translateZ(0);
   }
 </style>
