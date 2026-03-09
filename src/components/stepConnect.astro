@@ -1,0 +1,248 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center pt-4">
+  <!-- Text column -->
+  <div id="connect-text" class="flex flex-col gap-6 opacity-0">
+    <div>
+      <span class="inline-block bg-purple-200 text-purple-900 text-xs font-bold px-3 py-1 rounded-full tracking-widest mb-4">STEP 01 / 03</span>
+      <h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-800">Connect</h2>
+    </div>
+    <p class="text-lg text-slate-600 leading-relaxed">
+      A lightweight agent, <strong class="text-slate-800">dcim-claw</strong>, runs inside your
+      datacenter and continuously streams metrics from every sensor, server, and network device
+      into DCIMate.
+    </p>
+    <ul class="flex flex-col gap-4">
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:device-thermostat" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Temperature sensors</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Rack-level and ambient temperature, sampled every second.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:bolt" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">PDU & power meters</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Per-device power draw and cumulative energy consumption.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:lan" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Network & compute</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Switch utilization, CPU load, and memory metrics, streamed live.
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="flex items-center gap-2 bg-purple-50 border border-purple-200 rounded-full px-4 py-2 w-fit">
+      <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+      <span class="text-sm font-medium text-purple-800">dcim-claw agent · streaming live</span>
+    </div>
+  </div>
+
+  <!-- Viz column: animated sensor network -->
+  <div id="connect-viz" class="relative opacity-0">
+    <div class="relative w-full max-w-xs mx-auto aspect-square select-none">
+      <svg
+        id="connect-svg"
+        viewBox="0 0 300 300"
+        class="w-full h-full overflow-visible"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <!-- Connection lines -->
+        <line x1="62" y1="66" x2="134" y2="136" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+        <line x1="238" y1="66" x2="166" y2="136" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+        <line x1="32" y1="150" x2="122" y2="150" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+        <line x1="268" y1="150" x2="178" y2="150" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+        <line x1="74" y1="238" x2="138" y2="166" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+        <line x1="226" y1="238" x2="162" y2="166" stroke="#a855f7" stroke-width="1.5" stroke-dasharray="6 4" opacity="0.35"/>
+
+        <!-- Hub pulse ring (CSS animated) -->
+        <circle class="hub-ring" cx="150" cy="150" r="30" fill="none" stroke="#a855f7" stroke-width="1.5" opacity="0"/>
+
+        <!-- Hub -->
+        <circle cx="150" cy="150" r="30" fill="#ede9fe" stroke="#a855f7" stroke-width="1.5"/>
+        <circle cx="150" cy="150" r="22" fill="#7c3aed"/>
+        <text x="150" y="147" text-anchor="middle" fill="white" font-size="7" font-weight="700">DCIMate</text>
+        <text x="150" y="158" text-anchor="middle" fill="#c4b5fd" font-size="6.5">dcim-claw</text>
+
+        <!-- Sensor: Temperature (top-left) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="Temperature" data-value="42.3 °C">
+          <circle cx="62" cy="66" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="62" y="63" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="700">T°</text>
+          <text x="62" y="76" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">TEMP</text>
+        </g>
+
+        <!-- Sensor: Power (top-right) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="PDU Power" data-value="3.2 kW">
+          <circle cx="238" cy="66" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="238" y="63" text-anchor="middle" fill="#7c3aed" font-size="12" font-weight="700">W</text>
+          <text x="238" y="76" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">POWER</text>
+        </g>
+
+        <!-- Sensor: Network (left) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="Network" data-value="1.4 Gbps">
+          <circle cx="32" cy="150" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="32" y="147" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">≋</text>
+          <text x="32" y="160" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">NET</text>
+        </g>
+
+        <!-- Sensor: CPU (right) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="CPU Load" data-value="78%">
+          <circle cx="268" cy="150" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="268" y="147" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">⊡</text>
+          <text x="268" y="160" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">CPU</text>
+        </g>
+
+        <!-- Sensor: HVAC (bottom-left) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="HVAC" data-value="18 °C in">
+          <circle cx="74" cy="238" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="74" y="235" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">❄</text>
+          <text x="74" y="248" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">HVAC</text>
+        </g>
+
+        <!-- Sensor: Memory (bottom-right) -->
+        <g class="sensor-node" style="cursor:pointer" data-label="Memory" data-value="64 GB used">
+          <circle cx="226" cy="238" r="22" fill="#f5f3ff" stroke="#a855f7" stroke-width="1.5"/>
+          <text x="226" y="235" text-anchor="middle" fill="#7c3aed" font-size="11" font-weight="700">▦</text>
+          <text x="226" y="248" text-anchor="middle" fill="#9333ea" font-size="6.5" font-weight="600">MEM</text>
+        </g>
+      </svg>
+
+      <!-- Hover tooltip -->
+      <div
+        id="connect-tooltip"
+        class="absolute pointer-events-none bg-slate-800 text-white text-xs rounded-lg px-3 py-1.5 opacity-0 shadow-lg transition-opacity duration-150 z-10 whitespace-nowrap"
+      >
+        <div id="connect-tooltip-label" class="font-semibold"></div>
+        <div id="connect-tooltip-value" class="text-purple-300 mt-0.5"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes hubRingExpand {
+    0%   { transform: scale(1);   opacity: 0.55; }
+    100% { transform: scale(2.2); opacity: 0;    }
+  }
+  .hub-ring {
+    transform-box:    fill-box;
+    transform-origin: center;
+    animation: hubRingExpand 2.5s ease-out infinite;
+  }
+  .sensor-node circle {
+    transition: fill 0.18s;
+  }
+  .sensor-node:hover circle {
+    fill: #ede9fe;
+  }
+</style>
+
+<script>
+  import { animate } from "animejs";
+
+  (function () {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const section = document.getElementById("step-connect");
+    if (!section) return;
+
+    const text = document.getElementById("connect-text");
+    const viz  = document.getElementById("connect-viz");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        const dur = prefersReduced ? 0 : 600;
+        animate(text, { opacity: [0, 1], translateX: [-28, 0], duration: dur, ease: "outExpo" });
+        animate(viz,  { opacity: [0, 1], translateX: [28, 0],  duration: dur, delay: prefersReduced ? 0 : 200, ease: "outExpo" });
+
+        if (!prefersReduced) startPackets();
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(section);
+
+    const sensorPositions = [
+      { x: 62,  y: 66  },
+      { x: 238, y: 66  },
+      { x: 32,  y: 150 },
+      { x: 268, y: 150 },
+      { x: 74,  y: 238 },
+      { x: 226, y: 238 },
+    ];
+    const center = { x: 150, y: 150 };
+
+    function startPackets() {
+      const svg = document.getElementById("connect-svg") as SVGSVGElement | null;
+      if (!svg) return;
+
+      sensorPositions.forEach((s, i) => {
+        const period = 1700 + i * 130;
+        setTimeout(() => {
+          launchPacket(svg, s);
+          setInterval(() => launchPacket(svg, s), period);
+        }, i * 310);
+      });
+    }
+
+    function launchPacket(svg: SVGSVGElement, sensor: { x: number; y: number }) {
+      const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      dot.setAttribute("cx", String(sensor.x));
+      dot.setAttribute("cy", String(sensor.y));
+      dot.setAttribute("r", "5");
+      dot.setAttribute("fill", "#c084fc");
+      svg.appendChild(dot);
+
+      animate(dot, {
+        translateX: [0, (center.x - sensor.x) * 0.78],
+        translateY: [0, (center.y - sensor.y) * 0.78],
+        opacity:    [0.9, 0],
+        duration:   1050,
+        ease:       "inOutSine",
+        onComplete: () => dot.remove(),
+      });
+    }
+
+    // Tooltip
+    const tooltip      = document.getElementById("connect-tooltip");
+    const tooltipLabel = document.getElementById("connect-tooltip-label");
+    const tooltipValue = document.getElementById("connect-tooltip-value");
+    const container    = document.querySelector<HTMLElement>("#connect-viz .relative");
+
+    document.querySelectorAll<SVGGElement>(".sensor-node").forEach((node) => {
+      node.addEventListener("mouseenter", () => {
+        if (tooltipLabel) tooltipLabel.textContent = node.dataset.label ?? "";
+        if (tooltipValue) tooltipValue.textContent = node.dataset.value ?? "";
+        if (tooltip)      tooltip.style.opacity = "1";
+      });
+      node.addEventListener("mousemove", (e) => {
+        const rect = container?.getBoundingClientRect();
+        if (!rect || !tooltip) return;
+        tooltip.style.left = `${e.clientX - rect.left + 12}px`;
+        tooltip.style.top  = `${e.clientY - rect.top  - 42}px`;
+      });
+      node.addEventListener("mouseleave", () => {
+        if (tooltip) tooltip.style.opacity = "0";
+      });
+    });
+  })();
+</script>

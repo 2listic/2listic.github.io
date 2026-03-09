@@ -3,59 +3,328 @@ import LogoPart1 from "/public/logo_part1.svg";
 import LogoPart2 from "/public/logo_part2.svg";
 
 const cubes = [
-  { Component: LogoPart1, name: "fade-in", time: 1, delay: 0 },
-  { Component: LogoPart2, name: "slide-from-right", time: 1.5, delay: 0},
+  { Component: LogoPart1, name: "fade-in",          time: 1,   delay: 0 },
+  { Component: LogoPart2, name: "slide-from-right", time: 1.5, delay: 0 },
 ];
+
+const words = ["Agentic", "Datacenters"];
 ---
 
-<main class="min-h-[70vh] flex items-center justify-center">
-  <div class="flex flex-col gap-1 items-center justify-center">
-    <a href="/#features" class="relative w-[200px] h-[200px] md:w-[250px] md:h-[250px]">
-      {cubes.map(({ Component, name, time, delay }, index) => (
+<main class="min-h-[70vh] flex items-center justify-center relative overflow-hidden">
+  <!-- Animated rack background -->
+  <canvas id="hero-bg" class="absolute inset-0 w-full h-full pointer-events-none" style="opacity:0.25;"></canvas>
+
+  <div class="flex flex-col gap-1 items-center justify-center relative z-10">
+    <a href="/" class="relative w-[200px] h-[200px] md:w-[250px] md:h-[250px]">
+      {cubes.map(({ Component, name, time, delay }) => (
         <Component
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" 
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           width="100%"
           height="100%"
           style={`opacity: 0; animation: ${name} ${time}s ${delay}s forwards`}
         />
       ))}
     </a>
-    <div class="pt-4">
-      <h1 class="text-4xl lg:text-5xl font-bold tracking-tight text-center text-slate-600 max-w-4xl">
-        Digital Twins,<br/> made simple 
+    <div class="pt-4 text-center">
+      <h1 id="hero-headline" class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-800 max-w-4xl">
+        {words.map((word) => (
+          <span class="hero-word inline-block opacity-0 mr-[0.25em]">{word}</span>
+        ))}
       </h1>
-      <p class="text-center md:text-lg mt-4 text-slate-700 max-w-4xl">
-        Create and manage digital twins<br/> using no-code interfaces and advanced visualization.
+      <p id="hero-sub" class="md:text-lg mt-4 text-slate-600 max-w-xl mx-auto opacity-0">
+        DCIMate optimizes workloads, simulates airflow, and monitors temperature,
+        all orchestrated by intelligent agents.
       </p>
     </div>
-    <!-- <div class="mt-6 flex flex-col sm:flex-row gap-3">
-      <Link
-        size="lg"
-        style="outline"
-        rel="noopener"
-        href="https://github.com/2listic/"
-        class="flex gap-1 items-center justify-center"
-        target="_blank">
-        <Icon class="text-black w-4 h-4" name="uil:github" />
-         GitHub Repo
-      </Link>
-    </div> -->
   </div>
 </main>
 
+<script>
+  import { createTimeline, stagger } from "animejs";
+
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const dur  = prefersReduced ? 0 : 600;
+  const stag = prefersReduced ? 0 : 80;
+
+  createTimeline({ ease: "outExpo" })
+    .add(".hero-word", {
+      opacity: [0, 1], translateY: [20, 0], duration: dur, delay: stagger(stag),
+    })
+    .add("#hero-sub", { opacity: [0, 1], translateY: [12, 0], duration: dur }, "-=200");
+
+  // ── Animated rack background ────────────────────────────────────────────
+  (function () {
+    if (prefersReduced) return;
+
+    const canvas = document.getElementById("hero-bg") as HTMLCanvasElement | null;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const dpr = Math.min(window.devicePixelRatio, 2);
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+    window.addEventListener("resize", resize);
+
+    const W = () => canvas.width / dpr;
+    const H = () => canvas.height / dpr;
+
+    // ── Rack layout ───────────────────────────────────────────────────────
+    type Rack = { x: number; y: number; w: number; h: number; slots: number; bladeLoad: number[] };
+    type Link = { from: number; to: number };
+
+    function buildLayout() {
+      const w = W();
+      const h = H();
+      const racks: Rack[] = [];
+
+      const cols = 5;
+      const rows = 3;
+      const rackW = 44;
+      const rackH = 64;
+      const padX = (w - cols * rackW) / (cols + 1);
+      const padY = (h - rows * rackH) / (rows + 1);
+
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          const slots = 5 + Math.floor(Math.random() * 3);
+          racks.push({
+            x: padX + c * (rackW + padX),
+            y: padY + r * (rackH + padY),
+            w: rackW,
+            h: rackH,
+            slots,
+            bladeLoad: Array.from({ length: slots }, () => 0.05 + Math.random() * 0.15),
+          });
+        }
+      }
+
+      const links: Link[] = [];
+      for (let i = 0; i < racks.length; i++) {
+        if ((i + 1) % cols !== 0 && i + 1 < racks.length) links.push({ from: i, to: i + 1 });
+        if (i + cols < racks.length) links.push({ from: i, to: i + cols });
+        if ((i + 1) % cols !== 0 && i + cols + 1 < racks.length && Math.random() > 0.6) {
+          links.push({ from: i, to: i + cols + 1 });
+        }
+      }
+
+      return { racks, links };
+    }
+
+    let layout = buildLayout();
+
+    window.addEventListener("resize", () => { layout = buildLayout(); });
+
+    // Boost a random blade when a dot arrives at a rack
+    function boostRack(rackIdx: number) {
+      const rack = layout.racks[rackIdx];
+      if (!rack) return;
+      const blade = Math.floor(Math.random() * rack.slots);
+      rack.bladeLoad[blade] = Math.min(1, rack.bladeLoad[blade] + 0.3 + Math.random() * 0.4);
+    }
+
+    // Dim a random blade when a dot leaves a rack
+    function dimRack(rackIdx: number) {
+      const rack = layout.racks[rackIdx];
+      if (!rack) return;
+      const blade = Math.floor(Math.random() * rack.slots);
+      rack.bladeLoad[blade] = Math.max(0.05, rack.bladeLoad[blade] - 0.2 - Math.random() * 0.2);
+    }
+
+    // ── Workload dots (particles travelling along links) ──────────────────
+    type Dot = {
+      linkIdx: number;
+      t: number;        // 0→1 progress along the link
+      speed: number;
+      forward: boolean;  // direction
+      color: string;
+    };
+
+    const DOT_COUNT = 12;
+    const dots: Dot[] = [];
+    const dotColors = ["#a855f7", "#7c3aed", "#6d28d9", "#8b5cf6", "#c084fc"];
+
+    function spawnDot(): Dot {
+      const linkIdx = Math.floor(Math.random() * layout.links.length);
+      const forward = Math.random() > 0.5;
+      return {
+        linkIdx,
+        t: forward ? 0 : 1,
+        speed: 0.003 + Math.random() * 0.004,
+        forward,
+        color: dotColors[Math.floor(Math.random() * dotColors.length)],
+      };
+    }
+
+    for (let i = 0; i < DOT_COUNT; i++) {
+      const d = spawnDot();
+      d.t = Math.random(); // spread initial positions
+      dots.push(d);
+    }
+
+    // ── Drawing ───────────────────────────────────────────────────────────
+    function loadToHue(load: number): string {
+      // low=purple(270), mid=amber(45), high=red(0)
+      if (load < 0.4) {
+        // purple → amber
+        const t = load / 0.4;
+        const h = 270 + (45 - 270) * t; // 270 → 45
+        return `hsla(${h}, 80%, 55%, ${0.15 + load * 0.7})`;
+      }
+      // amber → red
+      const t = (load - 0.4) / 0.6;
+      const h = 45 + (0 - 45) * t; // 45 → 0
+      return `hsla(${h}, 85%, 50%, ${0.15 + load * 0.7})`;
+    }
+
+    function drawRack(rack: Rack) {
+      // Outer frame
+      ctx.strokeStyle = "#7c3aed";
+      ctx.lineWidth = 1.2;
+      ctx.strokeRect(rack.x, rack.y, rack.w, rack.h);
+
+      // Blade slots colored by workload
+      const slotH = (rack.h - 4) / rack.slots;
+      ctx.lineWidth = 0.6;
+      for (let s = 0; s < rack.slots; s++) {
+        const sy = rack.y + 2 + s * slotH;
+        const load = rack.bladeLoad[s];
+
+        // Fill intensity based on load
+        ctx.fillStyle = loadToHue(load);
+        ctx.fillRect(rack.x + 2, sy + 1, rack.w - 4, slotH - 2);
+
+        ctx.strokeStyle = `rgba(124, 58, 237, ${0.25 + load * 0.35})`;
+        ctx.strokeRect(rack.x + 2, sy + 1, rack.w - 4, slotH - 2);
+
+        // Small LED dot on high-load blades
+        if (load > 0.5) {
+          ctx.beginPath();
+          ctx.arc(rack.x + rack.w - 6, sy + slotH / 2, 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = load > 0.75 ? `rgba(239, 68, 68, ${load})` : `rgba(234, 179, 8, ${load})`;
+          ctx.fill();
+        }
+      }
+    }
+
+    function rackCenter(rack: Rack): [number, number] {
+      return [rack.x + rack.w / 2, rack.y + rack.h / 2];
+    }
+
+    function drawLink(link: Link) {
+      const rA = layout.racks[link.from];
+      const rB = layout.racks[link.to];
+      const [ax, ay] = rackCenter(rA);
+      const [bx, by] = rackCenter(rB);
+
+      ctx.beginPath();
+      ctx.moveTo(ax, ay);
+      ctx.lineTo(bx, by);
+      ctx.strokeStyle = "rgba(124, 58, 237, 0.25)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+
+    function drawDot(dot: Dot) {
+      const link = layout.links[dot.linkIdx];
+      if (!link) return;
+
+      const rA = layout.racks[link.from];
+      const rB = layout.racks[link.to];
+      const [ax, ay] = rackCenter(rA);
+      const [bx, by] = rackCenter(rB);
+
+      const x = ax + (bx - ax) * dot.t;
+      const y = ay + (by - ay) * dot.t;
+
+      // Glow
+      ctx.beginPath();
+      ctx.arc(x, y, 6, 0, Math.PI * 2);
+      ctx.fillStyle = dot.color.replace(")", ", 0.3)").replace("rgb", "rgba").replace("#", "");
+      // Use shadow for glow since rgba parsing from hex is tricky
+      ctx.shadowColor = dot.color;
+      ctx.shadowBlur = 10;
+      ctx.fillStyle = dot.color;
+      ctx.beginPath();
+      ctx.arc(x, y, 3, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    }
+
+    // ── Animation loop ────────────────────────────────────────────────────
+    let raf: number;
+    let visible = true;
+
+    function tick() {
+      if (!visible) return;
+
+      const w = W();
+      const h = H();
+      ctx.clearRect(0, 0, w, h);
+
+      // Draw links first (behind racks)
+      layout.links.forEach(drawLink);
+
+      // Draw racks
+      layout.racks.forEach(drawRack);
+
+      // Gradually decay all blade loads
+      layout.racks.forEach(rack => {
+        for (let s = 0; s < rack.slots; s++) {
+          rack.bladeLoad[s] = Math.max(0.05, rack.bladeLoad[s] - 0.001);
+        }
+      });
+
+      // Update & draw dots
+      dots.forEach((dot, i) => {
+        const link = layout.links[dot.linkIdx];
+        if (dot.forward) {
+          dot.t += dot.speed;
+          if (dot.t >= 1) {
+            // Dot arrived at destination rack — boost it, dim source
+            if (link) {
+              boostRack(link.to);
+              dimRack(link.from);
+            }
+            Object.assign(dots[i], spawnDot());
+          }
+        } else {
+          dot.t -= dot.speed;
+          if (dot.t <= 0) {
+            if (link) {
+              boostRack(link.from);
+              dimRack(link.to);
+            }
+            Object.assign(dots[i], spawnDot());
+          }
+        }
+        drawDot(dot);
+      });
+
+      raf = requestAnimationFrame(tick);
+    }
+
+    // Pause off-screen
+    const visObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { visible = true; raf = requestAnimationFrame(tick); }
+      else { visible = false; cancelAnimationFrame(raf); }
+    }, { threshold: 0 });
+    visObs.observe(canvas);
+  })();
+</script>
+
 <style>
   @keyframes fade-in {
-    to { opacity: 0.8; }
+    to { opacity: 1; }
   }
-
   @keyframes slide-from-right {
-    from { 
-      opacity: 0;
-      transform: translate(50%, 0%);
-    }
-    to { 
-      opacity: 0.8;
-      transform: translate(0%, 0%);
-    }
+    from { opacity: 0; transform: translate(50%, 0%); }
+    to   { opacity: 1; transform: translate(0%, 0%); }
   }
 </style>

@@ -39,3 +39,10 @@ frontmatter
 Sectionhead
 Giorgi
 autoplay
+DCIMate
+zclaw
+animejs
+datacenters
+datacenter
+airflow
+hotspots

@@ -2,212 +2,349 @@
 // @ts-ignore
 import { Icon } from "astro-icon/components";
 import Sectionhead from "./sectionhead.astro";
-import Link from "./ui/link.astro";
 
 const features = [
   {
-    title: "User-Centric Design",
-    description:
-      "Coral enables to create and manage Digital Twins effortlessly.",
-    icon: "material-symbols-light:face", 
+    title: "Workload Optimization",
+    description: "AI agents dynamically balance compute workloads across your datacenter infrastructure.",
+    icon: "material-symbols-light:memory-outline",
   },
   {
-    title: "Next-Generation Platform",
-    description:
-      "Designed for ease of use, efficiency, integration and modularity.",
-    icon: "uil:window",
+    title: "Digital Twin",
+    description: "A real-time 3D model of your datacenter simulates airflow and thermal dynamics.",
+    icon: "material-symbols-light:thermostat-auto",
   },
   {
-    title: "Integration of Technologies",
-    description:
-      "Integrates IoT, simulations, AI, data management, HPC, and visualization.",
-    icon: "uil:database",
+    title: "Temperature Intelligence",
+    description: "Sensor arrays feed continuous thermal data, alerting you to hotspots before failures occur.",
+    icon: "material-symbols-light:device-thermostat",
   },
-  // {
-  //   title: "Orchestrated by CoralCore",
-  //   description:
-  //     "CoralCore orchestrator ensures efficient operation and delivers a user experience based on block-based and no-code principles",
-  //   icon: "uil:robot",
-  // },
-  // {
-  //   title: "Modularity and Extensibility",
-  //   description:
-  //     "Modularity allows flexibility in customization and adaptation to specific organizational needs",
-  //   icon: "uil:search",
-  // },
-  // {
-  //   title: "Widely Adopted Standards",
-  //   description:
-  //     "Compatibility and interoperability facilitate smooth integration with existing software environments.",
-  //   icon: "uil:check", 
-  // },
+  {
+    title: "dcim-claw Agent",
+    description: "Chat with your datacenter. Query sensor data, trigger operations, and get insights via natural language.",
+    icon: "material-symbols-light:chat-bubble-outline",
+  },
+  {
+    title: "Real-Time Sensors",
+    description: "Seamless integration with physical sensors through dcim-claw's open protocol.",
+    icon: "material-symbols-light:sensors",
+  },
 ];
-const coralComponents = [
-  {
-    type: "Design",
-    title: "Coral Build",
-    description: "No-code building and admin GUI",
-    icon: "material-symbols-light:graph-3",
-    rowStart: 1,
-    backDescription: "Design and manage your digital replica easily with our no-code graphical interface",
-    buttonCssClass: "flex",
-    buttonLink: "/blog/coral_platform_dealii-x",
-  },
-  {
-    type: "Ingest",
-    title: "Coral IoT",
-    description: "Sensor data gateway",
-    icon: "material-symbols-light:settings-input-component-outline-rounded",
-    rowStart: 2,
-    backDescription: "Feed your digital twin with real-time data using our powerful gateway",
-    buttonCssClass: "hidden",
-    buttonLink: "/blog/coral_platform_dealii-x",
-  },
-  {
-    type: "Orchestrate",
-    title: "Coral Core",
-    description: "Orchestrator and data manager",
-    icon: "material-symbols-light:crossword-outline-rounded",
-    rowStart: 1,
-    backDescription: "Efficiently provide resources for heavy computations and conveniently manage data",
-    buttonCssClass: "flex",
-    buttonLink: "/blog/coral_platform_dealii-x",
-  },
-  {
-    type: "Simulate",
-    title: "Coral Sim/AI",
-    description: "Simulation and AI engine",
-    icon: "material-symbols-light:ecg-heart-outline",
-    rowStart: 2,
-    backDescription: "Generate trustworthy results using state-of-the-art AI and simulation techniques",
-    buttonCssClass: "flex",
-    buttonLink: "/blog/coral_platform_dealii-x",
-  },
-  {
-    type: "Visualize",
-    title: "Coral Viz",
-    description: "3D visualization with XR/VR",
-    icon: "material-symbols-light:visibility-outline-rounded",
-    rowStart: 1,
-    backDescription: "Leverage the power of 3D visualization to explore your digital replica",
-    buttonCssClass: "flex",
-    buttonLink: "/blog/coral_platform_dealii-x",
-  }
-]
 ---
 
-<script>
-  document.querySelectorAll('.flip-card').forEach(card => {
-    card.addEventListener('click', () => {
-      card.classList.toggle('flipped');
-    });
-  });
-</script>
-
 <Sectionhead>
-  <Fragment slot="title">Coral</Fragment>
-  <Fragment slot="desc">Digital Twin platform.</Fragment>
+  <Fragment slot="title">What DCIMate Does</Fragment>
+  <Fragment slot="desc">AI-powered tools built for modern datacenters.</Fragment>
 </Sectionhead>
 
-<div class="grid grid-col-1 md:grid-cols-3 justify-center mt-8 lg:mt-12 gap-8 md:gap-12">
-  {
-    features.map((item) => (
-      <div class="max-w-sm flex flex-col lg:gap-1 mx-2">
-        <div class="flex gap-4 items-end">
-          <div class="mt-1 bg-gray-800 rounded-full p-2 w-10 h-10 shrink-0">
-            <Icon class="text-center text-white w-6 h-6" name={item.icon} />
+<div class="mt-10 lg:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+
+  <!-- Left: feature cards -->
+  <div id="features-grid" class="flex flex-col gap-5">
+    {features.map((item, i) => (
+      <div
+        class="feature-card opacity-0 flex flex-col gap-3 p-5 rounded-2xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 shadow-sm hover:shadow-md transition-shadow duration-200"
+        data-index={i}
+      >
+        <div class="flex items-center gap-4">
+          <div class="feature-icon shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow">
+            <Icon class="text-white w-6 h-6" name={item.icon} />
           </div>
-          <div class="font-semibold text-lg">{item.title}</div>{" "}
+          <h3 class="font-bold text-lg text-slate-800">{item.title}</h3>
         </div>
-        <div class="mt-2 text-justify text-slate-600 leading-relaxed">{item.description}</div>
+        <p class="text-slate-600 leading-relaxed text-sm">{item.description}</p>
       </div>
-    ))
-  }
-</div>
+    ))}
+  </div>
 
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 lg:grid-rows-5 mt-12 mx-4 gap-8 lg:gap-12 justify-items-center">
-  {
-    coralComponents.map((component) => {
-      const rowStart = component.rowStart === 1 ? 'lg:row-start-1 lg:row-span-3' :
-                      component.rowStart === 2 ? 'lg:row-start-2 lg:row-span-3' :
-                      component.rowStart === 3 ? 'lg:row-start-3 lg:row-span-3' : '';
-      return (
-        <div class={`${rowStart} w-52 h-72 flip-card cursor-pointer`}>
-          <div class="flip-card-inner">
+  <!-- Right: 3D rack + agent log -->
+  <div id="features-rack-panel" class="opacity-0 sticky top-24">
+    <div class="bg-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-700/60 select-none">
 
-            <!--front -->
-            <div class="flip-card-front p-4 lg:p-8 rounded-xl bg-white shadow hover:shadow-2xl 
-              flex flex-col gap-5 justify-center items-center">
-              <div class="flex items-center justify-center shrink-0 border rounded-md w-20 h-20 ">
-                <Icon class="text-center text-black w-12 h-12" name={component.icon}/>
-              </div>
-              <div class="text-center text-lg mt-1">{component.title}</div>
-              <div class="font-bold text-lg">{component.type}</div>
-              {/* <div class="text-center text-slate-600 leading-relaxed max-w-[50vw]">{component.description}</div> */}
-              <div class="lg:hidden mt-4 text-xs text-slate-600 animate-pulse">
-                Tap for more →
-              </div>
-              <div class="hidden lg:block mt-4 text-xs text-slate-600 animate-pulse">
-                Click for more →
-              </div>
-            </div>
-
-            <!-- back -->
-            <div class="flip-card-back p-6 rounded-xl bg-slate-800 text-white shadow hover:shadow-2xl
-              flex flex-col lg:gap-2 justify-between items-center">
-              <div class="text-center text-lg text-slate-200 leading-relaxed">{component.backDescription}</div>
-              <Link
-                size="lg"
-                style="outline"
-                rel="noopener"
-                href={component.buttonLink}
-                class={`${component.buttonCssClass} gap-1 items-center justify-center`}
-                target="_blank">
-                <Icon class="text-black w-6 h-6" name="uil:arrow-circle-right" />
-                  Video
-              </Link>
-            </div>
-          </div>
+      <!-- Chrome bar -->
+      <div class="flex items-center gap-2 mb-4 pb-3 border-b border-slate-700/50">
+        <div class="w-2.5 h-2.5 rounded-full bg-red-500 opacity-80"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-amber-400 opacity-80"></div>
+        <div class="w-2.5 h-2.5 rounded-full bg-green-500 opacity-80"></div>
+        <span class="ml-2 text-slate-400 text-xs font-mono flex-1">dcimate · rack-view</span>
+        <div class="flex items-center gap-1.5 text-green-400 text-xs font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+          ONLINE
         </div>
-      )
-    })
-  }
+      </div>
+
+      <!-- 3D Rack Canvas -->
+      <div class="mb-3 relative">
+        <canvas id="rack-3d" class="w-full rounded-lg" style="aspect-ratio: 4/3;"></canvas>
+        <div class="absolute bottom-2 left-2 flex gap-3 text-[10px] font-mono text-slate-400">
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-green-500"></span>Low</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-yellow-400"></span>Med</span>
+          <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-sm bg-red-500"></span>High</span>
+        </div>
+      </div>
+
+      <!-- Agent activity log -->
+      <div class="bg-slate-800 rounded-xl p-3">
+        <div class="text-slate-500 text-xs font-mono mb-2">agent activity</div>
+        <ul id="agent-log" class="flex flex-col gap-1.5" style="overflow:hidden;max-height:72px">
+          <li class="flex items-start gap-2 text-xs font-mono">
+            <span class="text-green-400 shrink-0">✓</span>
+            <span class="text-slate-300">Optimization cycle complete · −8% energy</span>
+          </li>
+          <li class="flex items-start gap-2 text-xs font-mono">
+            <span class="text-purple-400 shrink-0">→</span>
+            <span class="text-slate-300">Workload migrated SRV-05 → SRV-02</span>
+          </li>
+          <li class="flex items-start gap-2 text-xs font-mono">
+            <span class="text-amber-400 shrink-0">⚠</span>
+            <span class="text-slate-300">Hotspot R2-4: 46°C · HVAC adjusted</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
 </div>
-<!-- <div class="p-8" style="display: flex; justify-content: center;">
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/Yxipeo_vLys?si=HIo6YgjkgKtdVdD-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div> -->
 
-<style>
-  .flip-card {
-    perspective: 1000px;
-  }
-  
-  .flip-card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.7s;
-    transform-style: preserve-3d;
-    will-change: transform;  /* browser expects changes */
-  }
+<script>
+  import { animate, stagger } from "animejs";
+  import * as THREE from "three";
 
-  .flip-card.flipped .flip-card-inner {
-    transform: rotateY(180deg);
-  }
+  (function () {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  .flip-card-front,
-  .flip-card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-  
-  .flip-card-front {
-    transform: translateZ(0); /* force also this side active in GPU memory */
-  }
-  .flip-card-back {
-    transform: rotateY(180deg) translateZ(0);
-  }
-</style>
+    // ── Card + panel entrance animations (scroll-triggered) ───────────────
+    const grid = document.getElementById("features-grid");
+    const rackPanel = document.getElementById("features-rack-panel");
+    if (!grid) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+
+          const cards = document.querySelectorAll<HTMLElement>(".feature-card");
+          const icons = document.querySelectorAll<HTMLElement>(".feature-icon");
+          const dur = prefersReduced ? 0 : 500;
+          const stag_ = prefersReduced ? 0 : 100;
+
+          animate(cards, {
+            opacity: [0, 1],
+            translateY: [40, 0],
+            duration: dur,
+            delay: stagger(stag_),
+            ease: "outExpo",
+          });
+
+          animate(icons, {
+            scale: [0.7, 1],
+            duration: prefersReduced ? 0 : 400,
+            delay: stagger(stag_, { start: prefersReduced ? 0 : 150 }),
+            ease: "outBack",
+          });
+
+          if (rackPanel) {
+            animate(rackPanel, {
+              opacity: [0, 1],
+              translateX: [36, 0],
+              duration: prefersReduced ? 0 : 700,
+              delay: prefersReduced ? 0 : 200,
+              ease: "outExpo",
+            });
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(grid);
+
+    // ── 3D Rack ───────────────────────────────────────────────────────────
+    const canvas = document.getElementById("rack-3d") as HTMLCanvasElement | null;
+    if (!canvas) return;
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.2;
+
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(32, 4 / 3, 0.1, 100);
+    camera.position.set(3.8, 2.2, 5.5);
+    camera.lookAt(0, 0.6, 0);
+
+    const ambient = new THREE.AmbientLight(0xb0b0c0, 0.7);
+    scene.add(ambient);
+    const dir = new THREE.DirectionalLight(0xffffff, 1.8);
+    dir.position.set(4, 5, 3);
+    scene.add(dir);
+    const fill = new THREE.DirectionalLight(0x8888ff, 0.4);
+    fill.position.set(-3, 2, -2);
+    scene.add(fill);
+
+    // ── Build rack ────────────────────────────────────────────────────────
+    const rackGroup = new THREE.Group();
+
+    const RACK_W = 2.0, RACK_D = 1.4, RACK_H = 4.0;
+    const POST_SIZE = 0.08;
+    const BLADE_COUNT = 10, BLADE_H = 0.28, BLADE_GAP = 0.06, BLADE_INSET = 0.12;
+
+    const frameMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.85, roughness: 0.25 });
+
+    const postGeo = new THREE.BoxGeometry(POST_SIZE, RACK_H, POST_SIZE);
+    [
+      [-RACK_W/2, RACK_H/2, -RACK_D/2],
+      [ RACK_W/2, RACK_H/2, -RACK_D/2],
+      [-RACK_W/2, RACK_H/2,  RACK_D/2],
+      [ RACK_W/2, RACK_H/2,  RACK_D/2],
+    ].forEach(([x, y, z]) => {
+      const post = new THREE.Mesh(postGeo, frameMat);
+      post.position.set(x, y, z);
+      rackGroup.add(post);
+    });
+
+    const railGeoW = new THREE.BoxGeometry(RACK_W + POST_SIZE, POST_SIZE, POST_SIZE);
+    const railGeoD = new THREE.BoxGeometry(POST_SIZE, POST_SIZE, RACK_D + POST_SIZE);
+    [0, RACK_H].forEach(y => {
+      [-RACK_D/2, RACK_D/2].forEach(z => {
+        const r = new THREE.Mesh(railGeoW, frameMat); r.position.set(0, y, z); rackGroup.add(r);
+      });
+      [-RACK_W/2, RACK_W/2].forEach(x => {
+        const r = new THREE.Mesh(railGeoD, frameMat); r.position.set(x, y, 0); rackGroup.add(r);
+      });
+    });
+
+    // ── Blades ─────────────────────────────────────────────────────────────
+    type BladeInfo = { mesh: THREE.Mesh; led: THREE.Mesh; load: number; targetLoad: number };
+    const blades: BladeInfo[] = [];
+
+    const bladeGeo = new THREE.BoxGeometry(RACK_W - BLADE_INSET*2, BLADE_H, RACK_D - BLADE_INSET*2);
+    const ledGeo = new THREE.BoxGeometry(0.04, 0.04, 0.01);
+
+    function loadToColor(load: number): THREE.Color {
+      if (load < 0.35) return new THREE.Color(0x22c55e);
+      if (load < 0.6)  return new THREE.Color(0xeab308);
+      if (load < 0.8)  return new THREE.Color(0xf97316);
+      return new THREE.Color(0xef4444);
+    }
+
+    for (let i = 0; i < BLADE_COUNT; i++) {
+      const load = 0.15 + Math.random() * 0.7;
+      const color = loadToColor(load);
+
+      const mat = new THREE.MeshStandardMaterial({
+        color, metalness: 0.55, roughness: 0.4, emissive: color, emissiveIntensity: 0.18,
+      });
+      const blade = new THREE.Mesh(bladeGeo, mat);
+      const y = BLADE_INSET + BLADE_H/2 + i * (BLADE_H + BLADE_GAP);
+      blade.position.set(0, y, 0);
+      rackGroup.add(blade);
+
+      const ledMat = new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 1.5 });
+      const led = new THREE.Mesh(ledGeo, ledMat);
+      led.position.set(-(RACK_W/2 - BLADE_INSET) + 0.12, y, (RACK_D/2 - BLADE_INSET) + 0.005);
+      rackGroup.add(led);
+
+      blades.push({ mesh: blade, led, load, targetLoad: load });
+    }
+
+    rackGroup.position.y = -RACK_H/2 + 0.3;
+    scene.add(rackGroup);
+
+    // ── Workload fluctuation ──────────────────────────────────────────────
+    function jitter(v: number, range: number, min: number, max: number) {
+      return Math.min(max, Math.max(min, v + (Math.random() - 0.5) * range));
+    }
+    setInterval(() => {
+      blades.forEach(b => { b.targetLoad = jitter(b.load, 0.18, 0.05, 0.98); });
+    }, 2500);
+
+    // ── Resize ────────────────────────────────────────────────────────────
+    function resize() {
+      const parent = canvas.parentElement;
+      if (!parent) return;
+      const w = parent.clientWidth;
+      const h = w * 0.75;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+    }
+    const resizeObs = new ResizeObserver(resize);
+    resizeObs.observe(canvas.parentElement!);
+    resize();
+
+    // ── Render loop ───────────────────────────────────────────────────────
+    let raf: number;
+    let visible = true;
+
+    function tick() {
+      if (!visible) return;
+
+      blades.forEach(b => {
+        b.load += (b.targetLoad - b.load) * 0.04;
+        const c = loadToColor(b.load);
+        const mat = b.mesh.material as THREE.MeshStandardMaterial;
+        mat.color.lerp(c, 0.08);
+        mat.emissive.lerp(c, 0.08);
+        const ledMat = b.led.material as THREE.MeshStandardMaterial;
+        ledMat.color.copy(mat.color);
+        ledMat.emissive.copy(mat.color);
+      });
+
+      if (!prefersReduced) rackGroup.rotation.y += 0.0025;
+
+      renderer.render(scene, camera);
+      raf = requestAnimationFrame(tick);
+    }
+
+    const visObs = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) { visible = true; raf = requestAnimationFrame(tick); }
+      else { visible = false; cancelAnimationFrame(raf); }
+    }, { threshold: 0 });
+    visObs.observe(canvas);
+
+    // ── Agent activity log ────────────────────────────────────────────────
+    const logMessages = [
+      { icon: "✓", cls: "text-green-400",  text: "Optimization cycle complete · −8% energy" },
+      { icon: "→", cls: "text-purple-400", text: "Workload migrated SRV-05 → SRV-02" },
+      { icon: "⚠", cls: "text-amber-400",  text: "Hotspot R2-4: 46°C · HVAC adjusted" },
+      { icon: "✓", cls: "text-green-400",  text: "PDU power draw normalized · 12.1 kW" },
+      { icon: "→", cls: "text-purple-400", text: "Workload migrated SRV-03 → SRV-06" },
+      { icon: "⚠", cls: "text-amber-400",  text: "Network link SWA-2 at 94% · rerouting" },
+      { icon: "✓", cls: "text-green-400",  text: "AI agent alert cleared · all nominal" },
+      { icon: "→", cls: "text-purple-400", text: "HVAC setpoint updated: 18°C → 16°C" },
+    ];
+    let logIdx = 3;
+
+    setInterval(() => {
+      const log = document.getElementById("agent-log");
+      if (!log) return;
+
+      const msg = logMessages[logIdx % logMessages.length];
+      logIdx++;
+
+      const li = document.createElement("li");
+      li.className = "flex items-start gap-2 text-xs font-mono opacity-0";
+      li.innerHTML = `<span class="${msg.cls} shrink-0">${msg.icon}</span><span class="text-slate-300">${msg.text}</span>`;
+      log.prepend(li);
+
+      if (!prefersReduced) {
+        animate(li, { opacity: [0, 1], translateY: [-8, 0], duration: 350, ease: "outExpo" });
+      } else {
+        li.style.opacity = "1";
+      }
+
+      const items = log.querySelectorAll("li");
+      if (items.length > 3) {
+        const last = items[items.length - 1] as HTMLElement;
+        if (!prefersReduced) {
+          animate(last, { opacity: [1, 0], duration: 250, onComplete: () => last.remove() });
+        } else {
+          last.remove();
+        }
+      }
+    }, 4000);
+  })();
+</script>

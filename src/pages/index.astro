@@ -3,6 +3,9 @@ import ContactSection from "@components/contactSection.astro";
 import Container from "@components/container.astro";
 import Features from "@components/features.astro";
 import Hero from "@components/hero.astro";
+import StepConnect from "@components/stepConnect.astro";
+import StepSimulate from "@components/stepSimulate.astro";
+import StepOptimize from "@components/stepOptimize.astro";
 import SnappingElement from "@components/snappingElement.astro";
 import Layout from "@layouts/Layout.astro";
 import ExperienceSection from "@components/experienceSection.astro";
@@ -10,41 +13,49 @@ import WaveBackground from "@components/waveBackground.astro";
 ---
 
 <Layout title="" enableScrollSnap={true}>
-  <SnappingElement 
-    id="hero"
-  >
-    <Container>
-      <Hero />
-    </Container>
+  <SnappingElement id="hero">
+    <Hero />
   </SnappingElement>
 
   <WaveBackground variant="purple" size={1}/>
-  <SnappingElement
-    id="features"
-    class="bg-purple-100"
-  >
+  <SnappingElement id="step-connect" class="bg-purple-100">
     <Container>
-      <Features />
-      <!-- <Cta /> -->
+      <StepConnect />
     </Container>
   </SnappingElement>
 
   <WaveBackground variant="white" size={0.75}/>
-  <!-- <SnappingElement id="coral">
-    <CoralSection />
-  </SnappingElement> -->
+  <SnappingElement id="step-simulate">
+    <Container>
+      <StepSimulate />
+    </Container>
+  </SnappingElement>
 
-  <SnappingElement id="team">
+  <WaveBackground variant="purple" size={0.75}/>
+  <SnappingElement id="step-optimize" class="bg-purple-100">
+    <Container>
+      <StepOptimize />
+    </Container>
+  </SnappingElement>
+
+  <WaveBackground variant="white" size={0.75}/>
+  <SnappingElement id="features">
+    <Container>
+      <Features />
+    </Container>
+  </SnappingElement>
+
+  <WaveBackground variant="purple" size={1}/>
+  <SnappingElement id="team" class="bg-purple-100">
     <Container>
       <ExperienceSection />
     </Container>
   </SnappingElement>
 
-  <WaveBackground variant="purple" size={0.5}/>
+  <WaveBackground variant="white" size={0.5}/>
   <SnappingElement
     id="contact"
     isLast={true}
-    class="bg-purple-100"
   >
     <Container>
       <ContactSection />

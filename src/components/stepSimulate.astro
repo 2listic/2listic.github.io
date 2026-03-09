@@ -1,0 +1,366 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center pt-4">
+  <!-- Left: airflow canvas -->
+  <div id="simulate-airflow" class="opacity-0">
+    <div class="bg-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-700/60 select-none">
+      <!-- Chrome bar -->
+      <div class="flex items-center justify-between mb-3 pb-3 border-b border-slate-700/50">
+        <div class="flex items-center gap-1.5">
+          <div class="w-2.5 h-2.5 rounded-full bg-red-500 opacity-80"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-amber-400 opacity-80"></div>
+          <div class="w-2.5 h-2.5 rounded-full bg-green-500 opacity-80"></div>
+        </div>
+        <span class="text-slate-400 text-xs font-mono">digital-twin · airflow-sim</span>
+        <span class="flex items-center gap-1.5 text-green-400 text-xs font-mono">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+          LIVE
+        </span>
+      </div>
+      <canvas id="airflow-canvas" width="400" height="260" class="w-full rounded-lg"></canvas>
+    </div>
+  </div>
+
+  <!-- Right: text -->
+  <div id="simulate-text" class="flex flex-col gap-6 opacity-0">
+    <div>
+      <span class="inline-block bg-purple-200 text-purple-900 text-xs font-bold px-3 py-1 rounded-full tracking-widest mb-4">STEP 02 / 03</span>
+      <h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-800">Simulate</h2>
+    </div>
+    <p class="text-lg text-slate-600 leading-relaxed">
+      DCIMate builds a <strong class="text-slate-800">live digital twin</strong> of your
+      datacenter, a real-time model that mirrors airflow, thermal dynamics, and workload
+      distribution from sensor to ceiling.
+    </p>
+    <ul class="flex flex-col gap-4">
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:thermostat-auto" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Thermal mapping</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Color-coded rack heatmaps updated in real time. Spot hotspots before they cause failures.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:mode-fan" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Airflow modeling</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Simulate cold/hot aisle dynamics and predict temperature under different load scenarios.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:analytics" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Predictive analysis</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Run "what if" scenarios: add a rack, spike load, and see the thermal impact instantly.
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  import { animate } from "animejs";
+
+  (function () {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const section = document.getElementById("step-simulate");
+    if (!section) return;
+
+    const panel = document.getElementById("simulate-airflow");
+    const text  = document.getElementById("simulate-text");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        const dur = prefersReduced ? 0 : 600;
+        animate(panel, { opacity: [0, 1], translateX: [-28, 0], duration: dur, ease: "outExpo" });
+        animate(text,  { opacity: [0, 1], translateX: [28, 0],  duration: dur, delay: prefersReduced ? 0 : 200, ease: "outExpo" });
+
+        if (!prefersReduced) startAirflow();
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(section);
+
+    // ─── Airflow canvas ───────────────────────────────────────────────────────
+    function startAirflow() {
+      const canvas = document.getElementById("airflow-canvas") as HTMLCanvasElement | null;
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      const W = canvas.width;   // 400
+      const H = canvas.height;  // 260
+
+      // Room geometry (canvas coords)
+      const FLOOR_Y = 238;
+      const CEIL_Y  = 18;
+
+      // Rack groups (cross-section side view)
+      // Hot aisle | LEFT RACKS | cold aisle | RIGHT RACKS | Hot aisle
+      const RACK_L = { x: 52, y: 88, w: 88, h: 150 };  // front face at x=140
+      const RACK_R = { x: 260, y: 88, w: 88, h: 150 }; // front face at x=260
+
+      // ── Bezier helpers ─────────────────────────────────────────────────────
+      type Pt = { x: number; y: number };
+      type Path4 = [Pt, Pt, Pt, Pt];
+
+      function bpt(t: number, [p0, p1, p2, p3]: Path4): Pt {
+        const m = 1 - t;
+        return {
+          x: m**3*p0.x + 3*m**2*t*p1.x + 3*m*t**2*p2.x + t**3*p3.x,
+          y: m**3*p0.y + 3*m**2*t*p1.y + 3*m*t**2*p2.y + t**3*p3.y,
+        };
+      }
+
+      // ── Streamline paths ───────────────────────────────────────────────────
+      // Cold air: rises from perforated floor in cold aisle → enters rack fronts
+      const coldPaths: Path4[] = [
+        // → left rack front (x=140)
+        [{x:162,y:238},{x:162,y:205},{x:140,y:195},{x:140,y:178}],
+        [{x:185,y:238},{x:185,y:200},{x:140,y:182},{x:140,y:152}],
+        [{x:200,y:238},{x:200,y:190},{x:140,y:168},{x:140,y:118}],
+        // → right rack front (x=260)
+        [{x:238,y:238},{x:238,y:205},{x:260,y:195},{x:260,y:178}],
+        [{x:215,y:238},{x:215,y:200},{x:260,y:182},{x:260,y:152}],
+        [{x:200,y:238},{x:200,y:190},{x:260,y:168},{x:260,y:118}],
+      ];
+
+      // Hot air: exits rack rears → pushes outward into hot aisle → then rises to ceiling
+      const hotPaths: Path4[] = [
+        // from left rack rear (x=52) — first go left, then curve up
+        [{x:52,y:205},{x:18,y:205},{x:14,y:160},{x:18,y:18}],
+        [{x:52,y:168},{x:15,y:168},{x:12,y:110},{x:50,y:18}],
+        [{x:52,y:132},{x:22,y:132},{x:16,y:80 },{x:90,y:18}],
+        // from right rack rear (x=348) — first go right, then curve up
+        [{x:348,y:205},{x:382,y:205},{x:386,y:160},{x:382,y:18}],
+        [{x:348,y:168},{x:385,y:168},{x:388,y:110},{x:350,y:18}],
+        [{x:348,y:132},{x:378,y:132},{x:384,y:80 },{x:310,y:18}],
+      ];
+
+      // ── Particle system ────────────────────────────────────────────────────
+      type Particle = {
+        path: Path4;
+        t: number;
+        speed: number;
+        type: "cold" | "hot";
+        size: number;
+        phase: number; // for opacity pulsing
+      };
+
+      const particles: Particle[] = [];
+      const N = 6; // particles per path
+
+      coldPaths.forEach(path => {
+        for (let i = 0; i < N; i++) {
+          particles.push({
+            path, t: i / N,
+            speed: 0.0022 + Math.random() * 0.0014,
+            type: "cold", size: 1.8 + Math.random() * 1.2,
+            phase: Math.random() * Math.PI * 2,
+          });
+        }
+      });
+      hotPaths.forEach(path => {
+        for (let i = 0; i < N; i++) {
+          particles.push({
+            path, t: i / N,
+            speed: 0.0026 + Math.random() * 0.0016,
+            type: "hot", size: 1.8 + Math.random() * 1.2,
+            phase: Math.random() * Math.PI * 2,
+          });
+        }
+      });
+
+      // ── Draw helpers ───────────────────────────────────────────────────────
+      function drawRack(x: number, y: number, w: number, h: number, ledsOnRight: boolean) {
+        // Body
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#334155";
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.roundRect(x, y, w, h, 3);
+        ctx.fill();
+        ctx.stroke();
+
+        // Rack unit stripes
+        ctx.strokeStyle = "#243348";
+        ctx.lineWidth = 0.6;
+        for (let ry = y + 8; ry < y + h - 2; ry += 9) {
+          ctx.beginPath();
+          ctx.moveTo(x + 3, ry);
+          ctx.lineTo(x + w - 3, ry);
+          ctx.stroke();
+        }
+
+        // LED row on the front face
+        const ledX = ledsOnRight ? x + w - 6 : x + 6;
+        const ledColors = ["#22d3ee","#22c55e","#22c55e","#f59e0b","#22c55e","#22d3ee","#22c55e"];
+        ledColors.forEach((c, i) => {
+          ctx.fillStyle = c;
+          ctx.shadowColor = c;
+          ctx.shadowBlur = 3;
+          ctx.beginPath();
+          ctx.arc(ledX, y + 15 + i * 18, 1.8, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+      }
+
+      function drawHVAC(cx: number) {
+        ctx.fillStyle = "#1e293b";
+        ctx.strokeStyle = "#475569";
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.roundRect(cx - 22, CEIL_Y - 12, 44, 12, 2);
+        ctx.fill();
+        ctx.stroke();
+        // Grill
+        ctx.strokeStyle = "#334155";
+        ctx.lineWidth = 0.8;
+        for (let gx = cx - 16; gx < cx + 16; gx += 6) {
+          ctx.beginPath();
+          ctx.moveTo(gx, CEIL_Y - 10);
+          ctx.lineTo(gx, CEIL_Y - 2);
+          ctx.stroke();
+        }
+      }
+
+      function drawScene() {
+        // Background
+        ctx.fillStyle = "#0f172a";
+        ctx.fillRect(0, 0, W, H);
+
+        // Zone tints
+        ctx.fillStyle = "rgba(34,211,238,0.035)";
+        ctx.fillRect(140, CEIL_Y, 120, FLOOR_Y - CEIL_Y);
+        ctx.fillStyle = "rgba(251,146,60,0.045)";
+        ctx.fillRect(12, CEIL_Y, 40, FLOOR_Y - CEIL_Y);
+        ctx.fillRect(348, CEIL_Y, 40, FLOOR_Y - CEIL_Y);
+
+        // Faint streamline guides
+        ctx.lineWidth = 1;
+        coldPaths.forEach(path => {
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          ctx.bezierCurveTo(path[1].x, path[1].y, path[2].x, path[2].y, path[3].x, path[3].y);
+          ctx.strokeStyle = "rgba(34,211,238,0.06)";
+          ctx.stroke();
+        });
+        hotPaths.forEach(path => {
+          ctx.beginPath();
+          ctx.moveTo(path[0].x, path[0].y);
+          ctx.bezierCurveTo(path[1].x, path[1].y, path[2].x, path[2].y, path[3].x, path[3].y);
+          ctx.strokeStyle = "rgba(251,146,60,0.06)";
+          ctx.stroke();
+        });
+
+        // Floor
+        ctx.strokeStyle = "#334155";
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(12, FLOOR_Y);
+        ctx.lineTo(388, FLOOR_Y);
+        ctx.stroke();
+
+        // Ceiling
+        ctx.beginPath();
+        ctx.moveTo(12, CEIL_Y);
+        ctx.lineTo(388, CEIL_Y);
+        ctx.stroke();
+
+        // Perforated floor tiles (cold aisle)
+        ctx.fillStyle = "rgba(34,211,238,0.45)";
+        for (let px = 148; px < 260; px += 10) {
+          ctx.beginPath();
+          ctx.arc(px, FLOOR_Y + 5, 1.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+
+        // Racks (left rack: LEDs on right/front side x=140; right rack: LEDs on left/front side x=260)
+        drawRack(RACK_L.x, RACK_L.y, RACK_L.w, RACK_L.h, true);
+        drawRack(RACK_R.x, RACK_R.y, RACK_R.w, RACK_R.h, false);
+
+        // HVAC units
+        drawHVAC(35);
+        drawHVAC(365);
+
+        // Labels
+        ctx.font = "bold 7.5px monospace";
+        ctx.textAlign = "center";
+        ctx.fillStyle = "rgba(34,211,238,0.55)";
+        ctx.fillText("COLD AISLE", 200, FLOOR_Y - 6);
+        ctx.fillStyle = "rgba(251,146,60,0.55)";
+        ctx.fillText("HOT", 33, FLOOR_Y - 6);
+        ctx.fillText("HOT", 367, FLOOR_Y - 6);
+
+        ctx.font = "7px monospace";
+        ctx.fillStyle = "rgba(100,116,139,0.7)";
+        ctx.fillText("HVAC", 35, CEIL_Y - 15);
+        ctx.fillText("HVAC", 365, CEIL_Y - 15);
+      }
+
+      // ── Animation loop ─────────────────────────────────────────────────────
+      let frame = 0;
+      let raf: number;
+
+      function tick() {
+        frame++;
+        drawScene();
+
+        particles.forEach(p => {
+          p.t += p.speed;
+          if (p.t >= 1) p.t -= 1;
+
+          const pos = bpt(p.t, p.path);
+
+          // Fade in/out near endpoints
+          const edge = Math.min(p.t, 1 - p.t) * 6;
+          const alpha = Math.min(1, edge) * (0.65 + 0.35 * Math.sin(frame * 0.04 + p.phase));
+
+          const r = p.type === "cold" ? 34  : 251;
+          const g = p.type === "cold" ? 211 : 146;
+          const b = p.type === "cold" ? 238 : 60;
+
+          // Dot with glow
+          ctx.shadowBlur = 6;
+          ctx.shadowColor = `rgba(${r},${g},${b},0.8)`;
+          ctx.beginPath();
+          ctx.arc(pos.x, pos.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        });
+
+        raf = requestAnimationFrame(tick);
+      }
+
+      // Stop animation when out of view (perf)
+      const visObs = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          raf = requestAnimationFrame(tick);
+        } else {
+          cancelAnimationFrame(raf);
+        }
+      }, { threshold: 0 });
+      visObs.observe(canvas);
+    }
+  })();
+</script>
