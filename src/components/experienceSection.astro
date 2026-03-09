@@ -1,39 +1,279 @@
 ---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
 import Sectionhead from "@components/sectionhead.astro";
 import { getCollection } from "astro:content";
 
-// Filter team entries with 'draft: false' & date before current date
-const publishedExperiences = await getCollection("experience", ({ data }) => {
-  return !data.draft;
-});
-const sortedExperiences = publishedExperiences.sort((a, b) => a.data.order - b.data.order)
+const publishedExperiences = await getCollection("experience", ({ data }) => !data.draft);
+const sortedExperiences = publishedExperiences.sort((a, b) => a.data.order - b.data.order);
+
+const iconMap: Record<string, string> = {
+  "Advanced Simulations":         "material-symbols-light:science",
+  "Data Driven Modeling":         "material-symbols-light:analytics",
+  "High Performance Computing":   "material-symbols-light:memory-outline",
+  "Workflow Management Platform": "material-symbols-light:schema",
+};
+
+const vizTypeMap: Record<string, string> = {
+  "Advanced Simulations":         "wave",
+  "Data Driven Modeling":         "scatter",
+  "High Performance Computing":   "cores",
+  "Workflow Management Platform": "flow",
+};
 ---
 
-<section>
-  <Sectionhead>
-    <Fragment slot="title">Team Experience</Fragment>
-    <Fragment slot="desc">The perfect blend of industrial and academic backgrounds.</Fragment>
-  </Sectionhead>
+<Sectionhead>
+  <Fragment slot="title">Team Experience</Fragment>
+  <Fragment slot="desc">The perfect blend of industrial and academic backgrounds.</Fragment>
+</Sectionhead>
 
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:grid-rows-4 mt-8 lg:mt-12 mx-8 mb-16 gap-6 md:gap-12">
-    {
-      sortedExperiences.map((experience) => {
-        const rowClasses = experience.data.rowStart === 1 ? 'lg:row-start-1 lg:row-span-3' :
-                          experience.data.rowStart === 2 ? 'lg:row-start-2 lg:row-span-3' :
-                          experience.data.rowStart === 3 ? 'lg:row-start-3 lg:row-span-3' : '';
-        
-        return (
-          <div class={`flex flex-col rounded-2xl p-4 lg:p-8 ring-1 ring-gray-200/50 shadow md:shadow-lg ${rowClasses}`}>
-            <h3 class="font-semibold text-lg pb-1">
-              {experience.data.area}
-            </h3>
-            <ul class="list-disc list-inside mt-2 space-y-2">
-              {experience.data.topics.map((topic) => {
-                return <li class="text-slate-600 leading-relaxed">{topic}</li>
-              })}
-            </ul>
+<div id="experience-grid" class="mt-10 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+  {sortedExperiences.map((exp, i) => {
+    const vizType = vizTypeMap[exp.data.area] ?? "";
+    return (
+      <div
+        class="exp-card opacity-0 flex flex-col gap-4 p-6 rounded-2xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 shadow-sm hover:shadow-md transition-shadow duration-200"
+        data-index={i}
+        data-viz={vizType}
+      >
+        {/* Icon + title */}
+        <div class="flex items-center gap-4">
+          <div class="exp-icon shrink-0 w-12 h-12 rounded-xl bg-purple-700 flex items-center justify-center shadow">
+            <Icon
+              class="text-white w-7 h-7"
+              name={iconMap[exp.data.area] ?? "material-symbols-light:star-outline"}
+            />
           </div>
-        )
-      })
+          <h3 class="font-bold text-lg text-slate-800">{exp.data.area}</h3>
+        </div>
+
+        {/* ── Interactive visualization ── */}
+
+        {vizType === "wave" && (
+          <div class="h-16 rounded-xl bg-purple-950/8 overflow-hidden flex items-center border border-purple-100">
+            <svg viewBox="0 0 280 64" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <g class="wave-group">
+                <path
+                  d="M-70,32 C-52.5,16 -35,48 -17.5,32 C0,16 17.5,48 35,32 C52.5,16 70,48 87.5,32 C105,16 122.5,48 140,32 C157.5,16 175,48 192.5,32 C210,16 227.5,48 245,32 C262.5,16 280,48 297.5,32 C315,16 332.5,48 350,32"
+                  fill="none" stroke="#a855f7" stroke-width="2" opacity="0.35"
+                />
+                <path
+                  d="M-35,32 C-17.5,16 0,48 17.5,32 C35,16 52.5,48 70,32 C87.5,16 105,48 122.5,32 C140,16 157.5,48 175,32 C192.5,16 210,48 227.5,32 C245,16 262.5,48 280,32 C297.5,16 315,48 332.5,32"
+                  fill="none" stroke="#c084fc" stroke-width="1.5" opacity="0.65"
+                />
+              </g>
+            </svg>
+          </div>
+        )}
+
+        {vizType === "scatter" && (
+          <div class="h-16 rounded-xl bg-purple-950/8 overflow-hidden border border-purple-100">
+            <svg viewBox="0 0 200 64" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Axes */}
+              <line x1="14" y1="10" x2="14" y2="52" stroke="#a855f7" stroke-width="0.8" opacity="0.35"/>
+              <line x1="14" y1="52" x2="192" y2="52" stroke="#a855f7" stroke-width="0.8" opacity="0.35"/>
+              {/* Grid ticks */}
+              {[50, 100, 150].map(x => (
+                <line x1={x} y1="50" x2={x} y2="54" stroke="#a855f7" stroke-width="0.8" opacity="0.25"/>
+              ))}
+              {/* Data points */}
+              <circle cx="28"  cy="46" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="56"  cy="38" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="84"  cy="30" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="112" cy="24" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="140" cy="18" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="168" cy="13" r="2.5" fill="#a855f7" opacity="0.7"/>
+              <circle cx="185" cy="10" r="2.5" fill="#a855f7" opacity="0.7"/>
+              {/* Trend line (draws in on hover) */}
+              <line
+                class="trend-line"
+                x1="20" y1="50" x2="190" y2="8"
+                stroke="#c084fc" stroke-width="1.5"
+                stroke-dasharray="195" stroke-dashoffset="195"
+              />
+            </svg>
+          </div>
+        )}
+
+        {vizType === "cores" && (
+          <div class="h-16 rounded-xl bg-purple-950/8 border border-purple-100 flex items-center justify-center">
+            <div class="grid gap-1.5" style="grid-template-columns:repeat(8,minmax(0,1fr));width:fit-content">
+              {Array.from({ length: 16 }, (_, k) => (
+                <div
+                  class="cpu-core rounded-sm"
+                  data-core={k}
+                  style="width:18px;height:18px;background:#334155;transition:background-color 0.15s"
+                ></div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {vizType === "flow" && (
+          <div class="h-16 rounded-xl bg-purple-950/8 border border-purple-100 overflow-hidden">
+            <svg viewBox="0 0 220 64" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              {/* Node boxes */}
+              <rect x="6"   y="22" width="48" height="20" rx="5" fill="#7c3aed" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="30"  y="33" text-anchor="middle" fill="#c4b5fd" font-size="7" font-weight="600">INPUT</text>
+
+              <rect x="86"  y="22" width="48" height="20" rx="5" fill="#7c3aed" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="110" y="33" text-anchor="middle" fill="#c4b5fd" font-size="7" font-weight="600">PROCESS</text>
+
+              <rect x="166" y="22" width="48" height="20" rx="5" fill="#7c3aed" fill-opacity="0.18" stroke="#a855f7" stroke-width="1.2"/>
+              <text x="190" y="33" text-anchor="middle" fill="#c4b5fd" font-size="7" font-weight="600">OUTPUT</text>
+
+              {/* Connector lines */}
+              <line x1="54"  y1="32" x2="86"  y2="32" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+              <polyline points="82,28 86,32 82,36" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+              <line x1="134" y1="32" x2="166" y2="32" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+              <polyline points="162,28 166,32 162,36" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.5"/>
+
+              {/* Traveling dot */}
+              <circle class="flow-dot" cx="30" cy="32" r="4.5" fill="#c084fc" opacity="0"/>
+            </svg>
+          </div>
+        )}
+
+        {/* Topic pills */}
+        <div class="flex flex-wrap gap-2">
+          {exp.data.topics.map((topic) => (
+            <span class="bg-purple-100 text-purple-800 text-xs font-medium px-3 py-1 rounded-full">
+              {topic}
+            </span>
+          ))}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<style>
+  /* Wave animation — paused by default, plays on card hover */
+  @keyframes waveScroll {
+    to { transform: translateX(-70px); }
+  }
+  .wave-group {
+    animation: waveScroll 2.4s linear infinite paused;
+  }
+  .exp-card:hover .wave-group {
+    animation-play-state: running;
+  }
+
+  /* Scatter trend line — draws in on card hover */
+  @keyframes drawTrend {
+    to { stroke-dashoffset: 0; }
+  }
+  .exp-card:hover .trend-line {
+    animation: drawTrend 0.75s ease-out forwards;
+  }
+  /* Reset when not hovering */
+  .trend-line {
+    stroke-dashoffset: 195;
+    animation: none;
+  }
+</style>
+
+<script>
+  import { animate, stagger } from "animejs";
+
+  (function () {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // ── Entrance animations ──
+    const grid = document.getElementById("experience-grid");
+    if (grid) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+
+            const cards = document.querySelectorAll<HTMLElement>(".exp-card");
+            const icons = document.querySelectorAll<HTMLElement>(".exp-icon");
+            const dur   = prefersReduced ? 0 : 500;
+            const stag  = prefersReduced ? 0 : 100;
+
+            animate(cards, {
+              opacity: [0, 1], translateY: [40, 0], duration: dur,
+              delay: stagger(stag), ease: "outExpo",
+            });
+            animate(icons, {
+              scale: [0.7, 1], duration: prefersReduced ? 0 : 400,
+              delay: stagger(stag, { start: prefersReduced ? 0 : 150 }), ease: "outBack",
+            });
+          });
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(grid);
     }
-</section>
+
+    if (prefersReduced) return;
+
+    // ── CPU cores: stagger fill on hover ──
+    document.querySelectorAll<HTMLElement>('.exp-card[data-viz="cores"]').forEach((card) => {
+      const cores = Array.from(card.querySelectorAll<HTMLElement>(".cpu-core"));
+
+      card.addEventListener("mouseenter", () => {
+        animate(cores, {
+          backgroundColor: ["#334155", "#7c3aed"],
+          duration: 80,
+          delay: stagger(35),
+          ease: "linear",
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        animate(cores, {
+          backgroundColor: "#334155",
+          duration: 250,
+          delay: stagger(20, { from: "last" }),
+          ease: "outSine",
+        });
+      });
+    });
+
+    // ── Flow dot: travels through pipeline on hover ──
+    document.querySelectorAll<HTMLElement>('.exp-card[data-viz="flow"]').forEach((card) => {
+      const dot = card.querySelector<SVGCircleElement>(".flow-dot");
+      if (!dot) return;
+
+      let busy = false;
+
+      card.addEventListener("mouseenter", () => {
+        if (busy) return;
+        busy = true;
+
+        // Reset to start
+        dot.style.opacity = "1";
+        dot.style.transform = "translateX(0)";
+
+        // Leg 1: INPUT → PROCESS (dx = 80)
+        animate(dot, {
+          translateX: [0, 80],
+          duration: 420,
+          ease: "inOutSine",
+          onComplete() {
+            // Leg 2: PROCESS → OUTPUT (dx = 80 more = 160 total)
+            animate(dot, {
+              translateX: 160,
+              duration: 420,
+              ease: "inOutSine",
+              onComplete() {
+                // Fade out
+                animate(dot, {
+                  opacity: 0,
+                  duration: 200,
+                  onComplete() {
+                    dot.style.transform = "translateX(0)";
+                    busy = false;
+                  },
+                });
+              },
+            });
+          },
+        });
+      });
+    });
+  })();
+</script>

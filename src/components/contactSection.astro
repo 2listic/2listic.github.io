@@ -11,34 +11,46 @@ import { Icon } from "astro-icon/components";
   </Sectionhead>
 
   <div class="grid md:grid-cols-2 gap-10 mx-auto max-w-4xl mt-8 lg:mt-12">
-    <div>
-      <!-- <h2 class="text-center font-bold text-3xl text-gray-800">Contact Dualistic</h2> -->
-      <!-- <p class="text-justify text-lg leading-relaxed text-slate-500 mt-3">
-        Have something to say? We are here to help. Fill up the form or send
-        email or call phone.
-      </p> -->
-      <div class="mt-5">
-        <div class="flex items-center mt-2 space-x-2 text-gray-700">
-          <Icon class="text-gray-500 w-6 h-6" name="uil:map-marker" />
-          <span class="text-lg"> via Crispi 56, 34126 Trieste (Italy) </span>
-        </div>
-        <div class="flex items-center mt-2 space-x-2 text-gray-700">
-          <Icon class="text-gray-500 w-6 h-6" name="uil:envelope" />
-          <a class="text-lg" href="mailto:info@dualistic.it">info@dualistic.it</a>
-        </div>
-        <div class="flex items-center mt-2 space-x-2 text-gray-700">
-          <Icon class="text-gray-500 w-6 h-6" name="uil:phone" />
-          <a class="text-lg" href="tel:+39 040 9719258">+39 040 9719258</a>
+    <!-- Left: contact info -->
+    <div class="flex flex-col gap-6">
+      <div class="rounded-2xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 shadow-sm p-6">
+        <h3 class="text-slate-800 font-semibold text-lg mb-5">Get in touch</h3>
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center gap-3">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+              <Icon class="text-white w-5 h-5" name="uil:map-marker" />
+            </div>
+            <span class="text-slate-600 text-sm">via Crispi 56, 34126 Trieste (Italy)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+              <Icon class="text-white w-5 h-5" name="uil:envelope" />
+            </div>
+            <a class="text-slate-600 text-sm hover:text-purple-700 transition-colors" href="mailto:info@dualistic.it">info@dualistic.it</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="shrink-0 w-10 h-10 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+              <Icon class="text-white w-5 h-5" name="uil:phone" />
+            </div>
+            <a class="text-slate-600 text-sm hover:text-purple-700 transition-colors" href="tel:+39 040 9719258">+39 040 9719258</a>
+          </div>
         </div>
       </div>
-      <br />
-      <div class="flex items-center mt-2 space-x-2 text-gray-700">
-        <Icon class="text-gray-500 w-6 h-6" name="uil:linkedin" />
-        <a class="text-lg" href="https://www.linkedin.com/in/giuseppe-piero-brandino-8285068a/">
-          Giuseppe Piero Brandino, CEO
-        </a>
+
+      <div class="rounded-2xl bg-gradient-to-br from-purple-50 to-white border border-purple-100 shadow-sm p-6">
+        <h3 class="text-slate-800 font-semibold text-lg mb-4">Connect</h3>
+        <div class="flex items-center gap-3">
+          <div class="shrink-0 w-10 h-10 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+            <Icon class="text-white w-5 h-5" name="uil:linkedin" />
+          </div>
+          <a class="text-slate-600 text-sm hover:text-purple-700 transition-colors" href="https://www.linkedin.com/in/giuseppe-piero-brandino-8285068a/">
+            Giuseppe Piero Brandino, CEO
+          </a>
+        </div>
       </div>
     </div>
+
+    <!-- Right: form -->
     <div>
       <Contactform />
     </div>

@@ -20,12 +20,14 @@
     "@iconify-json/uil": "^1.2.3",
     "@tailwindcss/typography": "^0.5.10",
     "@tailwindcss/vite": "^4.1.16",
+    "animejs": "^4.3.6",
     "astro": "^5.15.1",
     "astro-icon": "^1.1.5",
     "astro-navbar": "^2.3.0",
     "astro-seo": "^0.8.0",
     "sharp": "^0.33.0",
-    "tailwindcss": "^4.1.16"
+    "tailwindcss": "^4.1.16",
+    "three": "^0.183.2"
   },
   "devDependencies": {
     "cspell": "^9.3.0",

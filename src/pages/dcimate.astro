@@ -1,0 +1,159 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Container from "@components/container.astro";
+---
+
+<Layout
+  title="DCIMate"
+  description="DCIMate is a software platform for data center control and optimization using a thermo-fluid dynamic Digital Twin."
+>
+  <Container class="pb-52 bg-linear-to-br from-white to-purple-200">
+    <div class="mx-auto max-w-3xl pt-14">
+      <h1 class="text-4xl lg:text-5xl font-bold lg:tracking-tight lg:leading-tight text-center">
+        DCIMate
+      </h1>
+      <p class="text-lg mt-4 text-slate-600 leading-relaxed">
+        A software platform for data center control and optimization that uses a thermo-fluid dynamic
+        Digital Twin to improve energy efficiency of IT infrastructure and cooling systems.
+        Reduce consumption, improve PUE, and prevent thermal hotspots, while maintaining SLA compliance.
+      </p>
+    </div>
+
+    <div class="mx-auto prose prose-lg mt-10 max-w-3xl">
+      <!-- Metrics -->
+      <table>
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Energy savings</td>
+            <td><strong>&gt;10%</strong></td>
+          </tr>
+          <tr>
+            <td>Power Usage Effectiveness</td>
+            <td><strong>Improved</strong></td>
+          </tr>
+          <tr>
+            <td>Thermal hotspots</td>
+            <td><strong>0</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Digital Twin -->
+      <h2>A physics-based model of your data center</h2>
+      <p>
+        At the core of DCIMate is a digital twin that reproduces the thermo-fluid dynamic behavior 
+        of the physical environment. It combines discrete CFD simulation for airflow and heat 
+        distribution and cooling system models representing CRAC/CRAH units and ventilation systems.
+      </p>
+      <p>
+        This makes it possible to simulate temperature evolution at the rack level and evaluate
+        the thermal impact of variations in computational workload, in near real time.
+      </p>
+
+      <video src="/dcimate/simulation.mp4" autoplay loop muted playsinline></video>
+
+      <!-- Surrogate Model -->
+      <h2>Fast inference with a surrogate model</h2>
+      <p>
+        Full CFD simulations are too computationally expensive to run continuously at runtime.
+        DCIMate employs a surrogate model trained with machine learning that learns airflow behavior
+        from both physical simulations and real-world data.
+      </p>
+      <p>
+        The result is near real-time estimation of the thermal field while maintaining
+        good accuracy with respect to the physical model. The surrogate is periodically
+        updated using new operational datasets.
+      </p>
+
+      <!-- Scheduling -->
+      <h2>Energy-aware workload scheduling</h2>
+      <p>
+        The thermal model is integrated with a workload scheduling pipeline that jointly optimizes
+        IT systems and cooling infrastructure. The system evaluates the thermal impact of different
+        workload distributions via the digital twin and selects the configuration that minimizes
+        total energy consumption, cooling utilization, and thermal hotspots.
+      </p>
+      <p>
+        Unlike traditional DCIM solutions, DCIMate simultaneously considers server workload,
+        rack temperatures, airflow distribution, and cooling efficiency, enabling joint
+        optimization that was previously not available.
+      </p>
+
+      <figure>
+        <img src="/dcimate/video-loadbalancer.gif" alt="Load balancer visualization" />
+        <figcaption>Simulation of a naive workload balancing (on the left) vs. an optimized workload balancing (on the right) with DCIMate.</figcaption>
+      </figure>
+
+      <!-- Pipeline -->
+      <h2>From data to action</h2>
+      <p>
+        DCIMate operates through a continuous processing pipeline. Sensor data, temperature,
+        airflow, energy logs, and server utilization, is normalized and fed into the digital twin.
+        The surrogate model computes temperature distribution, predicted thermal evolution, and effects
+        of potential workload redistributions within seconds.
+      </p>
+      <p>
+        The scheduling algorithm then evaluates multiple scenarios and selects the configuration
+        that best balances energy efficiency, thermal stability, and SLA compliance. The system
+        generates workload balancing recommendations, ventilation policies, and optimal cooling
+        configurations. In advanced mode, it operates in closed-loop control, integrating directly
+        with existing DCIM or BMS systems.
+      </p>
+
+      <!-- Visualization -->
+      <h2>Interactive 3D viewer</h2>
+      <p>
+        DCIMate includes an interactive 3D viewer based on Three.js that represents the data center
+        in near real time, rack layout, room topology, airflow paths and particles, and temperature fields.
+      </p>
+      <p>
+        The interface facilitates understanding of thermal phenomena and communication of results
+        to operators and non-technical stakeholders. Operators can observe real-time rack temperatures,
+        airflow patterns, and the impact of optimization decisions, all in an intuitive 3D environment.
+      </p>
+
+      <figure>
+        <img src="/dcimate/dcimate.jpg" alt="3D visualization of a datacenter with DCIMate" />
+        <figcaption>3D visualization of a data center with DCIMate viz. The dashboard shows energy consumption in real time and predicts possible savings by simulating different workload scenarios.</figcaption>
+      </figure>
+
+      <!-- Sensor Node -->
+      <h2>Intelligent sensor nodes</h2>
+      <p>
+        Each ESP32-based sensor node integrates a low-power microcontroller with Wi-Fi/Ethernet
+        connectivity and hardware interfaces for sensors (I2C, SPI, GPIO). The firmware runs a
+        continuous cycle of sensor data acquisition, local filtering and normalization, and
+        transmission of processed data to the DCIMate platform.
+      </p>
+      <p>
+        The firmware includes a lightweight embedded agent inspired by zclaw, which exposes hardware
+        functionality through high-level commands. The agent acts as a software interface between
+        DCIMate and the physical sensors, enabling sensor querying, threshold configuration,
+        and firmware updates.
+      </p>
+
+      <!-- Who It's For -->
+      <h2>Built for energy-efficient infrastructure</h2>
+      <p>
+        DCIMate is designed for enterprise data centers, HPC infrastructures, edge data centers,
+        and cloud and colocation facilities, wherever energy efficiency drives operational cost
+        and sustainability.
+      </p>
+    </div>
+
+    <div class="text-center mt-12">
+      <a
+        href="/#contact"
+        class="bg-purple-700 text-white px-6 py-3 rounded-lg font-semibold shadow-md hover:bg-purple-800 transition-colors duration-200"
+      >
+        Get in touch
+      </a>
+    </div>
+  </Container>
+</Layout>

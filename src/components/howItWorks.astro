@@ -1,0 +1,134 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+import Sectionhead from "./sectionhead.astro";
+
+const steps = [
+  {
+    number: "01",
+    title: "Connect",
+    description: "Sensors & infrastructure feed real-time data into DCIMate via the dcim-claw agent.",
+    icon: "material-symbols-light:sensors",
+  },
+  {
+    number: "02",
+    title: "Simulate",
+    description: "The digital twin models airflow and thermal dynamics in your datacenter.",
+    icon: "material-symbols-light:device-thermostat",
+  },
+  {
+    number: "03",
+    title: "Optimize",
+    description: "AI agents redistribute workloads and alert you before issues arise.",
+    icon: "material-symbols-light:memory-outline",
+  },
+];
+---
+
+<Sectionhead>
+  <Fragment slot="title">How DCIMate Works</Fragment>
+  <Fragment slot="desc">Three steps from raw data to optimized datacenter.</Fragment>
+</Sectionhead>
+
+<div class="mt-12 lg:mt-16 flex flex-col lg:flex-row items-stretch gap-0 lg:gap-0 relative">
+  {steps.map((step, i) => (
+    <>
+      <div
+        class="hiw-step flex-1 flex flex-col items-center text-center px-6 py-8 opacity-0"
+        data-index={i}
+      >
+        <div class="hiw-icon w-20 h-20 rounded-full bg-purple-700 flex items-center justify-center shadow-lg mb-4">
+          <Icon class="text-white w-10 h-10" name={step.icon} />
+        </div>
+        <div class="text-purple-300 font-bold text-sm tracking-widest mb-1">{step.number}</div>
+        <h3 class="text-xl font-bold text-slate-800 mb-2">{step.title}</h3>
+        <p class="text-slate-600 leading-relaxed max-w-xs">{step.description}</p>
+      </div>
+
+      {i < steps.length - 1 && (
+        <div class="hiw-connector flex items-center justify-center lg:flex-none lg:w-12 py-4 lg:py-0">
+          <svg
+            class="hiw-line w-8 h-8 lg:w-12 lg:h-12 rotate-90 lg:rotate-0"
+            viewBox="0 0 48 48"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              class="connector-line"
+              x1="4" y1="24" x2="44" y2="24"
+              stroke="#a855f7"
+              stroke-width="2"
+              stroke-dasharray="40"
+              stroke-dashoffset="40"
+              stroke-linecap="round"
+            />
+            <polyline
+              class="connector-arrow"
+              points="36,16 44,24 36,32"
+              stroke="#a855f7"
+              stroke-width="2"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              opacity="0"
+            />
+          </svg>
+        </div>
+      )}
+    </>
+  ))}
+</div>
+
+<script>
+  import { animate, createTimeline } from "animejs";
+
+  (function () {
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const section = document.querySelector("#how-it-works");
+  if (!section) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        const steps = Array.from(document.querySelectorAll<HTMLElement>(".hiw-step"));
+        const lines = Array.from(document.querySelectorAll<SVGLineElement>(".connector-line"));
+        const arrows = Array.from(document.querySelectorAll<SVGPolylineElement>(".connector-arrow"));
+
+        const dur = prefersReduced ? 0 : 500;
+        const connDur = prefersReduced ? 0 : 400;
+
+        const tl = createTimeline({ ease: "outExpo" });
+
+        steps.forEach((step, i) => {
+          tl.add(step, {
+            opacity: [0, 1],
+            translateY: [30, 0],
+            scale: [0.95, 1],
+            duration: dur,
+          }, i * (prefersReduced ? 0 : 200));
+
+          if (i < steps.length - 1) {
+            tl.add(lines[i], {
+              strokeDashoffset: [40, 0],
+              duration: connDur,
+              ease: "inOutSine",
+            }, i * (prefersReduced ? 0 : 200) + (prefersReduced ? 0 : 350));
+
+            tl.add(arrows[i], {
+              opacity: [0, 1],
+              duration: prefersReduced ? 0 : 200,
+            }, "-=100");
+          }
+        });
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  observer.observe(section);
+  })();
+</script>

@@ -1,0 +1,241 @@
+---
+// @ts-ignore
+import { Icon } from "astro-icon/components";
+
+const servers = [
+  { id: "SRV-01", load: 91 },
+  { id: "SRV-02", load: 12 },
+  { id: "SRV-03", load: 88 },
+  { id: "SRV-04", load: 9  },
+  { id: "SRV-05", load: 94 },
+  { id: "SRV-06", load: 17 },
+];
+
+function loadColor(load: number): string {
+  if (load >= 80) return "#f87171"; // red-400
+  if (load >= 50) return "#fb923c"; // orange-400
+  return "#86efac";                 // green-300 (idle)
+}
+
+// Target loads after optimization (vary slightly around 62%)
+const optimizedLoads = [60, 63, 61, 64, 60, 62];
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center pt-4">
+  <!-- Left: text -->
+  <div id="optimize-text" class="flex flex-col gap-6 opacity-0">
+    <div>
+      <span class="inline-block bg-purple-200 text-purple-900 text-xs font-bold px-3 py-1 rounded-full tracking-widest mb-4">STEP 03 / 03</span>
+      <h2 class="text-4xl lg:text-5xl font-bold tracking-tight text-slate-800">Optimize</h2>
+    </div>
+    <p class="text-lg text-slate-600 leading-relaxed">
+      AI agents continuously analyze your datacenter state and
+      <strong class="text-slate-800">rebalance workloads</strong>, preventing overheating,
+      cutting energy waste, and alerting you before issues arise.
+    </p>
+    <ul class="flex flex-col gap-4">
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:balance" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Workload rebalancing</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Automatically migrate tasks from overloaded servers to idle ones.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:notifications-active" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Proactive alerts</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Get notified before thermal thresholds are breached, not after a failure.
+          </div>
+        </div>
+      </li>
+      <li class="flex gap-4 items-start">
+        <div class="shrink-0 w-11 h-11 rounded-xl bg-purple-700 flex items-center justify-center shadow-sm">
+          <Icon class="text-white w-6 h-6" name="material-symbols-light:eco" />
+        </div>
+        <div>
+          <div class="font-semibold text-slate-800">Energy efficiency</div>
+          <div class="text-slate-500 text-sm leading-relaxed mt-0.5">
+            Reduce PUE by consolidating workloads and spinning down underutilized hardware.
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Right: workload dashboard -->
+  <div id="optimize-viz" class="opacity-0">
+    <div class="bg-slate-800 rounded-2xl p-5 shadow-xl">
+      <!-- Terminal chrome bar -->
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-1.5">
+          <div class="w-3 h-3 rounded-full bg-red-500 opacity-80"></div>
+          <div class="w-3 h-3 rounded-full bg-amber-400 opacity-80"></div>
+          <div class="w-3 h-3 rounded-full bg-green-500 opacity-80"></div>
+        </div>
+        <span class="text-slate-400 text-xs font-mono">workload-monitor</span>
+        <div id="opt-status" class="text-amber-400 text-xs font-mono">● UNBALANCED</div>
+      </div>
+
+      <!-- Bar chart (vertical) -->
+      <div class="flex items-end gap-2 h-32 mb-1">
+        {servers.map((s, i) => (
+          <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
+            <div
+              class="server-load-bar w-full rounded-t-md"
+              data-initial={s.load}
+              data-target={optimizedLoads[i]}
+              style={`height: ${s.load}%; background-color: ${loadColor(s.load)}; transition: height 0.65s ease, background-color 0.65s ease;`}
+            ></div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Load % labels -->
+      <div class="flex items-center gap-2 mb-4">
+        {servers.map((s) => (
+          <div class="flex-1 text-center">
+            <span
+              class="load-pct text-xs font-mono font-bold"
+              style={`color: ${loadColor(s.load)}`}
+            >
+              {s.load}%
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Server ID labels -->
+      <div class="flex items-center gap-2 mb-4">
+        {servers.map((s) => (
+          <div class="flex-1 text-center">
+            <span class="text-slate-500 font-mono" style="font-size:9px;">
+              {s.id.replace("SRV-", "S")}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Controls row -->
+      <div class="flex items-center gap-4">
+        <button
+          id="optimize-btn"
+          class="flex-1 bg-purple-600 hover:bg-purple-500 active:bg-purple-700 text-white text-sm font-semibold rounded-xl px-4 py-2.5 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          Run AI Optimization
+        </button>
+        <div class="text-right shrink-0">
+          <div class="text-slate-500 text-xs font-mono">energy saved</div>
+          <div id="savings-metric" class="text-green-400 font-mono font-bold text-xl leading-tight">+0%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { animate } from "animejs";
+
+  (function () {
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const section = document.getElementById("step-optimize");
+    if (!section) return;
+
+    const text = document.getElementById("optimize-text");
+    const viz  = document.getElementById("optimize-viz");
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+
+        const dur = prefersReduced ? 0 : 600;
+        animate(text, { opacity: [0, 1], translateX: [-28, 0], duration: dur, ease: "outExpo" });
+        animate(viz,  { opacity: [0, 1], translateX: [28, 0],  duration: dur, delay: prefersReduced ? 0 : 200, ease: "outExpo" });
+      });
+    }, { threshold: 0.2 });
+
+    observer.observe(section);
+
+    const btn     = document.getElementById("optimize-btn") as HTMLButtonElement | null;
+    const status  = document.getElementById("opt-status");
+    const metric  = document.getElementById("savings-metric");
+    const bars    = Array.from(document.querySelectorAll<HTMLElement>(".server-load-bar"));
+    const labels  = Array.from(document.querySelectorAll<HTMLElement>(".load-pct"));
+
+    let optimized = false;
+
+    function loadColor(load: number): string {
+      if (load >= 80) return "#f87171";
+      if (load >= 50) return "#fb923c";
+      return "#86efac";
+    }
+
+    function countUp(el: HTMLElement, from: number, to: number, durationMs: number) {
+      const start = Date.now();
+      const tick = () => {
+        const elapsed  = Date.now() - start;
+        const progress = Math.min(elapsed / durationMs, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3);
+        el.textContent = `+${Math.round(from + eased * (to - from))}%`;
+        if (progress < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }
+
+    btn?.addEventListener("click", () => {
+      if (optimized) {
+        // Reset to initial state
+        bars.forEach((bar, i) => {
+          const initial = parseInt(bar.dataset.initial ?? "50");
+          bar.style.height = `${initial}%`;
+          bar.style.backgroundColor = loadColor(initial);
+          if (labels[i]) {
+            labels[i].textContent = `${initial}%`;
+            labels[i].style.color = loadColor(initial);
+          }
+        });
+        if (status) { status.textContent = "● UNBALANCED"; status.className = "text-amber-400 text-xs font-mono"; }
+        if (metric)  metric.textContent = "+0%";
+        if (btn)     btn.textContent = "Run AI Optimization";
+        optimized = false;
+      } else {
+        // Run optimization
+        if (btn) { btn.disabled = true; btn.textContent = "Optimizing…"; }
+
+        bars.forEach((bar, i) => {
+          const target = parseInt(bar.dataset.target ?? "62");
+          const delay  = prefersReduced ? 0 : i * 110;
+          setTimeout(() => {
+            bar.style.height = `${target}%`;
+            bar.style.backgroundColor = "#a855f7";
+            if (labels[i]) {
+              labels[i].textContent  = `${target}%`;
+              labels[i].style.color  = "#a855f7";
+            }
+          }, delay);
+        });
+
+        const settleTime = prefersReduced ? 0 : bars.length * 110 + 700;
+
+        if (!prefersReduced && metric) {
+          setTimeout(() => countUp(metric, 0, 27, 1600), 400);
+        }
+
+        setTimeout(() => {
+          if (status) { status.textContent = "● OPTIMIZED"; status.className = "text-green-400 text-xs font-mono"; }
+          if (btn)    { btn.disabled = false; btn.textContent = "Reset"; }
+          if (prefersReduced && metric) metric.textContent = "+27%";
+          optimized = true;
+        }, settleTime);
+      }
+    });
+  })();
+</script>
