@@ -27,7 +27,7 @@ const vizTypeMap: Record<string, string> = {
   <Fragment slot="desc">The perfect blend of industrial and academic backgrounds.</Fragment>
 </Sectionhead>
 
-<div id="experience-grid" class="mt-10 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+<div id="experience-grid" class="mt-10 lg:mt-14 mb-16 grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 mx-auto max-w-6xl">
   {sortedExperiences.map((exp, i) => {
     const vizType = vizTypeMap[exp.data.area] ?? "";
     return (
