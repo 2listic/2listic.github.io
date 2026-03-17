@@ -37,7 +37,7 @@ const features = [
   <Fragment slot="desc">AI-powered tools built for modern datacenters.</Fragment>
 </Sectionhead>
 
-<div class="mt-10 lg:mt-14 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+<div class="mt-10 lg:mt-14 mb-16 grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14 mx-auto max-w-6xl items-start">
 
   <!-- Left: feature cards -->
   <div id="features-grid" class="flex flex-col gap-5">
@@ -58,7 +58,7 @@ const features = [
   </div>
 
   <!-- Right: 3D rack + agent log -->
-  <div id="features-rack-panel" class="opacity-0 sticky top-24">
+  <div id="features-rack-panel" class="opacity-0 lg:col-span-2 self-center">
     <div class="bg-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-700/60 select-none">
 
       <!-- Chrome bar -->
@@ -86,7 +86,7 @@ const features = [
       <!-- Agent activity log -->
       <div class="bg-slate-800 rounded-xl p-3">
         <div class="text-slate-500 text-xs font-mono mb-2">agent activity</div>
-        <ul id="agent-log" class="flex flex-col gap-1.5" style="overflow:hidden;max-height:72px">
+        <ul id="agent-log" class="flex flex-col gap-1.5" style="overflow:hidden;height:8vh">
           <li class="flex items-start gap-2 text-xs font-mono">
             <span class="text-green-400 shrink-0">✓</span>
             <span class="text-slate-300">Optimization cycle complete · −8% energy</span>

@@ -3,7 +3,7 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center pt-4">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center mx-auto max-w-6xl pt-4 mb-16 ">
   <!-- Left: airflow canvas -->
   <div id="simulate-airflow" class="opacity-0">
     <div class="bg-slate-900 rounded-2xl p-4 shadow-2xl border border-slate-700/60 select-none">
@@ -103,7 +103,7 @@ import { Icon } from "astro-icon/components";
     function startAirflow() {
       const canvas = document.getElementById("airflow-canvas") as HTMLCanvasElement | null;
       if (!canvas) return;
-      const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d")!;
       if (!ctx) return;
 
       const W = canvas.width;   // 400
