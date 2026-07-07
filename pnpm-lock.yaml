@@ -19,7 +19,7 @@ importers:
         version: 5.2.8
       '@iconify-json/material-symbols-light':
         specifier: ^1.2.46
-        version: 1.2.83
+        version: 1.2.82
       '@iconify-json/uil':
         specifier: ^1.2.3
         version: 1.2.3
@@ -710,8 +710,8 @@ packages:
   '@fontsource-variable/inter@5.2.8':
     resolution: {integrity: sha512-kOfP2D+ykbcX/P3IFnokOhVRNoTozo5/JxhAIVYLpea/UBmCQ/YWPBfWIDuBImXX/15KH+eKh4xpEUyS2sQQGQ==}
 
-  '@iconify-json/material-symbols-light@1.2.83':
-    resolution: {integrity: sha512-zU86TINRMGHUCzQWBNqj0jOitGoh+XTEanGGowQGBVsR7ZpvNQk4tq8sy+alSqVufyopjDsnKd8Hz9HejDSxkg==}
+  '@iconify-json/material-symbols-light@1.2.82':
+    resolution: {integrity: sha512-3EI9+IB+PsMmyUJgOWlyu+0VbZY9VDVPZAPHR7DBvoErVF+igN7Tcathx+c/KGlSTlLCCWiGFjIcgxxD9W0wHA==}
 
   '@iconify-json/uil@1.2.3':
     resolution: {integrity: sha512-if91+UBhDQc6glPsIaXecGIcXnbQZfEO4Gdv89TV2xQ+V5e9GWbY5rNl2fsKZd8COsRQ5lRQAKimVQVL0CZZVg==}
@@ -3728,7 +3728,7 @@ snapshots:
 
   '@fontsource-variable/inter@5.2.8': {}
 
-  '@iconify-json/material-symbols-light@1.2.83':
+  '@iconify-json/material-symbols-light@1.2.82':
     dependencies:
       '@iconify/types': 2.0.0
 
