@@ -13,9 +13,10 @@ import Container from "@components/container.astro";
         DCIMate
       </h1>
       <p class="text-lg mt-4 text-slate-600 leading-relaxed">
-        A software platform for data center control and optimization that uses a thermo-fluid dynamic
-        Digital Twin to improve energy efficiency of IT infrastructure and cooling systems.
-        Reduce consumption, improve PUE, and prevent thermal hotspots, while maintaining SLA compliance.
+        A software platform for data center control and optimization that combines energy-aware
+        workload scheduling, autonomous power management, and a thermo-fluid dynamic Digital Twin.
+        Reduce consumption, improve PUE, and prevent thermal hotspots, while maintaining SLA compliance
+        &mdash; with results measured on real production-class hardware.
       </p>
     </div>
 
@@ -26,23 +27,99 @@ import Container from "@components/container.astro";
           <tr>
             <th>Metric</th>
             <th>Result</th>
+            <th>How</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>Energy savings</td>
-            <td><strong>&gt;10%</strong></td>
+            <td>Energy per unit of work</td>
+            <td><strong>&minus;31%</strong></td>
+            <td>measured at the wall, replicated (p&nbsp;&lt;&nbsp;0.05)</td>
           </tr>
           <tr>
-            <td>Power Usage Effectiveness</td>
-            <td><strong>Improved</strong></td>
+            <td>Throughput</td>
+            <td><strong>+44%</strong></td>
+            <td>measured, same jobs and hardware</td>
           </tr>
           <tr>
-            <td>Thermal hotspots</td>
-            <td><strong>0</strong></td>
+            <td>Facility energy during idle periods</td>
+            <td><strong>up to &minus;52%</strong></td>
+            <td>measured, autonomous power-off on a diurnal trace</td>
+          </tr>
+          <tr>
+            <td>Annual electricity bill (typical cluster)</td>
+            <td><strong>~&minus;41%</strong></td>
+            <td>modeled from measured power states, conservative assumptions</td>
           </tr>
         </tbody>
       </table>
+
+      <!-- Real-cluster validation -->
+      <h2>Validated end-to-end on real hardware</h2>
+      <p>
+        DCIMate's scheduling and power-management stack runs autonomously on a production-class
+        Kubernetes cluster of eight servers spanning four hardware generations (Intel Xeon and
+        AMD EPYC, 472 physical cores). Every energy figure below is measured at the wall with
+        facility-grade BMC/IPMI power metering &mdash; not simulated, and not estimated from CPU counters.
+      </p>
+
+      <h3>Energy-aware placement: the same work for a third less energy</h3>
+      <p>
+        Identical jobs cost very different amounts of energy depending on which server runs them
+        &mdash; on our cluster, up to 2&times; for compute work and 6&times; for memory-bound work. Stock schedulers
+        are blind to this: they place work wherever CPUs are free. DCIMate routes each job to the
+        node that completes it for the fewest joules.
+      </p>
+      <p>
+        Draining the same fixed backlog of AI-inference jobs through stock Kubernetes and through
+        DCIMate, on the same hardware, placement delivered <strong>31% less energy per job</strong> and
+        <strong>44% higher throughput</strong> &mdash; replicated over five paired runs, winning every time
+        (p&nbsp;&lt;&nbsp;0.05). Average power stayed flat: the cluster simply finished the work sooner.
+        No new hardware, no performance trade-off.
+      </p>
+
+      <figure>
+        <img src="/dcimate/placement-replicate-figure.png" alt="Energy per job and time to drain: default Kubernetes vs DCIMate, 5 paired repetitions" />
+        <figcaption>Measured on the validation cluster: DCIMate's energy-aware placement vs the default Kubernetes scheduler, five paired repetitions with the identical job set. Energy per job drops 31% and the backlog drains 31% sooner in every repetition.</figcaption>
+      </figure>
+
+      <h3>Safe power-off: removing the idle floor</h3>
+      <p>
+        A modern server drains roughly half its peak power while doing nothing &mdash; 200&ndash;300&nbsp;W per
+        node on our cluster &mdash; and CPU frequency tuning recovers almost none of it (we measured ~0%
+        at the wall). The only way to reclaim those watts is to power the machine off. DCIMate
+        consolidates work onto efficient nodes and autonomously powers off the machines it frees,
+        waking them within minutes when demand returns. On a four-hour realistic demand cycle this
+        cut measured facility energy by <strong>52%</strong>.
+      </p>
+
+      <figure>
+        <img src="/dcimate/node-power-figure.png" alt="Per-node wall power: under load, folded off by DCIMate, and waking" />
+        <figcaption>Per-node wall power (facility metering) across three regimes: under load, folded off by DCIMate, and waking on returning demand. Folding removes the idle floor that frequency tuning cannot touch.</figcaption>
+      </figure>
+
+      <p>
+        The hard part &mdash; and the part DCIMate is built around &mdash; is knowing <em>when</em> powering off is
+        safe. Done naively, it backfires: we measured that reacting to every short dip in demand
+        makes the cluster <em>worse</em> on both energy and service quality, cycling hardware and starving
+        capacity. DCIMate's hysteretic control tells a genuine lull from a brief dip: under load it
+        performs zero power-offs, and it folds the cluster only when idleness is sustained &mdash;
+        so it is never worse than doing nothing.
+      </p>
+
+      <h3>What it means for the bill</h3>
+      <p>
+        Feeding the measured power states into an annual cost model (a modeled projection, clearly
+        distinct from the measurements above): on a typical, partly-idle cluster the two levers
+        together cut the electricity bill by roughly <strong>41%, about EUR&nbsp;257 per server per year</strong>
+        at EUR&nbsp;0.25/kWh &mdash; scaling nearly linearly to fleets of thousands of machines, and growing
+        larger in sites with high cooling overhead, because a powered-off server also stops producing heat.
+      </p>
+
+      <figure>
+        <img src="/dcimate/abstract-savings-figure.png" alt="Annual electricity bill per server: stock Kubernetes vs DCIMate" />
+        <figcaption>What DCIMate does to a server's yearly energy bill, from measured power states on the validation cluster (modeled annual projection, conservative assumptions). Placement trims the cost of useful work; safe power-off removes most of the idle waste.</figcaption>
+      </figure>
 
       <!-- Digital Twin -->
       <h2>A physics-based model of your data center</h2>
