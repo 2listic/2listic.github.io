@@ -19,8 +19,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
 const { title, enableScrollSnap = false, description, image, author } = Astro.props;
 
 const makeTitle = title ? title + " | " + "Dualistic" : "Dualistic";
-const defaultDescription = "Digital Twins made simple. Create and manage digital twins, \
-  using no-code interfaces and advanced visualization.";
+const defaultDescription =
+  "DCIMate by Dualistic: agentic data center optimization. " +
+  "Energy-aware workload scheduling, autonomous power management, and a thermo-fluid " +
+  "dynamic Digital Twin. 31% less energy per job, measured on real hardware.";
 const defaultImage = new URL("/logo_no_dual.png", Astro.site).toString();
 const seoDescription = description || defaultDescription;
 const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
@@ -39,7 +41,7 @@ const seoImage = image ? new URL(image, Astro.site).toString() : defaultImage;
   >
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/logo_no_dual.svg" />
     <meta name="generator" content={Astro.generator} />
 
